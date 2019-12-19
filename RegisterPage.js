@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
+//import * as Font from 'expo-font';
 import {
     StyleSheet, Text, TextInput, View, Image,
-    Dimensions, TouchableHighlight, CheckBox
+    Dimensions, TouchableHighlight, CheckBox, KeyboardAvoidingView,
 } from 'react-native';
 
+
 export default class RegisterClass extends Component {
+
 
     constructor() {
         super()
         this.state = {
-            name: '', phoneNumber: '',
-            password: '', repeatPassword: '', checked: false
+            name: '',
+            phoneNumber: '',
+            password: '',
+            repeatPassword: '',
+            checked: false
         }
     }
 
     render() {
         return (
-            <View style={styles.containter}>
+            <KeyboardAvoidingView style={styles.containter}
+                behavior="padding" enabled>
                 <View style={styles.header}>
                     <Text style={{ fontSize: width / 16 }}>عضویت</Text>
                 </View>
@@ -77,7 +84,7 @@ export default class RegisterClass extends Component {
                 <View style={styles.footer}>
                     <TouchableHighlight onPress={this._onPressButton}>
                         <View style={styles.btn_register}>
-                            <Text style={styles.btn_register_txt} >ثبت نام کنید</Text>
+                            <Text style={styles.btn_register_txt} >ساخت حساب کاربری</Text>
                         </View>
                     </TouchableHighlight>
                     <View style={styles.rules_chk}>
@@ -88,10 +95,11 @@ export default class RegisterClass extends Component {
                     </View>
 
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 }
+
 
 const { width, height } = Dimensions.get("window");
 
@@ -102,10 +110,9 @@ const { width, height } = Dimensions.get("window");
 const styles = StyleSheet.create({
     containter: {
         flex: 1,
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
     content: {
-        marginTop: height / 15,
         height: height / 3,
         justifyContent: 'space-around',
     },
@@ -117,12 +124,12 @@ const styles = StyleSheet.create({
     },
 
     txt_input: {
+        fontFamily:'MyAwesomeFont',
         height: 40,
         width: width,
         textAlign: 'right',
         writingDirection: 'rtl',
-        paddingRight: width / 40
-
+        paddingRight: width / 4
     },
 
     txt_input_img: {
@@ -131,45 +138,45 @@ const styles = StyleSheet.create({
         marginRight: width / 45
     },
     header: {
-        height: height / 7,
+        height: height / 14,
         alignItems: 'center',
         borderBottomWidth: 2,
         borderColor: 'grey',
         backgroundColor: '#E4DFE6',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginTop: 24
     },
     footer: {
-         borderColor: 'grey',
+        borderColor: 'grey',
         backgroundColor: '#E4DFE6',
         borderTopWidth: 1,
-        height: height / 4,
+        height: height / 6,
         alignItems: 'center',
-       
+
     },
     btn_register_txt: {
-        fontSize: width / 15,
+        fontSize: width / 18,
         textAlign: 'center',
         padding: 8,
         color: 'white'
     },
     btn_register: {
-        margin: 15,
+        margin: 10,
         width: width / 2,
         height: height / 13,
         alignItems: 'center',
-        backgroundColor: '#A732D2',
+        backgroundColor: '#A537FD',
         borderRadius: 50,
     },
-    rules_chk:{
-        flexDirection:'row-reverse',
-        width:width/2,
-        height:height/13,
-        justifyContent:'center'
-    }, 
-    rules_txt:{
-        fontSize:15,
-        textAlign:'center',
-        marginTop:5
-
+    rules_chk: {
+        flexDirection: 'row-reverse',
+        width: width / 2,
+        height: height / 13,
+        justifyContent: 'center'
+    },
+    rules_txt: {
+        fontSize: 15,
+        textAlign: 'center',
+        marginTop: 3
     }
 });

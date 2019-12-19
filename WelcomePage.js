@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     btn_register_txt: {
         fontSize: width / 15,
         textAlign: 'center',
-        padding: 8,
+        // padding: 4,
         color: 'white'
     },
     btn_login:{
