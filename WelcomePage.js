@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, Dimensions, TouchableHighlight } from 'react-native';
+import Home from './MainPage';
 
 export default class WelcomePage extends Component {
     constructor() {
         super()
         console.log("some thing happenning!!!!")
     }
+    _onRegisterPressButton = ()=>{
+        this.props.navigation.navigate('RegisterPage');
+    }
+
+    _onLogingButtonPress = () =>{
+        this.props.navigation.navigate('Home');
+    }
+
     render() {
         console.log("rendering... ")
         var image = require('./assets/png/Group-2102.png')
@@ -15,12 +24,12 @@ export default class WelcomePage extends Component {
                     style={styles.image}
                     source={image}
                 />
-                <TouchableHighlight onPress={this._onPressButton} underlayColor="white">
+                <TouchableHighlight onPress={this._onRegisterPressButton} underlayColor="white">
                     <View style={styles.btn_register}>
                         <Text style={styles.btn_register_txt}>ثبت نام</Text>
                     </View>
                 </TouchableHighlight>
-                <TouchableHighlight onPress={this._onPressButton} underlayColor="white">
+                <TouchableHighlight onPress={this._onLogingButtonPress} underlayColor="white">
                     <View style={styles.btn_login}>
                         <Text style={styles.btn_login_txt}>وارد شوید</Text>
                     </View>
@@ -69,7 +78,7 @@ const styles = StyleSheet.create({
     btn_register_txt: {
         fontSize: width / 15,
         textAlign: 'center',
-        padding: 8,
+        // padding: 4,
         color: 'white'
     },
     btn_login:{
