@@ -1,23 +1,28 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, Dimensions, TouchableHighlight } from 'react-native';
-import Home from './MainPage';
+import React, {Component} from 'react';
+import {StyleSheet, Text, View, Image, Dimensions, TouchableHighlight} from 'react-native';
+import Home from '../MainPage';
 
 export default class WelcomePage extends Component {
+
+    static navigationOptions = {
+    };
+
     constructor() {
         super()
         console.log("some thing happenning!!!!")
     }
-    _onRegisterPressButton = ()=>{
+
+    _onRegisterPressButton = () => {
         this.props.navigation.navigate('RegisterPage');
     }
 
-    _onLoginButtonPress = () =>{
-        this.props.navigation.navigate('Home');
+    _onLoginButtonPress = () => {
+        this.props.navigation.navigate('Login');
     }
 
     render() {
         console.log("rendering... ")
-        var image = require('./assets/png/Group-2102.png')
+        var image = require('../assets/png/Group-2102.png')
         return (
             <View style={styles.container}>
                 <Image
@@ -40,7 +45,7 @@ export default class WelcomePage extends Component {
     }
 }
 
-const { width, height } = Dimensions.get("window");
+const {width, height} = Dimensions.get("window");
 
 const styles = StyleSheet.create({
     container: {
@@ -81,7 +86,7 @@ const styles = StyleSheet.create({
         // padding: 4,
         color: 'white'
     },
-    btn_login:{
+    btn_login: {
         // margin: 5,
         width: width / 2,
         height: height / 13,
@@ -89,7 +94,7 @@ const styles = StyleSheet.create({
         // backgroundColor: '#A732D2',
         borderRadius: 50,
     },
-    btn_login_txt:{
+    btn_login_txt: {
         fontSize: width / 15,
         textAlign: 'center',
         padding: 8,

@@ -7,8 +7,14 @@ import {
 
 
 export default class RegisterClass extends Component {
-
-
+    static navigationOptions = {
+        title:'عضویت',
+        headerTitleStyle: {
+            textAlign: 'center',
+            flexGrow:1,
+            alignSelf:'center',
+        },
+    };
     constructor() {
         super()
         this.state = {
@@ -20,19 +26,22 @@ export default class RegisterClass extends Component {
         }
     }
 
+    _onRegisterPressButton = () => {
+        this.props.navigation.navigate('RegisterPage2');
+    }
     render() {
         return (
             <KeyboardAvoidingView style={styles.containter}
                 behavior="padding" enabled>
-                <View style={styles.header}>
+               {/* <View style={styles.header}>
                     <Text style={{ fontSize: width / 16 }}>عضویت</Text>
-                </View>
+                </View>*/}
 
                 <View style={styles.content}>
                     <View style={styles.txt_input_container}>
                         <Image
                             style={styles.txt_input_img}
-                            source={require('./assets/png/woman.png')}
+                            source={require('../assets/png/woman.png')}
                         />
                         <TextInput
                             style={styles.txt_input}
@@ -44,7 +53,7 @@ export default class RegisterClass extends Component {
                     <View style={styles.txt_input_container}>
                         <Image
                             style={styles.txt_input_img}
-                            source={require('./assets/png/call.png')}
+                            source={require('../assets/png/call.png')}
                         />
                         <TextInput
                             style={styles.txt_input}
@@ -57,7 +66,7 @@ export default class RegisterClass extends Component {
                     <View style={styles.txt_input_container}>
                         <Image
                             style={styles.txt_input_img}
-                            source={require('./assets/png/locked.png')}
+                            source={require('../assets/png/locked.png')}
                         />
                         <TextInput
                             style={styles.txt_input}
@@ -71,7 +80,7 @@ export default class RegisterClass extends Component {
                     <View style={styles.txt_input_container}>
                         <Image
                             style={styles.txt_input_img}
-                            source={require('./assets/png/locked.png')}
+                            source={require('../assets/png/locked.png')}
                         />
                         <TextInput
                             style={styles.txt_input}
@@ -82,7 +91,7 @@ export default class RegisterClass extends Component {
                     </View>
                 </View>
                 <View style={styles.footer}>
-                    <TouchableHighlight onPress={this._onPressButton}>
+                    <TouchableHighlight onPress={this._onRegisterPressButton}>
                         <View style={styles.btn_register}>
                             <Text style={styles.btn_register_txt} >ساخت حساب کاربری</Text>
                         </View>

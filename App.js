@@ -1,8 +1,8 @@
 import React from 'react';
 
-import WelcomePage from './WelcomePage.js';
-import RegisterClass from './RegisterPage.js';
-import RegisterClass2 from './RegisterPage2.js';
+import WelcomePage from './auth/WelcomePage.js';
+import RegisterClass from './auth/RegisterPage.js';
+import RegisterClass2 from './auth/RegisterPage2.js';
 import * as Font from 'expo-font';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
@@ -13,12 +13,13 @@ import BlogPage from './BlogPage';
 import ReservationPage from './ReservationPage';
 import ProfilePage from './ProfilePage';
 import SupportPage from './SupportPage';
+import Login from './auth/LoginPage'
 import {Image} from "react-native";
 
 
-const AppStack = createStackNavigator({
-    Home: Home
-})
+/*const AppStack = createStackNavigator({
+    AppIntro: AppIntro
+})*/
 
 const HomeStack = createStackNavigator({
     Home: Home
@@ -41,41 +42,70 @@ const ProfileStack = createStackNavigator({
 const AuthStack = createStackNavigator({
     Welcome: WelcomePage,
     RegisterPage: RegisterClass,
-    LoginPage: RegisterClass2
-})
-const TabNavigator = createBottomTabNavigator({
-    Home: HomeStack,
-    Blog: BlogStack,
-    Reservation: ReservationStack,
-    Support: SupportStack,
-    Profile: ProfileStack
+    RegisterPage2: RegisterClass2,
+    Login:Login
 })
 
-/*const AppContainer = createAppContainer(createSwitchNavigator(
+const TabNavigator =  createBottomTabNavigator(
     {
-        AppIntro: AppIntro,
-        App: AppStack,
-        Auth: AuthStack,
-        Tab: TabNavigator
-    },
-    {
-        initialRouteName: 'AppIntro',
-    }
-));*/
-
-export default createAppContainer(createBottomTabNavigator(
-    {
-        //AppIntro: AppIntro,
         Profile: ProfileStack,
         Support: SupportStack,
         Reservation: ReservationStack,
         Blog: BlogStack,
-        Home: HomeStack
+        Home: {
+            screen: HomeStack,
+            initialRouteName: 'ماهرخ',
+            title:'ماهرخ',
+            navigationOption:({navigation}) =>({
+               title: 'ماهرخ',
+                tabBarLabel:'ماهرخ'
+            }),
+        },
     },
     {
         initialRouteName: 'Home',
-    }));
-//export default AppContainer;
+        defaultNavigationOptions: ({navigation}) => ({
+            tabBarIcon:({focused, horizontal, tintColor}) =>{
+                const {routeName} = navigation.state;
+                console.log('routeName: ' + routeName)
+                let icon;
+                if (routeName == 'Home'){
+                    icon = require('./assets/png/home.png');
+                } else if (routeName == 'Blog'){
+                    icon= require('./assets/png/copy.png')
+                }else if (routeName == 'Reservation'){
+                    icon= require('./assets/png/calendar.png')
+                }else if (routeName == 'Support'){
+                    icon= require('./assets/png/telemarketer.png')
+                }else if (routeName == 'Profile'){
+                    icon= require('./assets/png/woman.png')
+                }
+                return <Image style={{width:20, height:20, tintColor:tintColor}}
+                              source={icon}/>
+            }
+        }),tabBarOptions: {
+            activeTintColor: '#B08C3E',
+            inactiveTintColor: 'gray',
+        },
+    });
+
+const AppContainer = createAppContainer(createSwitchNavigator(
+    {
+        AppIntro: AppIntro,
+        //App: AppStack,
+        Auth: AuthStack,
+        Tab: TabNavigator
+    },
+    {
+        initialRouteName: 'Tab',
+    }
+));
+export default AppContainer;
+
+
+
+
+
 
 // import React from 'react';
 // import Temp from './Temp';

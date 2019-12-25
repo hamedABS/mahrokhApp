@@ -52,6 +52,10 @@ export default class RegisterClass2 extends Component {
         clearInterval(this.interval);
     }
 
+    _onPressButton = ()=>{
+        this.props.navigation.navigate('Tab');
+    }
+
     render() {
         return (
             <KeyboardAvoidingView style={styles.containter}
