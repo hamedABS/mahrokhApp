@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import React, {Component} from 'react';
+import {Ionicons} from '@expo/vector-icons';
 import {
     StyleSheet, Text, TextInput, View,
     Dimensions, TouchableHighlight, KeyboardAvoidingView
 } from 'react-native';
-
 
 
 export default class RegisterClass2 extends Component {
@@ -39,22 +38,24 @@ export default class RegisterClass2 extends Component {
                 } else {
                     s = 60;
                 }
-                this.setState({ second: s, minute: m })
+                this.setState({second: s, minute: m})
 
             } else {
                 s--;
-                this.setState({ second: s })
+                this.setState({second: s})
             }
         }, 100);
 
     }
+
     componentWillUnmount() {
         clearInterval(this.interval);
     }
+
     render() {
         return (
             <KeyboardAvoidingView style={styles.containter}
-                behavior="padding" enabled>
+                                  behavior="padding" enabled>
                 <View style={styles.header}>
                     {/* <Ionicons
                         name="md-arrow-round-back"
@@ -62,18 +63,19 @@ export default class RegisterClass2 extends Component {
                         size={24}
                         style={{ backgroundColor: 'transparent' }}
                     /> */}
-                    <Text style={{ fontSize: width / 16 }}>عضویت</Text>
+                    <Text style={{fontSize: width / 16}}>عضویت</Text>
                 </View>
                 <Text style={styles.txt_1}>لطفا کد ارسال شده را وارد کنید</Text>
-                <Text style={styles.txt_2}>برای تایید شماره تلفن، لطفا کد ارسال شده را در کادر زیر وارد کنید در صورتی که کد برایتان ارسال نشده، درخواست ارسال مجدد کد را ارسال کنید</Text>
+                <Text style={styles.txt_2}>برای تایید شماره تلفن، لطفا کد ارسال شده را در کادر زیر وارد کنید در صورتی که
+                    کد برایتان ارسال نشده، درخواست ارسال مجدد کد را ارسال کنید</Text>
 
                 <View style={styles.content}>
                     <TextInput
                         style={styles.txt_input}
                         placeholder="کد"
                         keyboardType="numeric"
-                        onChangeText={(code) => this.setState({ code })}
-                        value={this.state.code} />
+                        onChangeText={(code) => this.setState({code})}
+                        value={this.state.code}/>
                     <TouchableHighlight>
                         <Text style={styles.code}>ارسال دوباره کد؟</Text>
                     </TouchableHighlight>
@@ -83,7 +85,7 @@ export default class RegisterClass2 extends Component {
                 <View style={styles.footer}>
                     <TouchableHighlight onPress={this._onPressButton}>
                         <View style={styles.btn_register}>
-                            <Text style={styles.btn_register_txt} >تایید شماره تلفن</Text>
+                            <Text style={styles.btn_register_txt}>تایید شماره تلفن</Text>
                         </View>
                     </TouchableHighlight>
                     <View style={styles.rules_chk}>
@@ -96,7 +98,7 @@ export default class RegisterClass2 extends Component {
     }
 }
 
-const { width, height } = Dimensions.get("window");
+const {width, height} = Dimensions.get("window");
 
 {
     console.log("width: " + width + " height: " + height)

@@ -1,9 +1,12 @@
 import React from 'react';
-import { Button, View, Text } from 'react-native';
+import { Button, View, Text, Image } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
-export default class HomeScreen extends React.Component {
+export class HomeScreen extends React.Component {
+  static navigationOptions = {
+    headerTitle: ()=> <LogoTitle/>
+  };
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -17,8 +20,19 @@ export default class HomeScreen extends React.Component {
 }
 
 class DetailsScreen extends React.Component {
+  static navigationOptions = ({ navigation, navigationOptions }) => {
+    console.log(navigationOptions)
+    return {
+      title: navigation.getParam('otherParam', 'A Nested Details Screen'),
+      headerStyle: {
+        backgroundColor: navigationOptions.headerTintColor,
+      },
+      headerTintColor: navigationOptions.headerStyle.backgroundColor
+    };
+  };
+
   render() {
-    return (  
+    return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Details Screen</Text>
         <Button
@@ -45,15 +59,33 @@ const RootStack = createStackNavigator(
   },
   {
     initialRouteName: 'Home',
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#fc2003'
+      },
+      headerTintColor: '#03fccf',
+      headerTitleStyle: 'bold'
+    }
   }
 );
 
-// const AppContainer = createAppContainer(RootStack);
+class LogoTitle extends React.Component {
+  render() {
+    return (
+      <Image
+        source={require('./assets/png/Group-2102.png')}
+        style={{ width: 30, height: 30 }}
+      />
+    );
+  }
+}
 
-// export default class App extends React.Component {
-//   render() {
-//     return <AppContainer />;
-//   }
-// }
+const AppContainer = createAppContainer(RootStack);
+
+export default class App extends React.Component {
+  render() {
+    return <AppContainer />;
+  }
+}
 
 

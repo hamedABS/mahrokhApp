@@ -11,7 +11,7 @@ export default class WelcomePage extends Component {
         this.props.navigation.navigate('RegisterPage');
     }
 
-    _onLogingButtonPress = () =>{
+    _onLoginButtonPress = () =>{
         this.props.navigation.navigate('Home');
     }
 
@@ -29,7 +29,7 @@ export default class WelcomePage extends Component {
                         <Text style={styles.btn_register_txt}>ثبت نام</Text>
                     </View>
                 </TouchableHighlight>
-                <TouchableHighlight onPress={this._onLogingButtonPress} underlayColor="white">
+                <TouchableHighlight onPress={this._onLoginButtonPress} underlayColor="white">
                     <View style={styles.btn_login}>
                         <Text style={styles.btn_login_txt}>وارد شوید</Text>
                     </View>
