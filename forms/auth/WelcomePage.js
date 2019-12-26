@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Image, Dimensions, TouchableHighlight} from 'react-native';
-import Home from '../MainPage';
+import Home from '../home/HomePage';
 
 export default class WelcomePage extends Component {
 
@@ -22,7 +22,7 @@ export default class WelcomePage extends Component {
 
     render() {
         console.log("rendering... ")
-        var image = require('../assets/png/Group-2102.png')
+        var image = require('../../assets/png/Group-2102.png')
         return (
             <View style={styles.container}>
                 <Image
@@ -84,21 +84,21 @@ const styles = StyleSheet.create({
         fontSize: width / 15,
         textAlign: 'center',
         // padding: 4,
-        color: 'white'
+        color: 'white',
+        fontFamily: 'IRANSansWeb'
     },
     btn_login: {
-        // margin: 5,
         width: width / 2,
         height: height / 13,
         alignItems: 'center',
-        // backgroundColor: '#A732D2',
         borderRadius: 50,
     },
     btn_login_txt: {
-        fontSize: width / 15,
+        fontSize: width / 17,
         textAlign: 'center',
         padding: 8,
-        color: 'black'
+        color: 'black',
+        fontFamily:'IRANSansWeb'
     }
 });
 

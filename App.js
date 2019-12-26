@@ -1,28 +1,26 @@
 import React from 'react';
 
-import WelcomePage from './auth/WelcomePage.js';
-import RegisterClass from './auth/RegisterPage.js';
-import RegisterClass2 from './auth/RegisterPage2.js';
+import WelcomePage from './forms/auth/WelcomePage.js';
+import RegisterClass from './forms/auth/RegisterPage.js';
+import RegisterClass2 from './forms/auth/RegisterPage2.js';
 import * as Font from 'expo-font';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
 import AppIntro from './AppIntro';
-import Home from './MainPage';
+import Home from './forms/home/HomePage';
 import BlogPage from './BlogPage';
 import ReservationPage from './ReservationPage';
 import ProfilePage from './ProfilePage';
 import SupportPage from './SupportPage';
-import Login from './auth/LoginPage'
+import Login from './forms/auth/LoginPage'
+import Salon from './forms/Salon.js'
 import {Image} from "react-native";
-
-
-/*const AppStack = createStackNavigator({
-    AppIntro: AppIntro
-})*/
+import {exp} from "react-native-reanimated";
 
 const HomeStack = createStackNavigator({
-    Home: Home
+    Home: Home,
+    Salon:Salon
 })
 const BlogStack = createStackNavigator({
     Blog: BlogPage,
@@ -45,6 +43,8 @@ const AuthStack = createStackNavigator({
     RegisterPage2: RegisterClass2,
     Login:Login
 })
+
+
 
 const TabNavigator =  createBottomTabNavigator(
     {
@@ -100,52 +100,45 @@ const AppContainer = createAppContainer(createSwitchNavigator(
         initialRouteName: 'Tab',
     }
 ));
-export default AppContainer;
 
+export default class App extends React.Component{
+  constructor() {
+    super();
+    this.state = {
+      fontLoaded: false,
+    }
+  }
 
+  async componentDidMount() {
+    try {
+      console.log("int component did mount")
+      await Font.loadAsync({
+        'IranSans': require('./assets/fonts/IranianSans_0.ttf'),
+        'IRANSansFaNum': require('./assets/fonts/IRANSansFaNum_Light.ttf'),
+        'IRANSansWeb': require('./assets/fonts/IRANSansWeb.ttf'),
+        'IRANSansWebLight': require('./assets/fonts/IRANSansWeb_Light.ttf'),
+        'IRANSansWebBold': require('./assets/fonts/IRANSansWeb_Bold.ttf'),
+        'IRANSansWebUltraLight': require('./assets/fonts/IRANSansWeb_UltraLight.ttf'),
+        'Ionicons': require('@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf')
+      });
+      this.setState({fontLoaded: true});
 
+      console.log(this.state.fontLoaded)
+    } catch (e) {
+      console.warn(e)
+    }
+  }
+  render() {
+    if (this.state.fontLoaded){
+      return <AppContainer/>
+    } else return null;
+  }
+}
 
+/*import React from 'react';
+import Temp from './Temp2';
 
-
-// import React from 'react';
-// import Temp from './Temp';
-//
-// const App = ()=>{
-//   return <Temp/>
-// }
-//
-// export default App
-
-// import React from 'react';
-// import {View, Image, StyleSheet, Dimensions, TouchableHighlight} from "react-native";
-//
-//
-// export default class LogoTitle extends React.Component {
-//     render() {
-//         return (
-//             <View style={styles.headerLogo}>
-//                 <View></View>
-//                 <Image
-//                     source={require('./assets/png/Group-2102.png')}
-//                     style={{width: 50, height: 50}}
-//                 />
-//                 <TouchableHighlight style={{padding: 10}}>
-//                     <View>
-//                         <Image
-//                             source={require('./assets/png/calendar.png')}
-//                             style={{width: 30, height: 30}}
-//                         />
-//                     </View>
-//                 </TouchableHighlight>
-//             </View>
-//         )
-//     }
-// }
-// const {width, height} = Dimensions.get("window");
-// const styles = StyleSheet.create({
-//     headerLogo: {
-//         flexDirection: 'row',
-//         alignItems: 'center',
-//         justifyContent: 'space-between'
-//     }
-// });
+const App = ()=>{
+  return <Temp/>
+}
+export default App*/
