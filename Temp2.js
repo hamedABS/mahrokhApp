@@ -1,40 +1,41 @@
 import React, {Component} from 'react';
-import {ScrollView, Image, Text} from 'react-native';
-import * as Font from 'expo-font';
+import {View, Dimensions, StyleSheet, ScrollView, Image, Text} from 'react-native';
+import MapView from "react-native-maps";
+
 
 export default class Temp extends Component {
 
-    constructor() {
-        super();
-        this.state = {
-            showRealApp: false,
-            fontLoaded: false,
+    _onPressMethod = ()=>{
+        let list = []
+        for (let i = 0; i < 5; i++) {
+            list.push(<Text>i = {i}</Text>)
         }
-    }
-
-   async componentDidMount() {
-        console.log("int component did mount")
-       await Font.loadAsync({
-            MyAwesomeFont: require("./assets/fonts/IRANSansWeb.ttf"),
-            ionicons: require('@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf')
-        });
-        this.setState({fontLoaded: true});
-
-        console.log(this.state.fontLoaded)
+        return
     }
 
     render() {
-        if (this.state.fontLoaded) {
-            return (
-                <ScrollView horizontal>
-                    <Text style={{fontSize: 50, fontFamily: "MyAwesomeFont"}}> سلام ملت ما </Text>
-                </ScrollView>
-            )
-        }
-        else
-            {
-                return null
-            }
-
+        console.log("app rendering ...")
+        return (
+            <MapView style={{width: width, height: height}}
+                  /*   initialRegion={{
+                         latitude: 37.78825,
+                         longitude: -122.4324,
+                         latitudeDelta: 0.0922,
+                         longitudeDelta: 0.0421,
+                     }}*/
+                     showsMyLocationButton={true}
+                     followsUserLocation={true}
+                     showsCompass={true}
+                     showsIndoors={true}
+            />
+        )
     }
 }
+
+const {width, height} = Dimensions.get("window");
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    }
+});

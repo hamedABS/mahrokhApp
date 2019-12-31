@@ -17,7 +17,6 @@ export default class Home extends React.Component {
     static navigationOptions = {
         headerTitle: () => <LogoTitle/>
     };
-
     render() {
         return (
             <View style={styles.container}>
@@ -49,20 +48,20 @@ export default class Home extends React.Component {
                     <View style={styles.bestSalonsSlider}>
                         <Text style={{margin:5, marginBottom: 10, marginTop:0, fontFamily:'IRANSansWeb'}}>برترین سالن ها</Text>
                         <ScrollView horizontal>
-                            <SalonTile/>
-                            <SalonTile/>
-                            <SalonTile/>
-                            <SalonTile/>
-                            <SalonTile/>
-                            <SalonTile/>
+                            <SalonTile data={this.props}/>
+                            <SalonTile data={this.props}/>
+                            <SalonTile data={this.props}/>
+                            <SalonTile data={this.props}/>
+                            <SalonTile data={this.props}/>
+                            <SalonTile data={this.props}/>
                         </ScrollView>
                     </View>
                     <View style={styles.aroundSalonsSlider}>
                         <Text style={{margin:5, marginBottom: 10, fontFamily:'IRANSansWeb'}}>سالن های اطراف من</Text>
                         <ScrollView horizontal>
-                            <AroundSalonTile/>
-                            <AroundSalonTile/>
-                            <AroundSalonTile/>
+                            <AroundSalonTile  data={this.props}/>
+                            <AroundSalonTile  data={this.props}/>
+                            <AroundSalonTile  data={this.props}/>
                         </ScrollView>
                     </View>
                     <View style={styles.bePrettyBlogSlider}>
@@ -136,9 +135,14 @@ class DiscountTile extends React.Component {
 }
 
 class SalonTile extends React.Component {
+
+    _onPress = () => {
+        let parentProps = this.props.data;
+        parentProps.navigation.navigate('Salon')
+    }
     render() {
         return (
-            <TouchableHighlight>
+            <TouchableHighlight onPress={this._onPress}>
                 <Image
                     source={require('../../assets/png/salon1.png')}
                     style={{
@@ -155,17 +159,21 @@ class SalonTile extends React.Component {
 }
 
 class AroundSalonTile extends React.Component {
+
+    _onPress = () => {
+        let parentProps = this.props.data;
+        parentProps.navigation.navigate('Salon')
+    }
+
     render() {
         return (
-            <TouchableHighlight style={{marginRight: 10, marginLeft: 10}}>
+            <TouchableHighlight onPress={this._onPress} style={{marginRight: 10, marginLeft: 10}} >
                 <View style={styles.aroundSalonsSliderTile}>
                     <Image
                         source={require('../../assets/png/salon1.png')}
                         style={{
                             width: '100%',
                             height: '60%',
-                            //tintColor: '#0000004C',
-                            // margin: 10,
                             overflow: 'hidden'
                         }}
                     />

@@ -33,10 +33,6 @@ export default class RegisterClass extends Component {
         return (
             <KeyboardAvoidingView style={styles.containter}
                 behavior="padding" enabled>
-               {/* <View style={styles.header}>
-                    <Text style={{ fontSize: width / 16 }}>عضویت</Text>
-                </View>*/}
-
                 <View style={styles.content}>
                     <View style={styles.txt_input_container}>
                         <Image
