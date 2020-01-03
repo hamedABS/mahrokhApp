@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     },
 
     txt_input: {
-        //fontFamily:'MyAwesomeFont',
+        fontFamily:'IRANSansFaNum',
         height: 40,
         width: width,
         textAlign: 'right',

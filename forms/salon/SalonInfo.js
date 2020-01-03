@@ -136,6 +136,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1
     },
     routingBtn: {
+        justifyContent:'center',
         width: width / 4.8,
         height: 27,
         borderRadius: 25,

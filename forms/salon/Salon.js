@@ -23,6 +23,7 @@ export default class Salon extends React.Component {
             likedSalon: false
         }
     }
+
     static navigationOptions = {
         headerShown: false,
     };
@@ -34,7 +35,7 @@ export default class Salon extends React.Component {
         })
     }
 
-    _addressButtonPressed = ()=>{
+    _addressButtonPressed = () => {
         this.props.navigation.navigate('SalonInfo');
     }
 
