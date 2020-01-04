@@ -120,6 +120,7 @@ const styles = StyleSheet.create({
 
     },
     btn_register_txt: {
+        fontFamily: 'IRANSansWeb',
         fontSize: width / 18,
         textAlign: 'center',
         padding: 8,

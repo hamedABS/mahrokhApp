@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
         paddingRight: 10
     },
     btn_register_txt: {
+        fontFamily: 'IRANSansWeb',
         fontSize: width / 23,
         textAlign: 'center',
         color: 'white'

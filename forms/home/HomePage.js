@@ -17,6 +17,7 @@ export default class Home extends React.Component {
     static navigationOptions = {
         headerTitle: () => <LogoTitle/>
     };
+
     render() {
         return (
             <View style={styles.container}>
@@ -35,7 +36,7 @@ export default class Home extends React.Component {
                                 }}
                             />
                             <TextInput
-                                style={{padding: 2, width:'100%', fontFamily:'IRANSansFaNum'}}
+                                style={{padding: 2, width: width / 2.5, fontFamily: 'IRANSansFaNum'}}
                                 placeholder='دنبال چه چیزی هستید؟'/>
                         </View>
                     </View>
@@ -46,7 +47,8 @@ export default class Home extends React.Component {
                         </ScrollView>
                     </View>
                     <View style={styles.bestSalonsSlider}>
-                        <Text style={{margin:5, marginBottom: 10, marginTop:0, fontFamily:'IRANSansWeb'}}>برترین سالن ها</Text>
+                        <Text style={{margin: 5, marginBottom: 10, marginTop: 0, fontFamily: 'IRANSansWeb'}}>برترین سالن
+                            ها</Text>
                         <ScrollView horizontal>
                             <SalonTile data={this.props}/>
                             <SalonTile data={this.props}/>
@@ -57,15 +59,15 @@ export default class Home extends React.Component {
                         </ScrollView>
                     </View>
                     <View style={styles.aroundSalonsSlider}>
-                        <Text style={{margin:5, marginBottom: 10, fontFamily:'IRANSansWeb'}}>سالن های اطراف من</Text>
+                        <Text style={{margin: 5, marginBottom: 10, fontFamily: 'IRANSansWeb'}}>سالن های اطراف من</Text>
                         <ScrollView horizontal>
-                            <AroundSalonTile  data={this.props}/>
-                            <AroundSalonTile  data={this.props}/>
-                            <AroundSalonTile  data={this.props}/>
+                            <AroundSalonTile data={this.props}/>
+                            <AroundSalonTile data={this.props}/>
+                            <AroundSalonTile data={this.props}/>
                         </ScrollView>
                     </View>
                     <View style={styles.bePrettyBlogSlider}>
-                        <Text style={{marginRight:20,fontFamily:'IRANSansWeb'}} >بلاگ زیبا شو</Text>
+                        <Text style={{marginRight: 20, fontFamily: 'IRANSansWeb'}}>بلاگ زیبا شو</Text>
                         <ScrollView horizontal>
                             <Blog/>
                             <Blog/>
@@ -119,14 +121,15 @@ class DiscountTile extends React.Component {
                     overflow: 'hidden',
                     marginLeft: 20,
                     marginRight: 15,
-                    // justifyContent: 'center',
                     flexDirection: 'row-reverse'
                 }}>
                 <TouchableOpacity onPress={this._onPressButton}>
                     <View style={styles.linkInDiscount}>
                         <Text
-                            style={{textAlign: 'center', marginTop: 5, marginLeft:8, fontFamily:'IRANSansFaNum'}}>تخفیف ویژه کایزن</Text>
-                        <Image source={require('../../assets/png/right.png')} style={{width:20, height:15,marginTop:7}}/>
+                            style={{textAlign: 'center', marginTop: 5, marginLeft: 8, fontFamily: 'IRANSansFaNum'}}>تخفیف
+                            ویژه کایزن</Text>
+                        <Image source={require('../../assets/png/right.png')}
+                               style={{width: 20, height: 15, marginTop: 7}}/>
                     </View>
                 </TouchableOpacity>
             </ImageBackground>
@@ -140,6 +143,7 @@ class SalonTile extends React.Component {
         let parentProps = this.props.data;
         parentProps.navigation.navigate('Salon')
     }
+
     render() {
         return (
             <TouchableHighlight onPress={this._onPress}>
@@ -167,7 +171,7 @@ class AroundSalonTile extends React.Component {
 
     render() {
         return (
-            <TouchableHighlight onPress={this._onPress} style={{marginRight: 10, marginLeft: 10}} >
+            <TouchableHighlight onPress={this._onPress} style={{marginRight: 10, marginLeft: 10}}>
                 <View style={styles.aroundSalonsSliderTile}>
                     <Image
                         source={require('../../assets/png/salon1.png')}
@@ -185,19 +189,26 @@ class AroundSalonTile extends React.Component {
                             <Image source={require('../../assets/png/star3x_gold.png')} style={styles.star}/>
                             <Image source={require('../../assets/png/star3x.png')} style={styles.star}/>
                         </View>
-                        <Text style={{fontSize: 5, alignSelf: 'flex-start',fontFamily:'IRANSansFaNum'}}>۳۰ نظر</Text>
-                        <Text style={{fontSize: 14, fontFamily:'IRANSansFaNum', color:'#00000099'}}> کایزن</Text>
-                        <Text style={{fontSize: 9,marginRight: 5, fontFamily:'IRANSansFaNum', color:'#00000099'}}>زعفرانیه مقدس اردبیلی</Text>
-                        <View style={{alignSelf:'flex-start', flexDirection:'row', width:50, height:26}}>
+                        <Text style={{fontSize: 5, alignSelf: 'flex-start', fontFamily: 'IRANSansFaNum'}}>۳۰ نظر</Text>
+                        <Text style={{fontSize: 14, fontFamily: 'IRANSansFaNum', color: '#00000099'}}> کایزن</Text>
+                        <Text style={{fontSize: 9, marginRight: 5, fontFamily: 'IRANSansFaNum', color: '#00000099'}}>زعفرانیه
+                            مقدس اردبیلی</Text>
+                        <View style={{alignSelf: 'flex-start', flexDirection: 'row', width: 50, height: 26}}>
                             <Image
                                 source={require('../../assets/png/heart2x.png')}
                                 style={{
                                     width: 14,
                                     height: 12,
-                                    marginLeft:8,
+                                    marginLeft: 8,
                                 }}
                             />
-                            <Text style={{fontSize: 12 ,marginBottom: 10,marginLeft:3, alignSelf:'flex-end', fontFamily:'IRANSansFaNum'}}>250</Text>
+                            <Text style={{
+                                fontSize: 12,
+                                marginBottom: 10,
+                                marginLeft: 3,
+                                alignSelf: 'flex-end',
+                                fontFamily: 'IRANSansFaNum'
+                            }}>250</Text>
                         </View>
                     </View>
                 </View>
@@ -218,7 +229,7 @@ class Blog extends React.Component {
                 source={require('../../assets/png/brownHairGirl.png')}
                 style={{
                     width: width / 2,
-                    height: height/6,
+                    height: height / 6,
                     borderRadius: 10,
                     overflow: 'hidden',
                     margin: 10,
@@ -229,8 +240,9 @@ class Blog extends React.Component {
                 <TouchableOpacity onPress={this._onPressButton}>
                     <View style={styles.blogTouchable}>
                         <Text
-                            style={{textAlign: 'center', marginTop:5,marginLeft:5, fontSize:8}}>سشوار حرفه ای</Text>
-                        <Image source={require('../../assets/png/right.png')} style={{width:15, height:10,marginTop:7}}/>
+                            style={{textAlign: 'center', marginTop: 5, marginLeft: 5, fontSize: 8}}>سشوار حرفه ای</Text>
+                        <Image source={require('../../assets/png/right.png')}
+                               style={{width: 15, height: 10, marginTop: 7}}/>
 
                     </View>
                 </TouchableOpacity>
@@ -262,7 +274,7 @@ const styles = StyleSheet.create({
     filter: {
         width: width / 1.5,
         margin: 5,
-        marginTop:15,
+        marginTop: 15,
         backgroundColor: '#00000008',
         borderColor: '#70707033',
         borderWidth: 1,
@@ -282,7 +294,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         margin: 47,
         marginRight: 5,
-        flexDirection:'row'
+        flexDirection: 'row'
     },
     bestSalonsSlider: {
         width: width,
@@ -323,13 +335,13 @@ const styles = StyleSheet.create({
     },
 
     blogTouchable: {
-        width: width/6,
-        height: height/30,
+        width: width / 6,
+        height: height / 30,
         backgroundColor: 'white',
         borderRadius: 20,
-        marginBottom:10,
+        marginBottom: 10,
         margin: 5,
-        flexDirection:'row'
+        flexDirection: 'row'
         // marginRight: 25
     }
 });

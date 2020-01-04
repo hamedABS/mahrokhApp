@@ -14,6 +14,8 @@ import RegisterClass2 from "./forms/auth/RegisterPage2";
 import ReservedSalons from "./forms/profile/ReservedSalons";
 import ReserveDetails from "./forms/profile/ReserveDetails";
 import ProfileSetting from "./forms/profile/ProfileSetting";
+import FinalizeReserve from "./forms/salon/FinalizeReserve";
+import NewReserve from "./forms/salon/NewReserve";
 import Login from "./forms/auth/LoginPage";
 import {createBottomTabNavigator} from "react-navigation-tabs";
 import {Image} from "react-native";
@@ -22,7 +24,9 @@ import React from "react";
 export const HomeStack = createStackNavigator({
     Home: Home,
     Salon: Salon,
-    SalonInfo: SalonInfo
+    SalonInfo: SalonInfo,
+    FinalizeReserve: FinalizeReserve,
+    NewReserve:NewReserve
 }, {
     initialRouteName: 'Home'
 })
@@ -110,7 +114,7 @@ export const TabNavigator = createBottomTabNavigator(
         },
     },
     {
-        initialRouteName: 'Profile',
+        initialRouteName: 'Home',
         defaultNavigationOptions: ({navigation}) => ({
             tabBarIcon: ({focused, horizontal, tintColor}) => {
                 const {routeName} = navigation.state;

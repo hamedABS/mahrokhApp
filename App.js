@@ -32,6 +32,7 @@ export default class App extends React.Component {
                 'IRANSansFaNum': require('./assets/fonts/IRANSansFaNum_Light.ttf'),
                 'IRANSansWeb': require('./assets/fonts/IRANSansWeb.ttf'),
                 'IRANSansWebLight': require('./assets/fonts/IRANSansWeb_Light.ttf'),
+                'IRANSansWebMedium': require('./assets/fonts/IRANSansWeb_Medium.ttf'),
                 'IRANSansWebBold': require('./assets/fonts/IRANSansWeb_Bold.ttf'),
                 'IRANSansWebUltraLight': require('./assets/fonts/IRANSansWeb_UltraLight.ttf'),
                 'Ionicons': require('@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/Ionicons.ttf')

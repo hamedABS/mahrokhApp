@@ -10,6 +10,7 @@ import {
 
 export default class SalonService extends React.Component {
     render() {
+        let parentProps = this.props.data;
         return (
             <View style={styles.container}>
                 <View style={styles.serviceItem}>
@@ -42,9 +43,17 @@ export default class SalonService extends React.Component {
                            style={styles.plus}
                     />
                 </View>
-                <TouchableOpacity style={{borderTopColor:'#70707080', borderTopWidth:1 }}>
-                    <View style={{width:width/2.9, height:height/17, backgroundColor:'#A537FD', borderRadius:25, marginTop:15}}>
-                        <Text style={{color:'white', fontFamily: 'IRANSansWeb', textAlign:'center', marginTop:8 }}>خدمت آماده رزرو</Text>
+                <TouchableOpacity style={{borderTopColor: '#70707080', borderTopWidth: 1}}
+                onPress={()=>parentProps.navigation.navigate('NewReserve')}>
+                    <View style={{
+                        width: width / 2.9,
+                        height: height / 17,
+                        backgroundColor: '#A537FD',
+                        borderRadius: 25,
+                        marginTop: 15
+                    }}>
+                        <Text style={{color: 'white', fontFamily: 'IRANSansWeb', textAlign: 'center', marginTop: 8}}>خدمت
+                            آماده رزرو</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -59,22 +68,22 @@ const styles = StyleSheet.create({
     container: {
         width: width,
         height: height / 4,
-        justifyContent:'space-between',
-        alignItems:'center'
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     serviceItem: {
         flexDirection: 'row-reverse',
         justifyContent: 'space-between',
-        alignItems:'center',
+        alignItems: 'center',
         width: "90%",
-        height: height/12,
+        height: height / 12,
         borderBottomColor: '#70707080',
         borderBottomWidth: 0.75,
     },
-    serviceText:{
-        fontSize:16,
-        fontFamily:'IRANSansFaNum',
-        margin:5
+    serviceText: {
+        fontSize: 16,
+        fontFamily: 'IRANSansFaNum',
+        margin: 5
     },
     plus: {
         width: 20,

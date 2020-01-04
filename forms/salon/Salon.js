@@ -47,7 +47,7 @@ export default class Salon extends React.Component {
             case"sample":
                 return <WorkSample/>
             default:
-                return <SalonService/>
+                return <SalonService data={this.props}/>
         }
     }
 
