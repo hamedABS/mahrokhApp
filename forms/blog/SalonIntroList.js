@@ -2,12 +2,11 @@ import React from 'react';
 import {Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Video} from "expo-av";
 
-export default class BlogIntroList extends React.Component {
-
+export default class SalonIntroList extends React.Component {
 
     _onPress = () => {
         let navigation = this.props.data;
-        navigation.navigate('BlogArticle')
+        navigation.navigate('SalonIntro')
     }
 
     render() {

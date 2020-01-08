@@ -2,7 +2,7 @@ import React from 'react';
 import {Dimensions, Image, StyleSheet, Text, TextInput, View, TouchableOpacity} from 'react-native';
 import BlogList from "./BlogList";
 import BlogArticle from "./BlogArticle";
-import BlogIntroList from "./BlogIntroList";
+import SalonIntroList from "./SalonIntroList";
 
 
 export default class Blog extends React.Component {
@@ -29,7 +29,7 @@ export default class Blog extends React.Component {
             case "theHottest":
                 return <BlogList data={this.props.navigation}/>
             case "salonIntro":
-                return <BlogIntroList/>;
+                return <SalonIntroList data={this.props.navigation}/>;
             case "theNews":
                 return <BlogList data={this.props.navigation}/>
         }

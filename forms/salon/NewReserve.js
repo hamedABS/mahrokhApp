@@ -1,6 +1,6 @@
 import React from 'react';
 import {Dimensions, Image, StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView} from 'react-native';
-import MapView from "react-native-maps";
+// import PersianCalendarPicker from 'react-native-persian-calendar-picker';
 
 
 export default class ReserveDetails extends React.Component {
@@ -9,6 +9,7 @@ export default class ReserveDetails extends React.Component {
         super();
         this.state = {
             selectedReservedTime: '',
+            selectedStartDate: null,
             note: ''
         }
     }
@@ -40,12 +41,25 @@ export default class ReserveDetails extends React.Component {
         })
     }
 
+    onDateChange(date) {
+        //this.setState({selectedStartDate: date});
+        console.log(date)
+    }
+
     render() {
         let times = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'];
         times = times.reverse();
+        const {selectedStartDate} = this.state;
+        const startDate = selectedStartDate ? selectedStartDate.toString() : '';
         return (
             <View style={{flex: 1, alignItems: 'center'}}>
                 <View style={[styles.itemContainer, {height: height / 8}]}>
+                 {/*   <PersianCalendarPicker
+                        onDateChange={this.onDateChange}
+                        width={350}
+                        hieght={50}
+                    />*/}
+                    {/*<Text>SELECTED DATE:{ startDate }</Text>*/}
                     <Text style={[styles.itemText, {fontSize: 18}]}>تقویم</Text>
                 </View>
                 <View style={[styles.itemContainer, {padding: 10, height: height / 5}]}>
@@ -102,12 +116,13 @@ export default class ReserveDetails extends React.Component {
                         style={styles.txt_input}
                         placeholder='ایجاد یادداشت برای پرسنل و آرایشگاه موردنظر'
                         autoCapitalize='words'
-                        onChangeText={(name) => this.setState({note})}
+                        onChangeText={(note) => this.setState({note})}
                         value={this.state.note}/>
 
                 </View>
                 <View>
-                    <TouchableOpacity style={styles.pay_btn} onPress={()=>this.props.navigation.navigate('FinalizeReserve')}>
+                    <TouchableOpacity style={styles.pay_btn}
+                                      onPress={() => this.props.navigation.navigate('FinalizeReserve')}>
                         <Text style={styles.btn_pay_txt}>مرحله بعد</Text>
                     </TouchableOpacity>
                 </View>

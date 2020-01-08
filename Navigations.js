@@ -15,6 +15,7 @@ import ReservedSalons from "./forms/profile/ReservedSalons";
 import ReserveDetails from "./forms/profile/ReserveDetails";
 import ProfileSetting from "./forms/profile/ProfileSetting";
 import FinalizeReserve from "./forms/salon/FinalizeReserve";
+import SalonIntro from "./forms/blog/SalonIntro";
 import NewReserve from "./forms/salon/NewReserve";
 import Login from "./forms/auth/LoginPage";
 import {createBottomTabNavigator} from "react-navigation-tabs";
@@ -26,14 +27,15 @@ export const HomeStack = createStackNavigator({
     Salon: Salon,
     SalonInfo: SalonInfo,
     FinalizeReserve: FinalizeReserve,
-    NewReserve:NewReserve
+    NewReserve:NewReserve,
+    ReservedSalons:ReservedSalons
 }, {
     initialRouteName: 'Home'
 })
 HomeStack.navigationOptions = ({navigation}) => {
     let tabBarVisible = true;
     let routeName = navigation.state.routes[navigation.state.index].routeName
-    if (routeName == 'Salon' || routeName == 'SalonInfo') {
+    if (routeName != 'Home') {
         tabBarVisible = false
     }
     return {
@@ -43,7 +45,8 @@ HomeStack.navigationOptions = ({navigation}) => {
 
 export const BlogStack = createStackNavigator({
     Blog: Blog,
-    BlogArticle: BlogArticle
+    BlogArticle: BlogArticle,
+    SalonIntro:SalonIntro
 }, {
     initialRouteName: 'Blog'
 })
@@ -51,7 +54,7 @@ export const BlogStack = createStackNavigator({
 BlogStack.navigationOptions = ({navigation}) => {
     let tabBarVisible = true;
     let routeName = navigation.state.routes[navigation.state.index].routeName
-    if (routeName == 'BlogArticle') {
+    if (routeName == 'BlogArticle' || routeName=='SalonIntro') {
         tabBarVisible = false
     }
     return {

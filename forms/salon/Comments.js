@@ -15,7 +15,7 @@ export default class Comments extends React.Component {
                 {commentsMock.map((item, i) => {
                     console.log("item: " + item + " number: " + i)
                     return (
-                        <View style={styles.commentContainer}>
+                        <View key={i} style={styles.commentContainer}>
                             <Text style={styles.commentText} key={i}> {item} </Text>
                             <View style={{flexDirection: 'row', marginLeft:10}}>
                                 <Image source={require('../../assets/png/star3x_gold.png')} style={styles.star}/>

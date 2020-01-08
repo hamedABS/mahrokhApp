@@ -14,8 +14,10 @@ import {
 } from 'react-native';
 
 export default class Home extends React.Component {
-    static navigationOptions = {
-        headerTitle: () => <LogoTitle/>
+    static navigationOptions = ({navigation}) => {
+        return {
+            headerTitle: () => <LogoTitle data={navigation}/>
+        }
     };
 
     render() {
@@ -69,10 +71,10 @@ export default class Home extends React.Component {
                     <View style={styles.bePrettyBlogSlider}>
                         <Text style={{marginRight: 20, fontFamily: 'IRANSansWeb'}}>بلاگ زیبا شو</Text>
                         <ScrollView horizontal>
-                            <Blog/>
-                            <Blog/>
-                            <Blog/>
-                            <Blog/>
+                            <Blog data={this.props}/>
+                            <Blog data={this.props}/>
+                            <Blog data={this.props}/>
+                            <Blog data={this.props}/>
                         </ScrollView>
                     </View>
                 </ScrollView>
@@ -91,14 +93,15 @@ class LogoTitle extends React.Component {
                     source={require('../../assets/png/Group-2102.png')}
                     style={{width: 60, height: 60}}
                 />
-                <TouchableHighlight style={{paddingRight: 10}}>
+                <TouchableOpacity style={{padding: 15}}
+                                  onPress={() => this.props.data.navigate('ReservedSalons')}>
                     <View>
                         <Image
                             source={require('../../assets/png/calendar.png')}
-                            style={{width: 30, height: 35}}
+                            style={{width: 23, height: 26}}
                         />
                     </View>
-                </TouchableHighlight>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -219,8 +222,8 @@ class AroundSalonTile extends React.Component {
 
 class Blog extends React.Component {
     _onPressButton = () => {
-        let url = "https://varzesh3.com";
-        //Linking.openURL(url).catch((err) => console.error('An error occurred', err));
+        let data = this.props.data;
+        data.navigation.navigate('Blog')
     }
 
     render() {

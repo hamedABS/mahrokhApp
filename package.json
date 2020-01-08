@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "expo": "^35.0.1",
+    "expo-av": "~7.0.1",
     "install-packages": "^0.2.5",
     "react": "16.8.3",
     "react-dom": "16.8.3",
@@ -26,7 +27,7 @@
     "react-navigation": "^4.0.10",
     "react-navigation-stack": "^1.10.3",
     "react-navigation-tabs": "^2.6.2",
-    "expo-av": "~7.0.1"
+    "expo-location": "~7.0.0"
   },
   "devDependencies": {
     "babel-preset-expo": "^7.1.0"
