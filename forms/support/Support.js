@@ -38,18 +38,18 @@ export default class Support extends React.Component {
                     source={require('../../assets/png/Group-2102.png')}
                     style={{width: width / 2, height: width / 2}}
                 />
-                <View style={styles.everyItem}>
+                <TouchableOpacity style={styles.everyItem} onPress={()=> this.props.navigation.navigate('AboutApp')}>
                     <Image
                         source={require('../../assets/png/wallet.png')}
                         style={styles.icon}/>
                     <Text style={styles.txt}>درباره ماهرخ</Text>
-                </View>
-                <View style={styles.everyItem}>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.everyItem}>
                     <Image
                         source={require('../../assets/png/document.png')}
                         style={styles.icon}/>
                     <Text style={styles.txt}>تماس با ماهرخ</Text>
-                </View>
+                </TouchableOpacity>
                 <View style={styles.everyItem}>
                     <Image
                         source={require('../../assets/png/edit.png')}

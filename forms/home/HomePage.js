@@ -49,7 +49,7 @@ export default class Home extends React.Component {
                         </ScrollView>
                     </View>
                     <View style={styles.bestSalonsSlider}>
-                        <Text style={{margin: 5, marginBottom: 10, marginTop: 0, fontFamily: 'IRANSansWeb'}}>برترین سالن
+                        <Text style={{margin: 5,marginRight: 20, marginBottom: 10, marginTop: 0, fontFamily: 'IRANSansWeb'}}>برترین سالن
                             ها</Text>
                         <ScrollView horizontal>
                             <SalonTile data={this.props}/>
@@ -61,7 +61,7 @@ export default class Home extends React.Component {
                         </ScrollView>
                     </View>
                     <View style={styles.aroundSalonsSlider}>
-                        <Text style={{margin: 5, marginBottom: 10, fontFamily: 'IRANSansWeb'}}>سالن های اطراف من</Text>
+                        <Text style={{margin: 5, marginRight: 20, marginBottom: 10, fontFamily: 'IRANSansWeb'}}>سالن های اطراف من</Text>
                         <ScrollView horizontal>
                             <AroundSalonTile data={this.props}/>
                             <AroundSalonTile data={this.props}/>

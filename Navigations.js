@@ -16,6 +16,7 @@ import ReserveDetails from "./forms/profile/ReserveDetails";
 import ProfileSetting from "./forms/profile/ProfileSetting";
 import FinalizeReserve from "./forms/salon/FinalizeReserve";
 import SalonIntro from "./forms/blog/SalonIntro";
+import AboutApp from "./forms/support/AboutApp";
 import NewReserve from "./forms/salon/NewReserve";
 import Login from "./forms/auth/LoginPage";
 import {createBottomTabNavigator} from "react-navigation-tabs";
@@ -68,8 +69,8 @@ export const ReservationStack = createStackNavigator({
     SalonInfo: SalonInfo
 })
 export const SupportStack = createStackNavigator({
-    Support: Support,
-
+    AboutApp:AboutApp,
+    Support: Support
 })
 export const ProfileStack = createStackNavigator({
     Profile: Profile,
@@ -117,7 +118,7 @@ export const TabNavigator = createBottomTabNavigator(
         },
     },
     {
-        initialRouteName: 'Home',
+        initialRouteName: 'Support',
         defaultNavigationOptions: ({navigation}) => ({
             tabBarIcon: ({focused, horizontal, tintColor}) => {
                 const {routeName} = navigation.state;
