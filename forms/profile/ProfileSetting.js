@@ -92,7 +92,6 @@ export default class ProfileSetting extends React.Component {
                     <TextInput
                         style={styles.txt_input}
                         defaultValue="Tehran"
-                        // defaultValue='تهران'
                         placeholder='شهر'
                         autoCapitalize='words'
                         onChangeText={(name) => this.setState({name})}
@@ -138,7 +137,6 @@ const styles = StyleSheet.create({
     },
     txt_input: {
         fontFamily: 'IRANSansFaNum',
-        // height: 40,
         width: width,
         textAlign: 'right',
         writingDirection: 'rtl',

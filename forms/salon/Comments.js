@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
     commentContainer: {
         width: width / 1.1,
         height: height / 8,
-        // borderBottomColor:'#00000029',
         borderRadius:7,
         backgroundColor:'white',
         margin: 3,
@@ -60,7 +59,6 @@ const styles = StyleSheet.create({
     star: {
         width: 16,
         height: 16,
-        //marginTop: 20
     },
     commentText: {
         fontSize: 14,

@@ -18,6 +18,9 @@ import FinalizeReserve from "./forms/salon/FinalizeReserve";
 import SalonIntro from "./forms/blog/SalonIntro";
 import AboutApp from "./forms/support/AboutApp";
 import NewReserve from "./forms/salon/NewReserve";
+import Survey from "./forms/profile/Survey";
+import ChangePasswordPage from "./forms/profile/ChangePasswordPage"
+import FAQ from "./forms/support/FAQ";
 import Login from "./forms/auth/LoginPage";
 import {createBottomTabNavigator} from "react-navigation-tabs";
 import {Image} from "react-native";
@@ -28,8 +31,8 @@ export const HomeStack = createStackNavigator({
     Salon: Salon,
     SalonInfo: SalonInfo,
     FinalizeReserve: FinalizeReserve,
-    NewReserve:NewReserve,
-    ReservedSalons:ReservedSalons
+    NewReserve: NewReserve,
+    ReservedSalons: ReservedSalons
 }, {
     initialRouteName: 'Home'
 })
@@ -47,7 +50,7 @@ HomeStack.navigationOptions = ({navigation}) => {
 export const BlogStack = createStackNavigator({
     Blog: Blog,
     BlogArticle: BlogArticle,
-    SalonIntro:SalonIntro
+    SalonIntro: SalonIntro
 }, {
     initialRouteName: 'Blog'
 })
@@ -55,7 +58,7 @@ export const BlogStack = createStackNavigator({
 BlogStack.navigationOptions = ({navigation}) => {
     let tabBarVisible = true;
     let routeName = navigation.state.routes[navigation.state.index].routeName
-    if (routeName == 'BlogArticle' || routeName=='SalonIntro') {
+    if (routeName == 'BlogArticle' || routeName == 'SalonIntro') {
         tabBarVisible = false
     }
     return {
@@ -64,21 +67,26 @@ BlogStack.navigationOptions = ({navigation}) => {
 }
 
 export const ReservationStack = createStackNavigator({
-   Reservation: SalonReserve,
+    Reservation: SalonReserve,
     Salon: Salon,
     SalonInfo: SalonInfo
 })
 export const SupportStack = createStackNavigator({
-    AboutApp:AboutApp,
-    Support: Support
+    Support: Support,
+    AboutApp: AboutApp,
+    FAQ: FAQ
 })
 export const ProfileStack = createStackNavigator({
     Profile: Profile,
     Setting: Setting,
     ReservedSalons: ReservedSalons,
     ReserveDetails: ReserveDetails,
+    AboutApp: AboutApp,
     Salon: Salon,
-    ProfileSetting:ProfileSetting
+    ChangePasswordPage: ChangePasswordPage,
+    ProfileSetting: ProfileSetting,
+    FAQ: FAQ,
+    Survey: Survey
 }, {
     initialRouteName: 'Profile'
 })
@@ -86,7 +94,7 @@ export const ProfileStack = createStackNavigator({
 ProfileStack.navigationOptions = ({navigation}) => {
     let tabBarVisible = true;
     let routeName = navigation.state.routes[navigation.state.index].routeName
-    if (routeName == 'ReserveDetails' || routeName == 'Salon') {
+    if (routeName != 'Profile') {
         tabBarVisible = false
     }
     return {
@@ -118,11 +126,10 @@ export const TabNavigator = createBottomTabNavigator(
         },
     },
     {
-        initialRouteName: 'Support',
+        initialRouteName: 'Home',
         defaultNavigationOptions: ({navigation}) => ({
             tabBarIcon: ({focused, horizontal, tintColor}) => {
                 const {routeName} = navigation.state;
-                // console.log('routeName: ' + routeName)
                 let icon;
                 if (routeName == 'Home') {
                     icon = require('./assets/png/home.png');

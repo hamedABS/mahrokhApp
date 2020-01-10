@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import * as Font from 'expo-fonts';
 import {
     StyleSheet, Text, TextInput, View, Image,
     Dimensions, TouchableHighlight, CheckBox, KeyboardAvoidingView,
@@ -7,13 +6,25 @@ import {
 
 
 export default class RegisterClass extends Component {
-    static navigationOptions = {
-        title:'عضویت',
-        headerTitleStyle: {
-            textAlign: 'center',
-            flexGrow:1,
-            alignSelf:'center',
-        },
+    static navigationOptions = ({navigation}) => {
+        let headerBackImage = <Image source={require('../../assets/png/left.png')}
+                                     style={{width: 20, height: 20}}
+        />;
+        let headerTitle =
+            <Text style={{
+                textAlign: 'center',
+                fontFamily: 'IRANSansWeb',
+                width: width / 1.4,
+                fontSize: 16
+            }}>عضویت</Text>
+        return {
+            headerBackImage: () => {
+                return headerBackImage
+            },
+            headerTitle: () => {
+                return headerTitle
+            },
+        };
     };
     constructor() {
         super()
@@ -125,6 +136,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row-reverse',
         justifyContent: 'space-between',
         borderBottomWidth: 1,
+        borderColor: 'rgba(0,0,0,0.5)',
         paddingRight: width
     },
 
@@ -138,9 +150,10 @@ const styles = StyleSheet.create({
     },
 
     txt_input_img: {
-        height: height / 21,
-        width: width / 13,
-        marginRight: width / 45
+        height: 35,
+        width: 35,
+        marginRight: width / 45,
+        tintColor:'rgba(0,0,0,0.5)',
     },
     header: {
         height: height / 14,
@@ -157,11 +170,10 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         height: height / 6,
         alignItems: 'center',
-
     },
     btn_register_txt: {
         fontFamily: 'IRANSansWeb',
-        fontSize: width / 18,
+        fontSize: 18,
         textAlign: 'center',
         padding: 8,
         color: 'white'

@@ -10,112 +10,170 @@ import {
     View
 } from 'react-native';
 import MapView from "react-native-maps";
+import * as Permissions from "expo-permissions";
+import * as Location from "expo-location";
 
 
 export default class SalonInfo extends React.Component {
 
+    constructor() {
+        super();
+        this.state = {
+            location: ''
+        }
+    }
+
     static navigationOptions = ({navigation}) => {
         let headerBackImage = <Image source={require('../../assets/png/left.png')}
-                                     style={{width:20, height:20}}
-            />;
-        let headerTitle = <Text style={{textAlign:'center', fontFamily:'IRANSansWeb', flexGrow:1, marginRight:30, fontSize:16}}>کایزن</Text>
+                                     style={{width: 20, height: 20}}
+        />;
+        let headerTitle = <Text style={{
+            textAlign: 'center',
+            fontFamily: 'IRANSansWeb',
+            flexGrow: 1,
+            marginRight: 30,
+            fontSize: 16
+        }}>کایزن</Text>
         return {
             title: navigation.getParam('salonName', 'کایزن'),
-            headerBackImage: () =>{ return headerBackImage },
-            headerTitle: () => {return headerTitle},
+            headerBackImage: () => {
+                return headerBackImage
+            },
+            headerTitle: () => {
+                return headerTitle
+            },
             tabBarVisible: false
         };
     };
 
-    render() {
-        return (
-            <View>
-                <MapView style={{width: width, height: height / 4}}
-                         initialRegion={{
-                             latitude: 37.78825,
-                             longitude: -122.4324,
-                             latitudeDelta: 0.0922,
-                             longitudeDelta: 0.0421,
-                         }}
-                         showsMyLocationButton={true}
-                         followsUserLocation={true}
-                         showsCompass={true}
-                         showsIndoors={true}
-                />
+    componentDidMount() {
+        this._getLocationAsync()
+    }
 
-                <View style={styles.address}>
-                    <Text style={{fontSize: 17, fontFamily: 'IRANSansFaNum', textAlign: 'center', color: '#00000099'}}>زعفرانیه
-                        - مقدس اردبیلی- پلاک 2</Text>
-                    <TouchableOpacity style={styles.routingBtn}>
+    _getLocationAsync = async () => {
+        let {status} = await Permissions.askAsync(Permissions.LOCATION);
+        if (status !== 'granted') {
+            this.setState({
+                errorMessage: 'Permission to access location was denied',
+            });
+        }
+
+        let location = await Location.getCurrentPositionAsync({});
+        this.setState({location: location});
+    };
+
+    render() {
+        let text = 'Waiting..';
+        let location;
+        let locationIsLoad = false;
+        if (this.state.errorMessage) {
+            text = this.state.errorMessage;
+            locationIsLoad=false
+        } else if (this.state.location) {
+            text = JSON.stringify(this.state.location);
+            location = JSON.parse(text);
+            console.log(location.coords.latitude);
+            console.log(location.coords.longitude);
+            locationIsLoad = true;
+        }
+        console.log(text)
+        if (locationIsLoad) {
+            let latitude = this.state.location.coords.latitude;
+            let longitude = this.state.location.coords.longitude;
+            return (
+                <View>
+                    <MapView style={{width: width, height: height / 4}}
+                             initialRegion={{
+                                 latitude: latitude,
+                                 longitude: longitude,
+                                 latitudeDelta: 0.0922,
+                                 longitudeDelta: 0.0421,
+                             }}
+                             showsMyLocationButton={true}
+                             followsUserLocation={true}
+                             showsCompass={true}
+                             showsIndoors={true}
+                    />
+
+                    <View style={styles.address}>
                         <Text style={{
-                            fontSize: 15,
+                            fontSize: 17,
                             fontFamily: 'IRANSansFaNum',
                             textAlign: 'center',
-                            marginBottom: 5,
-                            color: '#00000099',
-                        }}>مسیر یابی</Text>
-                    </TouchableOpacity>
-                </View>
+                            color: '#00000099'
+                        }}>زعفرانیه
+                            - مقدس اردبیلی- پلاک 2</Text>
+                        <TouchableOpacity style={styles.routingBtn}>
+                            <Text style={{
+                                fontSize: 15,
+                                fontFamily: 'IRANSansFaNum',
+                                textAlign: 'center',
+                                marginBottom: 5,
+                                color: '#00000099',
+                            }}>مسیر یابی</Text>
+                        </TouchableOpacity>
+                    </View>
 
-                <View style={styles.workingTime}>
-                    <Text style={[styles.titlesBaseStyle, {alignSelf: 'flex-end'}]}>ساعات کاری</Text>
-                    <View style={styles.workingTimeItem}>
-                        <View style={{flexDirection: 'row-reverse', alignItems: 'center'}}>
-                            <View style={{width: 10, height: 10, backgroundColor: '#A537FD', borderRadius: 50}}/>
-                            <Text style={[styles.workingItemText, {fontSize: 15, marginRight: 10}]}>شنبه الی
-                                چهارشنبه</Text>
+                    <View style={styles.workingTime}>
+                        <Text style={[styles.titlesBaseStyle, {alignSelf: 'flex-end'}]}>ساعات کاری</Text>
+                        <View style={styles.workingTimeItem}>
+                            <View style={{flexDirection: 'row-reverse', alignItems: 'center'}}>
+                                <View style={{width: 10, height: 10, backgroundColor: '#A537FD', borderRadius: 50}}/>
+                                <Text style={[styles.workingItemText, {fontSize: 15, marginRight: 10}]}>شنبه الی
+                                    چهارشنبه</Text>
+                            </View>
+                            <Text style={[styles.workingItemText, {fontSize: 15}]}>۹-۲۰</Text>
                         </View>
-                        <Text style={[styles.workingItemText, {fontSize: 15}]}>۹-۲۰</Text>
-                    </View>
-                    <View style={styles.workingTimeItem}>
-                        <View style={{flexDirection:'row-reverse', alignItems:'center'}}>
-                            <View style={{width: 10, height: 10, backgroundColor: '#A537FD', borderRadius: 50}}/>
-                            <Text style={[styles.workingItemText, {fontSize: 15, marginRight:10}]}>پنجشنبه</Text>
-                        </View>
-                        <Text style={[styles.workingItemText, {fontSize: 15}]}>۹-۲۰</Text>
-                    </View>
-                </View>
-                <View style={styles.personnelContainer}>
-                    <Text style={styles.titlesBaseStyle}>پرسنل</Text>
-                    <View style={styles.personnel}>
-                        <View style={styles.personnelTile}>
-                            <Image
-                                source={require('../../assets/png/brownHairGirl.png')}
-                                style={styles.personnelImage}
-                            />
-                            <Text style={[styles.titlesBaseStyle, {fontSize:12}]}>پرسنل چشم</Text>
-                        </View>
-                        <View style={styles.personnelTile}>
-                            <Image
-                                source={require('../../assets/png/brownHairGirl.png')}
-                                style={styles.personnelImage}
-                            />
-                            <Text style={[styles.titlesBaseStyle,{fontSize:12}]}>پرسنل پوست</Text>
-                        </View>
-                        <View style={styles.personnelTile}>
-                            <Image
-                                source={require('../../assets/png/brownHairGirl.png')}
-                                style={styles.personnelImage}
-                            />
-                            <Text style={[styles.titlesBaseStyle, {fontSize:12}]}>پرسنل ابرو</Text>
-                        </View>
-                        <View style={styles.personnelTile}>
-                            <Image
-                                source={require('../../assets/png/brownHairGirl.png')}
-                                style={styles.personnelImage}
-                            />
-                            <Text style={[styles.titlesBaseStyle, {fontSize:12, marginLeft:5}]}>پرسنل مو</Text>
+                        <View style={styles.workingTimeItem}>
+                            <View style={{flexDirection: 'row-reverse', alignItems: 'center'}}>
+                                <View style={{width: 10, height: 10, backgroundColor: '#A537FD', borderRadius: 50}}/>
+                                <Text style={[styles.workingItemText, {fontSize: 15, marginRight: 10}]}>پنجشنبه</Text>
+                            </View>
+                            <Text style={[styles.workingItemText, {fontSize: 15}]}>۹-۲۰</Text>
                         </View>
                     </View>
+                    <View style={styles.personnelContainer}>
+                        <Text style={styles.titlesBaseStyle}>پرسنل</Text>
+                        <View style={styles.personnel}>
+                            <View style={styles.personnelTile}>
+                                <Image
+                                    source={require('../../assets/png/brownHairGirl.png')}
+                                    style={styles.personnelImage}
+                                />
+                                <Text style={[styles.titlesBaseStyle, {fontSize: 12}]}>پرسنل چشم</Text>
+                            </View>
+                            <View style={styles.personnelTile}>
+                                <Image
+                                    source={require('../../assets/png/brownHairGirl.png')}
+                                    style={styles.personnelImage}
+                                />
+                                <Text style={[styles.titlesBaseStyle, {fontSize: 12}]}>پرسنل پوست</Text>
+                            </View>
+                            <View style={styles.personnelTile}>
+                                <Image
+                                    source={require('../../assets/png/brownHairGirl.png')}
+                                    style={styles.personnelImage}
+                                />
+                                <Text style={[styles.titlesBaseStyle, {fontSize: 12}]}>پرسنل ابرو</Text>
+                            </View>
+                            <View style={styles.personnelTile}>
+                                <Image
+                                    source={require('../../assets/png/brownHairGirl.png')}
+                                    style={styles.personnelImage}
+                                />
+                                <Text style={[styles.titlesBaseStyle, {fontSize: 12, marginLeft: 5}]}>پرسنل مو</Text>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={styles.info}>
+                        <Text style={styles.titlesBaseStyle}>توضیحات
+                            فروشگاه</Text>
+                        <Text style={[styles.titlesBaseStyle,]}>برای زمان جمعه لطفا با ما
+                            تماس بگیرید</Text>
+                    </View>
                 </View>
-                <View style={styles.info}>
-                    <Text style={styles.titlesBaseStyle}>توضیحات
-                        فروشگاه</Text>
-                    <Text style={[styles.titlesBaseStyle, ]}>برای زمان جمعه لطفا با ما
-                        تماس بگیرید</Text>
-                </View>
-            </View>
-        )
+            )
+        } else return null;
     }
 }
 
@@ -136,7 +194,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1
     },
     routingBtn: {
-        justifyContent:'center',
+        justifyContent: 'center',
         width: width / 4.8,
         height: 27,
         borderRadius: 25,
@@ -169,7 +227,7 @@ const styles = StyleSheet.create({
         height: height / 4.5,
         borderBottomColor: "#70707080",
         borderBottomWidth: 1,
-        justifyContent:'space-between'
+        justifyContent: 'space-between'
     },
     personnel: {
         flexDirection: 'row-reverse',

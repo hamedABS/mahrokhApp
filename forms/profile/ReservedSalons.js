@@ -39,7 +39,8 @@ export default class ReservedSalons extends React.Component {
                                 style={{width: width, height: height / 2.5}}>
                         {
                             mockData.map((item, index) => {
-                                return <SalonReservedItem key={index} data={item} parentProps={this.props}/>
+                                return <SalonReservedItem key={index} data={item} btnText='1'
+                                                          parentProps={this.props}/>
                             })
                         }
                         <View style={{height: 10, width: width}}></View>
@@ -51,7 +52,8 @@ export default class ReservedSalons extends React.Component {
 
                     {
                         mockData.map((item, index) => {
-                            return <SalonReservedItem key={index} data={item} parentProps={this.props}/>
+                            return <SalonReservedItem key={index} data={item} btnText='2'
+                                                      parentProps={this.props}/>
                         })
                     }
                     <View style={{height: 5}}></View>
@@ -63,8 +65,13 @@ export default class ReservedSalons extends React.Component {
 
 
 export class SalonReservedItem extends React.Component {
+
+    _onPress = () => {
+    }
+
     render() {
         let data = [this.props.data];
+        let btnText = this.props.btnText;
         let parentProps = this.props.parentProps;
         return (
             data.map((item, i) => {
@@ -80,8 +87,9 @@ export class SalonReservedItem extends React.Component {
                             <Text style={styles.itemText}>{item.date}</Text>
                         </View>
                         <TouchableOpacity style={styles.details}
-                                          onPress={() => parentProps.navigation.navigate('ReserveDetails')}>
-                            <Text style={[styles.itemText, {textAlign: 'center'}]}>جزییات</Text>
+                                          onPress={() => btnText == 1 ? parentProps.navigation.navigate('ReserveDetails') :
+                                              parentProps.navigation.navigate('Survey')}>
+                            <Text style={[styles.itemText, {textAlign: 'center'}]}>{btnText == 1 ? 'جزییات' : 'نظرسنجی'}</Text>
                         </TouchableOpacity>
                     </TouchableOpacity>
                 )

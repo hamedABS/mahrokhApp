@@ -12,15 +12,17 @@ import Swiper from "react-native-web-swiper";
 import SalonService from "./SalonService";
 import WorkSample from "./WorkSample";
 import Comments from "./Comments";
-import Icon from 'react-native-ionicons';
 
 export default class Salon extends React.Component {
+
 
     constructor() {
         super();
         this.state = {
             name: "service",
-            likedSalon: false
+            likedSalon: false,
+            serviceReservedCount: 0,
+            focusedStatuses: [false, false, false, false, false, false]
         }
     }
 
@@ -178,9 +180,6 @@ const slides = [
 ]
 
 const styles = StyleSheet.create({
-    container: {
-        //flex:1
-    },
     header: {
         width: width,
         height: height / 4,

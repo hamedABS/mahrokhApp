@@ -1,91 +1,64 @@
-import React from 'react';
-import { Button, View, Text, Image} from 'react-native';
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import React, {Component} from "react";
+import Constants from 'expo-constants';
+import MapView from "react-native-maps";
+import {Dimensions} from "react-native";
+import * as Location from 'expo-location';
+import * as Permissions from 'expo-permissions';
 
-export class HomeScreen extends React.Component {
-  static navigationOptions = {
-    headerTitle: ()=> <LogoTitle/>
-  };
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Home Screen</Text>
-        <Button
-          title="Go to the F**ing Details Screen"
-          onPress={() => this.props.navigation.navigate('Details')} />
-      </View>
-    );
-  }
-}
 
-class DetailsScreen extends React.Component {
-  static navigationOptions = ({ navigation, navigationOptions }) => {
-    console.log(navigationOptions)
-    return {
-      title: navigation.getParam('otherParam', 'A Nested Details Screen'),
-      headerStyle: {
-        backgroundColor: navigationOptions.headerTintColor,
-      },
-      headerTintColor: navigationOptions.headerStyle.backgroundColor
-    };
-  };
-
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Details Screen</Text>
-        <Button
-          title="Go to Details... again"
-          onPress={() => this.props.navigation.push('Details')}
-        />
-        <Button
-          title="Go to Home"
-          onPress={() => this.props.navigation.navigate('Home')}
-        />
-        <Button
-          title="Go back"
-          onPress={() => this.props.navigation.goBack()}
-        />
-      </View>
-    );
-  }
-}
-
-const RootStack = createStackNavigator(
-  {
-    Home: HomeScreen,
-    Details: DetailsScreen,
-  },
-  {
-    initialRouteName: 'Home',
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: '#fc2003'
-      },
-      headerTintColor: '#03fccf',
-      headerTitleStyle: 'bold'
+export default class Temp extends Component {
+    state = {
+        location: '',
+        isModalVisible: false
     }
-  }
-);
 
-class LogoTitle extends React.Component {
-  render() {
-    return (
-      <Image
-        source={require('./assets/png/Group-2102.png')}
-        style={{ width: 30, height: 30 }}
-      />
-    );
-  }
+    componentDidMount() {
+        this._getLocationAsync()
+    }
+
+    _getLocationAsync = async () => {
+        let {status} = await Permissions.askAsync(Permissions.LOCATION);
+        if (status !== 'granted') {
+            this.setState({
+                errorMessage: 'Permission to access location was denied',
+            });
+        }
+
+        let location = await Location.getCurrentPositionAsync({});
+        this.setState({location: location});
+    };
+
+    render() {
+        let text = 'Waiting..';
+        let location;
+        let flag = false;
+        if (this.state.errorMessage) {
+            text = this.state.errorMessage;
+        } else if (this.state.location) {
+            text = JSON.stringify(this.state.location);
+            location = JSON.parse(text);
+            console.log(location.coords.latitude);
+            console.log(location.coords.longitude);
+            flag = true;
+            console.log(location)
+        }
+        console.log(text)
+        if (flag)
+            return (
+                <MapView style={{width: width, height: height / 4}}
+                         initialRegion={{
+                             latitude: location.coords.latitude,
+                             longitude: location.coords.longitude,
+                             latitudeDelta: 0.0922,
+                             longitudeDelta: 0.0421,
+                         }}
+                         showsMyLocationButton={true}
+                         followsUserLocation={true}
+                         showsCompass={true}
+                         showsIndoors={true}
+                />
+            );
+        else return null
+    }
 }
-
-const AppContainer = createAppContainer(RootStack);
-
-export default class App extends React.Component {
-  render() {
-    return <AppContainer />;
-  }
-}
-
-
+const {width, height} = Dimensions.get("window");

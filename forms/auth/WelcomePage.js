@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Image, Dimensions, TouchableHighlight} from 'react-native';
-import Home from '../home/HomePage';
 
 export default class WelcomePage extends Component {
 
     static navigationOptions = {
+        headerShown: false,
     };
 
     constructor() {
@@ -66,7 +66,6 @@ const styles = StyleSheet.create({
         paddingRight: 10
     },
     image: {
-        // backgroundColor: 'yellow',
         padding: 5,
         marginTop: height / 7,
         height: height / 2.7,
@@ -83,7 +82,6 @@ const styles = StyleSheet.create({
     btn_register_txt: {
         fontSize: width / 15,
         textAlign: 'center',
-        // padding: 4,
         color: 'white',
         fontFamily: 'IRANSansWeb'
     },

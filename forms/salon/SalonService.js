@@ -9,42 +9,48 @@ import {
 } from 'react-native';
 
 export default class SalonService extends React.Component {
+
+    constructor() {
+        super();
+        this.state = {
+            serviceReservedCount: 0,
+            focusedStatuses: [false, false, false, false, false, false],
+            reservedServices: []
+        }
+    }
+
+    _onPress = (i, item) => {
+        let tmp = this.state.focusedStatuses;
+        let count = this.state.serviceReservedCount;
+        tmp[i] = !this.state.focusedStatuses[i]
+        this.state.focusedStatuses[i] ? count++ : count--
+        this.setState({
+            focusedStatuses: tmp,
+            serviceReservedCount: count
+        })
+        this.state.reservedServices.push(item)
+    }
+
     render() {
         let parentProps = this.props.data;
         return (
             <View style={styles.container}>
-                <View style={styles.serviceItem}>
-                    <Text style={styles.serviceText}>کاشت ناخن</Text>
-                    <Image source={require('../../assets/png/plus.png')}
-                           style={styles.plus}
-                    />
-                </View>
-                <View style={styles.serviceItem}>
-                    <Text style={styles.serviceText}>کلوپ</Text>
-                    <Image source={require('../../assets/png/plus.png')}
-                           style={styles.plus}
-                    />
-                </View>
-                <View style={styles.serviceItem}>
-                    <Text style={styles.serviceText}>کرلی</Text>
-                    <Image source={require('../../assets/png/plus.png')}
-                           style={styles.plus}
-                    />
-                </View>
-                <View style={styles.serviceItem}>
-                    <Text style={styles.serviceText}>رنگ شیشه</Text>
-                    <Image source={require('../../assets/png/plus.png')}
-                           style={styles.plus}
-                    />
-                </View>
-                <View style={styles.serviceItem}>
-                    <Text style={styles.serviceText}>بافت</Text>
-                    <Image source={require('../../assets/png/plus.png')}
-                           style={styles.plus}
-                    />
-                </View>
+                {
+                    services.map((item, i) => {
+                        return (
+                            <View key={i} style={styles.serviceItem}>
+                                <Text style={styles.serviceText}>{item.name}</Text>
+                                <TouchableOpacity onPress={() => this._onPress(i, item)}>
+                                    <Image source={require('../../assets/png/plus.png')}
+                                           style={this.state.focusedStatuses[i] ? styles.plus : [styles.plus, {opacity: 0.5}]}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        )
+                    })
+                }
                 <TouchableOpacity style={{borderTopColor: '#70707080', borderTopWidth: 1}}
-                onPress={()=>parentProps.navigation.navigate('NewReserve')}>
+                                  onPress={() => parentProps.navigation.navigate('NewReserve', {services: this.state.reservedServices})}>
                     <View style={{
                         width: width / 2.9,
                         height: height / 17,
@@ -52,15 +58,40 @@ export default class SalonService extends React.Component {
                         borderRadius: 25,
                         marginTop: 15
                     }}>
-                        <Text style={{color: 'white', fontFamily: 'IRANSansWeb', textAlign: 'center', marginTop: 8}}>خدمت
-                            آماده رزرو</Text>
+                        <Text style={{
+                            color: 'white',
+                            fontFamily: 'IRANSansFaNum',
+                            textAlign: 'center',
+                            marginTop: 8
+                        }}>{this.state.serviceReservedCount} خدمت آماده رزرو</Text>
                     </View>
                 </TouchableOpacity>
             </View>
-
         );
     }
 }
+
+const services = [
+    {
+        name: 'کاشت ناخن',
+        price: 50
+    },
+    {
+        name: 'کلوپ',
+        price: 50
+    },
+    {
+        name: 'کرلی',
+        price: 60
+    },
+    {
+        name: 'رنگ شیشه',
+        price: 60
+    },
+    {
+        name: 'بافت',
+        price: 100
+    }]
 
 const {width, height} = Dimensions.get("window");
 
@@ -87,7 +118,7 @@ const styles = StyleSheet.create({
     },
     plus: {
         width: 20,
-        height: 20
+        height: 20,
     }
 })
 

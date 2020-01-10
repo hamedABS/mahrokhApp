@@ -1,6 +1,5 @@
 import React from 'react';
 import {Dimensions, Image, StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView} from 'react-native';
-// import PersianCalendarPicker from 'react-native-persian-calendar-picker';
 
 
 export default class ReserveDetails extends React.Component {
@@ -41,20 +40,18 @@ export default class ReserveDetails extends React.Component {
         })
     }
 
-    onDateChange(date) {
-        //this.setState({selectedStartDate: date});
-        console.log(date)
-    }
 
     render() {
         let times = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'];
+        let services = this.props.navigation.getParam('services');
+        console.log(services)
         times = times.reverse();
         const {selectedStartDate} = this.state;
         const startDate = selectedStartDate ? selectedStartDate.toString() : '';
         return (
             <View style={{flex: 1, alignItems: 'center'}}>
                 <View style={[styles.itemContainer, {height: height / 8}]}>
-                 {/*   <PersianCalendarPicker
+                    {/*   <PersianCalendarPicker
                         onDateChange={this.onDateChange}
                         width={350}
                         hieght={50}

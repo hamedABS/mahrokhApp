@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import {
-    StyleSheet, Text, TextInput, View, Image,
+    StyleSheet, Text, TextInput, View, Image, TouchableOpacity,
     Dimensions, TouchableHighlight, CheckBox, KeyboardAvoidingView,
 } from 'react-native';
 
-
-export default class Login extends React.Component {
+export default class ChangePasswordPage extends React.Component {
     static navigationOptions = ({navigation}) => {
         let headerBackImage = <Image source={require('../../assets/png/left.png')}
                                      style={{width: 20, height: 20}}
@@ -16,7 +15,7 @@ export default class Login extends React.Component {
                 fontFamily: 'IRANSansWeb',
                 width: width / 1.4,
                 fontSize: 16
-            }}>ورود</Text>
+            }}>تغییر گذر واژه</Text>
         return {
             headerBackImage: () => {
                 return headerBackImage
@@ -30,15 +29,16 @@ export default class Login extends React.Component {
     constructor() {
         super()
         this.state = {
-            phoneNumber: '',
-            password: '',
-            checked: false
+            currentPassword: '',
+            newPassword: '',
+            repeatPassword: ''
         }
     }
 
     _onPressButton = () => {
         this.props.navigation.navigate('Tab');
     }
+
 
     render() {
         return (
@@ -48,14 +48,15 @@ export default class Login extends React.Component {
                     <View style={styles.txt_input_container}>
                         <Image
                             style={styles.txt_input_img}
-                            source={require('../../assets/png/telephone.png')}
+                            source={require('../../assets/png/locked.png')}
                         />
                         <TextInput
                             style={styles.txt_input}
-                            placeholder="شماره تلفن همراه"
-                            keyboardType="phone-pad"
-                            onChangeText={(phoneNumber) => this.setState({phoneNumber})}
-                            value={this.state.phoneNumber}/>
+                            placeholder='رمز عبور فعلی'
+                            secureTextEntry={true}
+                            autoCompleteType='off'
+                            onChangeText={(currentPassword) => this.setState({currentPassword})}
+                            value={this.state.currentPassword}/>
 
                     </View>
                     <View style={styles.txt_input_container}>
@@ -65,23 +66,34 @@ export default class Login extends React.Component {
                         />
                         <TextInput
                             style={styles.txt_input}
-                            placeholder='رمز عبور'
+                            placeholder='رمز عبور جدید'
                             secureTextEntry={true}
                             autoCompleteType='off'
-                            onChangeText={(password) => this.setState({password})}
-                            value={this.state.password}/>
+                            onChangeText={(newPassword) => this.setState({newPassword})}
+                            value={this.state.newPassword}/>
+
+                    </View>
+                    <View style={styles.txt_input_container}>
+                        <Image
+                            style={styles.txt_input_img}
+                            source={require('../../assets/png/locked.png')}
+                        />
+                        <TextInput
+                            style={styles.txt_input}
+                            placeholder='تکرار رمز عبور'
+                            secureTextEntry={true}
+                            autoCompleteType='off'
+                            onChangeText={(repeatPassword) => this.setState({repeatPassword})}
+                            value={this.state.repeatPassword}/>
 
                     </View>
                 </View>
                 <View style={styles.footer}>
-                    <TouchableHighlight onPress={this._onPressButton}>
-                        <View style={styles.btn_login}>
-                            <Text style={styles.btn_register_txt}>وارد شدن</Text>
+                    <TouchableOpacity onPress={this._onPressButton}>
+                        <View style={styles.btn}>
+                            <Text style={styles.btn_save_txt}>ذخیره</Text>
                         </View>
-                    </TouchableHighlight>
-                    <View style={styles.rules_chk}>
-                        <Text style={styles.rules_txt}>رمز عبور را فراموش کردم</Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </KeyboardAvoidingView>
         );
@@ -89,68 +101,55 @@ export default class Login extends React.Component {
 }
 
 const {width, height} = Dimensions.get("window");
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'space-between',
     },
     content: {
-        height: height / 3,
+        height: height / 4,
+        marginTop: 50,
     },
     txt_input_container: {
+        height: height / 15,
+        alignItems: 'center',
         flexDirection: 'row-reverse',
-        justifyContent: 'space-between',
         borderBottomWidth: 1,
-        height:40,
-        marginTop: 20,
+        borderBottomColor: 'rgba(0,0,0,0.5)'
     },
 
     txt_input: {
-        fontFamily: 'IRANSansWeb',
-        height: 40,
+        fontFamily: 'IRANSansFaNum',
+        height: height/15,
         width: width,
+        fontSize: 14,
+        color: 'rgba(0,0,0,0.5)',
         textAlign: 'right',
         writingDirection: 'rtl',
-        paddingRight: width / 4
     },
 
     txt_input_img: {
-        tintColor: 'rgba(0,0,0,0.4)',
-        height: height / 21,
-        width: width / 13,
-        marginRight: width / 45
+        height: 20,
+        width: 20,
+        marginRight: 10,
+        marginLeft: 10,
+        tintColor: 'rgba(0,0,0,0.5)'
     },
     footer: {
-        borderColor: 'rgba(0,0,0,0.4)',
-        backgroundColor: '#E4DFE6',
-        borderTopWidth: 1,
-        height: height / 6,
         alignItems: 'center',
     },
-    btn_register_txt: {
+    btn_save_txt: {
         fontFamily: 'IRANSansWeb',
-        fontSize: width / 18,
+        fontSize: 18,
         textAlign: 'center',
         padding: 8,
         color: 'white'
     },
-    btn_login: {
-        margin: 10,
+    btn: {
         width: width / 2,
         height: height / 13,
         alignItems: 'center',
         backgroundColor: '#A537FD',
         borderRadius: 50,
     },
-    rules_chk: {
-        flexDirection: 'row-reverse',
-        width: width / 2,
-        height: height / 13,
-        justifyContent: 'center'
-    },
-    rules_txt: {
-        fontSize: 15,
-        textAlign: 'center',
-        marginTop: 3
-    }
 });

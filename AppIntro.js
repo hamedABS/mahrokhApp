@@ -63,7 +63,6 @@ export default class AppIntro extends React.Component {
                     name="md-checkmark"
                     color="rgba(255, 255, 255, .9)"
                     size={24}
-                    //style={{ backgroundColor: 'transparent' }}
                 />
             </View>
         );

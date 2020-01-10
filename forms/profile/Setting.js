@@ -11,7 +11,7 @@ export default class Setting extends React.Component {
             <Text style={{
                 textAlign: 'center',
                 fontFamily: 'IRANSansWeb',
-                width: width/1.4,
+                width: width / 1.4,
                 fontSize: 16
             }}>تنظیمات</Text>
         return {
@@ -27,32 +27,34 @@ export default class Setting extends React.Component {
     render() {
         return (
 
-            <View style={{flex:1, justifyContent:'space-between'}}>
+            <View style={{flex: 1, justifyContent: 'space-between'}}>
                 <View style={{flex: 1, alignItems: 'center', marginTop: 30}}>
-                    <View style={styles.everyItem}>
+                    <TouchableOpacity style={styles.everyItem}
+                                      onPress={() => this.props.navigation.navigate('ChangePasswordPage')}>
                         <Image
                             source={require('../../assets/png/locked.png')}
                             style={styles.icon}/>
                         <Text style={styles.txt}>تغییر گذر واژه</Text>
-                    </View>
-                    <View style={styles.everyItem}>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.everyItem}
+                                      onPress={() => this.props.navigation.navigate('AboutApp')}>
                         <Image
                             source={require('../../assets/png/AJ.png')}
                             style={styles.icon}/>
-                        <Text style={styles.txt}>درباره زیباشو</Text>
-                    </View>
+                        <Text style={styles.txt}>درباره ماهرخ</Text>
+                    </TouchableOpacity>
                     <View style={styles.everyItem}>
                         <Image
                             source={require('../../assets/png/call.png')}
                             style={styles.icon}/>
                         <Text style={styles.txt}>تماس با ما</Text>
                     </View>
-                    <View style={styles.everyItem}>
+                    <TouchableOpacity style={styles.everyItem} onPress={() => this.props.navigation.navigate('FAQ')}>
                         <Image
                             source={require('../../assets/png/Group-94.png')}
                             style={styles.icon}/>
                         <Text style={styles.txt}>سوالات متداول</Text>
-                    </View>
+                    </TouchableOpacity>
                     <View style={styles.everyItem}>
                         <Image
                             source={require('../../assets/png/exit.png')}
@@ -60,7 +62,7 @@ export default class Setting extends React.Component {
                         <Text style={styles.txt}>خروج از برنامه</Text>
                     </View>
                 </View>
-                <View style={{width:width,marginBottom:10, alignItems: 'center'}}>
+                <View style={{width: width, marginBottom: 10, alignItems: 'center'}}>
                     <Image
                         source={require('../../assets/png/Group-2102.png')}
                         style={{width: width / 4, height: width / 4}}

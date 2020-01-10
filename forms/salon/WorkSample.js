@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     container: {
         width: width,
         height: height / 2,
-        //alignItems:'center'
     },
     sampleItem: {
         width: width,
@@ -83,6 +82,5 @@ const styles = StyleSheet.create({
     imageContainer:{
         flexDirection: 'row-reverse',
         alignItems:'center',
-        //marginLeft:5
     }
 })

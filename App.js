@@ -53,7 +53,7 @@ export default class App extends React.Component {
 }
 
 /*import React from 'react';
-import Temp from './Temp2';
+import Temp from './Temp';
 
 const App = ()=>{
   return <Temp/>

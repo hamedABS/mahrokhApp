@@ -8,7 +8,6 @@ import {
     StyleSheet,
     Text,
     TextInput,
-    TouchableHighlight,
     TouchableOpacity,
     View
 } from 'react-native';
@@ -49,7 +48,13 @@ export default class Home extends React.Component {
                         </ScrollView>
                     </View>
                     <View style={styles.bestSalonsSlider}>
-                        <Text style={{margin: 5,marginRight: 20, marginBottom: 10, marginTop: 0, fontFamily: 'IRANSansWeb'}}>برترین سالن
+                        <Text style={{
+                            margin: 5,
+                            marginRight: 20,
+                            marginBottom: 10,
+                            marginTop: 0,
+                            fontFamily: 'IRANSansWeb'
+                        }}>برترین سالن
                             ها</Text>
                         <ScrollView horizontal>
                             <SalonTile data={this.props}/>
@@ -61,7 +66,8 @@ export default class Home extends React.Component {
                         </ScrollView>
                     </View>
                     <View style={styles.aroundSalonsSlider}>
-                        <Text style={{margin: 5, marginRight: 20, marginBottom: 10, fontFamily: 'IRANSansWeb'}}>سالن های اطراف من</Text>
+                        <Text style={{margin: 5, marginRight: 20, marginBottom: 10, fontFamily: 'IRANSansWeb'}}>سالن های
+                            اطراف من</Text>
                         <ScrollView horizontal>
                             <AroundSalonTile data={this.props}/>
                             <AroundSalonTile data={this.props}/>
@@ -88,20 +94,21 @@ class LogoTitle extends React.Component {
     render() {
         return (
             <View style={styles.headerLogo}>
-                <View></View>
-                <Image
-                    source={require('../../assets/png/Group-2102.png')}
-                    style={{width: 60, height: 60}}
-                />
                 <TouchableOpacity style={{padding: 15}}
                                   onPress={() => this.props.data.navigate('ReservedSalons')}>
                     <View>
                         <Image
                             source={require('../../assets/png/calendar.png')}
-                            style={{width: 23, height: 26}}
+                            style={{width: 24, height: 26}}
                         />
                     </View>
                 </TouchableOpacity>
+
+                <Image
+                    source={require('../../assets/png/Group-2102.png')}
+                    style={{width: 60, height: 60}}
+                />
+                <View style={{width: 45}}></View>
             </View>
         )
     }
@@ -129,10 +136,10 @@ class DiscountTile extends React.Component {
                 <TouchableOpacity onPress={this._onPressButton}>
                     <View style={styles.linkInDiscount}>
                         <Text
-                            style={{textAlign: 'center', marginTop: 5, marginLeft: 8, fontFamily: 'IRANSansFaNum'}}>تخفیف
+                            style={{textAlign: 'center', fontFamily: 'IRANSansFaNum', marginLeft: 5}}>تخفیف
                             ویژه کایزن</Text>
                         <Image source={require('../../assets/png/right.png')}
-                               style={{width: 20, height: 15, marginTop: 7}}/>
+                               style={{width: 20, height: 15, marginRight: 3}}/>
                     </View>
                 </TouchableOpacity>
             </ImageBackground>
@@ -149,7 +156,7 @@ class SalonTile extends React.Component {
 
     render() {
         return (
-            <TouchableHighlight onPress={this._onPress}>
+            <TouchableOpacity onPress={this._onPress}>
                 <Image
                     source={require('../../assets/png/salon1.png')}
                     style={{
@@ -160,7 +167,7 @@ class SalonTile extends React.Component {
                         overflow: 'hidden'
                     }}
                 />
-            </TouchableHighlight>
+            </TouchableOpacity>
         );
     }
 }
@@ -174,7 +181,7 @@ class AroundSalonTile extends React.Component {
 
     render() {
         return (
-            <TouchableHighlight onPress={this._onPress} style={{marginRight: 10, marginLeft: 10}}>
+            <TouchableOpacity onPress={this._onPress} style={{marginRight: 10, marginLeft: 10}}>
                 <View style={styles.aroundSalonsSliderTile}>
                     <Image
                         source={require('../../assets/png/salon1.png')}
@@ -192,7 +199,7 @@ class AroundSalonTile extends React.Component {
                             <Image source={require('../../assets/png/star3x_gold.png')} style={styles.star}/>
                             <Image source={require('../../assets/png/star3x.png')} style={styles.star}/>
                         </View>
-                        <Text style={{fontSize: 5, alignSelf: 'flex-start', fontFamily: 'IRANSansFaNum'}}>۳۰ نظر</Text>
+                        <Text style={{fontSize: 8, alignSelf: 'flex-start', fontFamily: 'IRANSansFaNum'}}>۳۰ نظر</Text>
                         <Text style={{fontSize: 14, fontFamily: 'IRANSansFaNum', color: '#00000099'}}> کایزن</Text>
                         <Text style={{fontSize: 9, marginRight: 5, fontFamily: 'IRANSansFaNum', color: '#00000099'}}>زعفرانیه
                             مقدس اردبیلی</Text>
@@ -215,7 +222,7 @@ class AroundSalonTile extends React.Component {
                         </View>
                     </View>
                 </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
         );
     }
 }
@@ -259,8 +266,7 @@ const {width, height} = Dimensions.get("window");
 const styles = StyleSheet.create({
     headerLogo: {
         flex: 1,
-        flexDirection: 'row',
-        // alignItems: 'center',
+        flexDirection: 'row-reverse',
         justifyContent: 'space-between'
     },
     container: {
@@ -270,7 +276,6 @@ const styles = StyleSheet.create({
     filterWrapper: {
         width: width,
         height: height / 12,
-        // backgroundColor: 'pink',
         alignItems: 'center',
 
     },
@@ -288,7 +293,6 @@ const styles = StyleSheet.create({
         width: width,
         height: height / 8,
         marginTop: 10
-        //backgroundColor: 'red'
     },
     linkInDiscount: {
         width: 130,
@@ -297,18 +301,19 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         margin: 47,
         marginRight: 5,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        alignContent: 'center'
     },
     bestSalonsSlider: {
         width: width,
         height: height / 5,
         marginTop: 20,
-        // backgroundColor: 'cyan'
     },
     aroundSalonsSlider: {
         width: width,
         height: height / 2.8,
-        // backgroundColor: 'pink'
 
     },
     aroundSalonsSliderTile: {
@@ -329,12 +334,10 @@ const styles = StyleSheet.create({
     bePrettyBlogSlider: {
         width: width,
         height: height / 4,
-        // backgroundColor: 'red'
     },
     star: {
-        width: 8,
-        height: 8,
-        // tintColor:'#FAC917',
+        width: 10,
+        height: 10,
     },
 
     blogTouchable: {
@@ -345,6 +348,5 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         margin: 5,
         flexDirection: 'row'
-        // marginRight: 25
     }
 });

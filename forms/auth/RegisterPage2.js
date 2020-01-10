@@ -2,11 +2,32 @@ import React, {Component} from 'react';
 import {Ionicons} from '@expo/vector-icons';
 import {
     StyleSheet, Text, TextInput, View,
-    Dimensions, TouchableHighlight, KeyboardAvoidingView
+    Dimensions, TouchableHighlight, KeyboardAvoidingView, Image
 } from 'react-native';
 
 
 export default class RegisterClass2 extends Component {
+
+    static navigationOptions = ({navigation}) => {
+        let headerBackImage = <Image source={require('../../assets/png/left.png')}
+                                     style={{width: 20, height: 20}}
+        />;
+        let headerTitle =
+            <Text style={{
+                textAlign: 'center',
+                fontFamily: 'IRANSansWeb',
+                width: width / 1.4,
+                fontSize: 16
+            }}>عضویت</Text>
+        return {
+            headerBackImage: () => {
+                return headerBackImage
+            },
+            headerTitle: () => {
+                return headerTitle
+            },
+        };
+    };
 
     constructor() {
         super()
@@ -17,17 +38,6 @@ export default class RegisterClass2 extends Component {
         }
     }
     componentDidMount() {
-        // let SEC = this.state.second
-        // var inter = setInterval(() => {
-        //     if(this.state.second === 0){
-        //         clearInterval(inter)
-        //     } else {
-        //         this.setState(pervState => ({
-        //             second:pervState.second -1,
-        //         }))
-        //     }
-        // }, 1000);
-
         let s = this.state.second;
         let m = this.state.minute;
         var inter = setInterval(() => {
@@ -60,15 +70,6 @@ export default class RegisterClass2 extends Component {
         return (
             <KeyboardAvoidingView style={styles.containter}
                                   behavior="padding" enabled>
-                <View style={styles.header}>
-                    {/* <Ionicons
-                        name="md-arrow-round-back"
-                        color="#B08C3E"
-                        size={24}
-                        style={{ backgroundColor: 'transparent' }}
-                    /> */}
-                    <Text style={{fontSize: width / 16}}>عضویت</Text>
-                </View>
                 <Text style={styles.txt_1}>لطفا کد ارسال شده را وارد کنید</Text>
                 <Text style={styles.txt_2}>برای تایید شماره تلفن، لطفا کد ارسال شده را در کادر زیر وارد کنید در صورتی که
                     کد برایتان ارسال نشده، درخواست ارسال مجدد کد را ارسال کنید</Text>
@@ -112,7 +113,7 @@ const styles = StyleSheet.create({
     containter: {
         flex: 1,
         justifyContent: 'space-between',
-        // fontFamily:'MyAwesomeFont'
+        fontFamily:'IRANSansWeb'
     },
     content: {
         height: height / 5,
