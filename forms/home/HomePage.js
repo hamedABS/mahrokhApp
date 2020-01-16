@@ -11,6 +11,7 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
+import StarRating from 'react-native-star-rating'
 
 export default class Home extends React.Component {
     static navigationOptions = ({navigation}) => {
@@ -57,30 +58,38 @@ export default class Home extends React.Component {
                         }}>برترین سالن
                             ها</Text>
                         <ScrollView horizontal>
-                            <SalonTile data={this.props}/>
-                            <SalonTile data={this.props}/>
-                            <SalonTile data={this.props}/>
-                            <SalonTile data={this.props}/>
-                            <SalonTile data={this.props}/>
-                            <SalonTile data={this.props}/>
+                            {
+                                [1, 2, 3, 4, 5, 6].map(value => {
+                                    return (
+                                        <SalonTile key={value} data={this.props}/>
+                                    )
+                                })
+                            }
                         </ScrollView>
                     </View>
                     <View style={styles.aroundSalonsSlider}>
                         <Text style={{margin: 5, marginRight: 20, marginBottom: 10, fontFamily: 'IRANSansWeb'}}>سالن های
                             اطراف من</Text>
                         <ScrollView horizontal>
-                            <AroundSalonTile data={this.props}/>
-                            <AroundSalonTile data={this.props}/>
-                            <AroundSalonTile data={this.props}/>
+                            {
+                                [1, 2, 3, 4, 5, 6].map(value => {
+                                    return (
+                                        <AroundSalonTile key={value} data={this.props}/>
+                                    )
+                                })
+                            }
                         </ScrollView>
                     </View>
                     <View style={styles.bePrettyBlogSlider}>
                         <Text style={{marginRight: 20, fontFamily: 'IRANSansWeb'}}>بلاگ زیبا شو</Text>
                         <ScrollView horizontal>
-                            <Blog data={this.props}/>
-                            <Blog data={this.props}/>
-                            <Blog data={this.props}/>
-                            <Blog data={this.props}/>
+                            {
+                                [1, 2, 3, 4, 5, 6].map(value => {
+                                    return (
+                                        <Blog key={value} data={this.props}/>
+                                    )
+                                })
+                            }
                         </ScrollView>
                     </View>
                 </ScrollView>
@@ -105,7 +114,7 @@ class LogoTitle extends React.Component {
                 </TouchableOpacity>
 
                 <Image
-                    source={require('../../assets/png/Group-2102.png')}
+                    source={require('../../assets/png/logo.png')}
                     style={{width: 60, height: 60}}
                 />
                 <View style={{width: 45}}></View>
@@ -192,14 +201,17 @@ class AroundSalonTile extends React.Component {
                         }}
                     />
                     <View>
-                        <View style={{flexDirection: 'row'}}>
-                            <Image source={require('../../assets/png/star3x_gold.png')} style={styles.star}/>
-                            <Image source={require('../../assets/png/star3x_gold.png')} style={styles.star}/>
-                            <Image source={require('../../assets/png/star3x_gold.png')} style={styles.star}/>
-                            <Image source={require('../../assets/png/star3x_gold.png')} style={styles.star}/>
-                            <Image source={require('../../assets/png/star3x.png')} style={styles.star}/>
+                        <View style={{flexDirection: 'row', marginLeft:5,marginTop:2}}>
+                            <StarRating
+                                disabled={true}
+                                starSize={13}
+                                emptyStarColor='#707070'
+                                fullStarColor='#FAC917'
+                                maxStars={5}
+                                rating={4}
+                            />
                         </View>
-                        <Text style={{fontSize: 8, alignSelf: 'flex-start', fontFamily: 'IRANSansFaNum'}}>۳۰ نظر</Text>
+                        <Text style={{fontSize: 8, alignSelf: 'flex-start', fontFamily: 'IRANSansFaNum',marginLeft:5}}>۳۰ نظر</Text>
                         <Text style={{fontSize: 14, fontFamily: 'IRANSansFaNum', color: '#00000099'}}> کایزن</Text>
                         <Text style={{fontSize: 9, marginRight: 5, fontFamily: 'IRANSansFaNum', color: '#00000099'}}>زعفرانیه
                             مقدس اردبیلی</Text>
@@ -250,9 +262,9 @@ class Blog extends React.Component {
                 <TouchableOpacity onPress={this._onPressButton}>
                     <View style={styles.blogTouchable}>
                         <Text
-                            style={{textAlign: 'center', marginTop: 5, marginLeft: 5, fontSize: 8}}>سشوار حرفه ای</Text>
+                            style={{textAlign: 'center', fontSize: 8, fontFamily:'IRANSansFaNum'}}>سشوار حرفه ای</Text>
                         <Image source={require('../../assets/png/right.png')}
-                               style={{width: 15, height: 10, marginTop: 7}}/>
+                               style={{width: 15, height: 10}}/>
 
                     </View>
                 </TouchableOpacity>
@@ -341,12 +353,13 @@ const styles = StyleSheet.create({
     },
 
     blogTouchable: {
-        width: width / 6,
-        height: height / 30,
         backgroundColor: 'white',
         borderRadius: 20,
         marginBottom: 10,
         margin: 5,
-        flexDirection: 'row'
+        alignItems:'center',
+        alignContent: 'center',
+        flexDirection: 'row',
+        padding:5,
     }
 });

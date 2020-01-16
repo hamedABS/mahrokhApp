@@ -17,7 +17,7 @@ export default class BlogArticle extends React.Component {
                         zIndex: 1,
                         justifyContent: 'space-between',
                         width: width,
-                        marginTop: 25,
+                        marginTop: 35,
                     }}>
                         <TouchableOpacity style={styles.backBtn} onPress={() => this.props.navigation.goBack()}>
                             <Image

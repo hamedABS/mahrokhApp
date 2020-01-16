@@ -13,7 +13,6 @@ export default class Comments extends React.Component {
         return (
             <View style={styles.container}>
                 {commentsMock.map((item, i) => {
-                    console.log("item: " + item + " number: " + i)
                     return (
                         <View key={i} style={styles.commentContainer}>
                             <Text style={styles.commentText} key={i}> {item} </Text>

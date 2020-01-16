@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Image, StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Accordion from "react-native-collapsible/Accordion";
 
 export default class FAQ extends React.Component {
@@ -31,21 +31,13 @@ export default class FAQ extends React.Component {
         }
     }
 
-    _renderSectionTitle = section => {
-        return (
-            <View style={styles.txt}>
-                <Text>{section.content}</Text>
-            </View>
-        );
-    };
-
-    _renderHeader = section => {
+    _renderHeader = (section, index, activeSection) => {
         return (
             <View style={styles.everyItem}>
                 <Text style={[styles.txt, {marginRight: 10}]}>{section.title}</Text>
                 <Image
                     source={require('../../assets/png/left.png')}
-                    style={styles.icon}/>
+                    style={index == activeSection ? [styles.icon, {rotation: -90}] : styles.icon}/>
             </View>
         );
     };
@@ -70,7 +62,7 @@ export default class FAQ extends React.Component {
                     containerStyle={{alignItems: 'center', marginTop: 30}}
                     sections={SECTIONS}
                     activeSections={this.state.activeSections}
-                    renderHeader={this._renderHeader}
+                    renderHeader={(section, isActive) => this._renderHeader(section, isActive, this.state.activeSections[0])}
                     renderContent={this._renderContent}
                     onChange={this._updateSections}
                     touchableComponent={TouchableOpacity}
@@ -78,7 +70,7 @@ export default class FAQ extends React.Component {
                 <View style={{marginTop: 20}}>
                     <View style={{width: width, marginBottom: 10, alignItems: 'center'}}>
                         <Image
-                            source={require('../../assets/png/Group-2102.png')}
+                            source={require('../../assets/png/logo.png')}
                             style={{width: width / 4, height: width / 4}}
                         />
                         <Text style={styles.txt}>version 0.0.1</Text>
@@ -155,7 +147,7 @@ const styles = StyleSheet.create({
         height: 20,
         marginRight: 10,
         marginLeft: 7,
-        tintColor: 'rgba(0,0,0,0.26)'
+        tintColor: 'rgba(0,0,0,0.26)',
     },
     txt: {
         fontSize: 16,

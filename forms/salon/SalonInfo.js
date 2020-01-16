@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-    Dimensions,
-    Image,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    ImageBackground,
-    ScrollView,
-    View
-} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import MapView from "react-native-maps";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";

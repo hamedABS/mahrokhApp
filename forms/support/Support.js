@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Image, StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 export default class Support extends React.Component {
     static navigationOptions = ({navigation}) => {
@@ -35,7 +35,7 @@ export default class Support extends React.Component {
         return (
             <View style={{flex: 1, alignItems: 'center'}}>
                 <Image
-                    source={require('../../assets/png/Group-2102.png')}
+                    source={require('../../assets/png/logo.png')}
                     style={{width: width / 2, height: width / 2}}
                 />
                 <TouchableOpacity style={styles.everyItem} onPress={()=> this.props.navigation.navigate('AboutApp')}>

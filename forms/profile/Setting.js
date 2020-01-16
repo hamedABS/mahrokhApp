@@ -64,7 +64,7 @@ export default class Setting extends React.Component {
                 </View>
                 <View style={{width: width, marginBottom: 10, alignItems: 'center'}}>
                     <Image
-                        source={require('../../assets/png/Group-2102.png')}
+                        source={require('../../assets/png/logo.png')}
                         style={{width: width / 4, height: width / 4}}
                     />
                     <Text style={styles.txt}>version 0.0.1</Text>

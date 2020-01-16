@@ -80,10 +80,14 @@ export default class Profile extends React.Component {
                                     <Text style={[styles.txt, styles.modalHeaderText]}>افزایش اعتبار کیف پول</Text>
                                     <TouchableOpacity
                                         onPress={() => this.setState({modalIsVisible: !this.state.modalIsVisible})}
-                                        style={{margin: 20}}>
+                                        style={{marginTop:10 ,marginLeft: 20 }}>
                                         <Image
                                             source={require('../../assets/png/cancel.png')}
-                                            style={{width: 30, height: 30}}
+                                            style={{
+                                                width: 30,
+                                                height: 30,
+                                                tintColor: 'rgb(0,0,0)',
+                                            }}
                                         />
                                     </TouchableOpacity>
                                 </View>
@@ -129,23 +133,22 @@ export default class Profile extends React.Component {
 
                         </Modal>
                         <TouchableOpacity style={{flexDirection: 'row-reverse'}} onPress={() => this.setState({
-                            modalIsVisible: !this.state.modalIsVisible
+                            modalIsVisible: true
                         })}>
                             <Image
                                 source={require('../../assets/png/wallet.png')}
                                 style={styles.icon}/>
                             <Text style={styles.txt}>کیف پول</Text>
                         </TouchableOpacity>
-                        <View style={{
+                        <TouchableOpacity style={{
                             flexDirection: 'row-reverse',
                             justifyContent: 'space-between',
-                            width: width / 3.6,
                             height: 25,
                             borderRadius: 25,
                             borderWidth: 1,
                             borderColor: 'rgba(0,0,0,0.26)',
                             marginRight: 15,
-                        }}>
+                        }} onPress={() => this.setState({modalIsVisible: true})}>
                             <Text style={[styles.txt, {fontSize: 12}]}> اعتبار {this.state.chargeItem} تومان</Text>
                             <Image
                                 source={require('../../assets/png/plus2.png')}
@@ -156,7 +159,7 @@ export default class Profile extends React.Component {
                                     marginLeft: 5,
                                     tintColor: 'rgba(0,0,0,0.6)'
                                 }}/>
-                        </View>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.everyItem}>
                         <Image
@@ -176,16 +179,11 @@ export default class Profile extends React.Component {
                             style={styles.icon}/>
                         <Text style={styles.txt}>معرفی به دوستان</Text>
                     </View>
-                    <View style={styles.everyItem}>
-                        <Image
-                            source={require('../../assets/png/falling-star.png')}
-                            style={styles.icon}/>
-                        <Text style={styles.txt}>قرعه کشی</Text>
-                    </View>
                 </View>
             </View>
         )
     }
+
     _onItemPressed(item) {
         console.log(item)
         this.setState({
@@ -241,6 +239,7 @@ const styles = StyleSheet.create({
         borderBottomColor: 'rgba(0,0,0,0.4)',
         height: height / 10,
         width: width / 1.1,
+        padding:15,
         backgroundColor: 'white',
         borderBottomWidth: 1,
         borderTopEndRadius: 25,

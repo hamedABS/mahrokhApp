@@ -4,7 +4,7 @@ import Salon from "./forms/salon/Salon";
 import SalonInfo from "./forms/salon/SalonInfo";
 import Blog from "./forms/blog/Blog";
 import BlogArticle from "./forms/blog/BlogArticle";
-import SalonReserve from "./forms/salon/SalonReserve";
+import SalonsList from "./forms/salon/SalonsList";
 import Support from "./forms/support/Support";
 import Profile from "./forms/profile/Profile";
 import Setting from "./forms/profile/Setting";
@@ -13,6 +13,7 @@ import RegisterClass from "./forms/auth/RegisterPage";
 import RegisterClass2 from "./forms/auth/RegisterPage2";
 import ReservedSalons from "./forms/profile/ReservedSalons";
 import ReserveDetails from "./forms/profile/ReserveDetails";
+import Filter from "./forms/salon/Filter";
 import ProfileSetting from "./forms/profile/ProfileSetting";
 import FinalizeReserve from "./forms/salon/FinalizeReserve";
 import SalonIntro from "./forms/blog/SalonIntro";
@@ -23,7 +24,7 @@ import ChangePasswordPage from "./forms/profile/ChangePasswordPage"
 import FAQ from "./forms/support/FAQ";
 import Login from "./forms/auth/LoginPage";
 import {createBottomTabNavigator} from "react-navigation-tabs";
-import {Image} from "react-native";
+import {Image,Text,StyleSheet} from "react-native";
 import React from "react";
 
 export const HomeStack = createStackNavigator({
@@ -67,10 +68,23 @@ BlogStack.navigationOptions = ({navigation}) => {
 }
 
 export const ReservationStack = createStackNavigator({
-    Reservation: SalonReserve,
+    Reservation: SalonsList,
     Salon: Salon,
-    SalonInfo: SalonInfo
+    SalonInfo: SalonInfo,
+    Filter:Filter
 })
+
+ReservationStack.navigationOptions = ({navigation}) => {
+    let tabBarVisible = true;
+    let routeName = navigation.state.routes[navigation.state.index].routeName
+    if (routeName != 'Reservation') {
+        tabBarVisible = false
+    }
+    return {
+        tabBarVisible,
+    }
+}
+
 export const SupportStack = createStackNavigator({
     Support: Support,
     AboutApp: AboutApp,
@@ -115,18 +129,10 @@ export const TabNavigator = createBottomTabNavigator(
         Support: SupportStack,
         Reservation: ReservationStack,
         Blog: BlogStack,
-        Home: {
-            screen: HomeStack,
-            initialRouteName: 'ماهرخ',
-            title: 'ماهرخ',
-            navigationOption: ({navigation}) => ({
-                title: 'ماهرخ',
-                tabBarLabel: 'ماهرخ'
-            }),
-        },
+        Home: HomeStack
     },
     {
-        initialRouteName: 'Home',
+        initialRouteName: 'Profile',
         defaultNavigationOptions: ({navigation}) => ({
             tabBarIcon: ({focused, horizontal, tintColor}) => {
                 const {routeName} = navigation.state;
@@ -142,11 +148,33 @@ export const TabNavigator = createBottomTabNavigator(
                 } else if (routeName == 'Profile') {
                     icon = require('./assets/png/woman.png')
                 }
-                return <Image style={{width: 20, height: 20, tintColor: tintColor}}
+                return <Image style={{width: 20, height: 21, tintColor: tintColor}}
                               source={icon}/>
+            },
+            tabBarLabel:()=>{
+                const {routeName} = navigation.state;
+                if (routeName == 'Home') {
+                    return <Text style={styles.label}>ماهرخ</Text>
+                } else if (routeName == 'Blog') {
+                    return <Text style={styles.label}>بلاگ</Text>
+                } else if (routeName == 'Reservation') {
+                    return <Text style={styles.label}>رزرو سالن</Text>
+                } else if (routeName == 'Support') {
+                    return <Text style={styles.label}> پشتیبانی</Text>
+                } else if (routeName == 'Profile') {
+                    return <Text style={styles.label}>پروفایل من</Text>
+                }
             }
         }), tabBarOptions: {
             activeTintColor: '#B08C3E',
-            inactiveTintColor: 'gray',
+            inactiveTintColor: 'rgb(0,0,0)',
         },
     });
+
+const styles = StyleSheet.create({
+    label:{
+        textAlign:'center',
+        fontFamily:'IRANSansWeb',
+        fontSize:11,
+    }
+})

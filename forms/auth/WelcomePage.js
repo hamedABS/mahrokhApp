@@ -22,7 +22,7 @@ export default class WelcomePage extends Component {
 
     render() {
         console.log("rendering... ")
-        var image = require('../../assets/png/Group-2102.png')
+        var image = require('../../assets/png/logo.png')
         return (
             <View style={styles.container}>
                 <Image

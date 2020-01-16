@@ -2,8 +2,6 @@ import React from 'react';
 import {Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 export default class BlogList extends React.Component {
-
-
     _onPress = ()=>{
         let navigation = this.props.data;
         navigation.navigate('BlogArticle')
@@ -31,7 +29,7 @@ export default class BlogList extends React.Component {
                                     }}>#داغترین</Text>
                                     <Image
                                         source={require('../../assets/png/tag-(1).png')}
-                                        style={{width: 10, height: 20}}/>
+                                        style={{width: 15, height: 20}}/>
                                 </View>
                                 <Text style={{
                                     fontSize: 16,

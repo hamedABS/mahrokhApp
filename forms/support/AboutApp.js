@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Image, StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 
 export default class AboutApp extends React.Component {
@@ -39,7 +39,7 @@ export default class AboutApp extends React.Component {
                 </View>
                 <View style={{height: height / 3, width: width, alignItems: 'center'}}>
                     <Image
-                        source={require('../../assets/png/Group-2102.png')}
+                        source={require('../../assets/png/logo.png')}
                         style={{width: width / 4, height: width / 4}}
                     />
                     <Text style={styles.txt}>version 0.0.1</Text>

@@ -1,10 +1,12 @@
 import React from 'react';
 import {Dimensions, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 
-export default class SalonReserve extends React.Component {
+export default class SalonsList extends React.Component {
 
-    static navigationOptions = {
-        headerTitle: () => <Search/>
+    static navigationOptions = ({navigation}) => {
+        return {
+            headerTitle: () => <Search data={navigation}/>,
+        }
     }
 
     constructor() {
@@ -79,11 +81,14 @@ export default class SalonReserve extends React.Component {
 class Search extends React.Component {
 
     render() {
+        let navigation = this.props.data;
         return (
             <View style={{flexDirection: 'row-reverse', width: width, alignItems: 'center', height: height / 12}}>
-                <Image
-                    source={require('../../assets/png/filter.png')}
-                    style={styles.headerIcon}/>
+                <TouchableOpacity onPress={() => navigation.navigate('Filter')}>
+                    <Image
+                        source={require('../../assets/png/filter.png')}
+                        style={styles.headerIcon}/>
+                </TouchableOpacity>
                 <Image
                     source={require('../../assets/png/placeholder3x.png')}
                     style={styles.headerIcon}/>
@@ -111,6 +116,7 @@ class Search extends React.Component {
         )
     }
 }
+
 
 const {width, height} = Dimensions.get("window");
 const styles = StyleSheet.create({

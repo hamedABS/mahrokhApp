@@ -12,7 +12,7 @@ const AppContainer = createAppContainer(createSwitchNavigator(
         Tab: TabNavigator
     },
     {
-        initialRouteName: 'Tab',
+        initialRouteName: 'AppIntro',
     }
 ));
 
@@ -26,7 +26,6 @@ export default class App extends React.Component {
 
     async componentDidMount() {
         try {
-            console.log("int component did mount")
             await Font.loadAsync({
                 'IranSans': require('./assets/fonts/IranianSans_0.ttf'),
                 'IRANSansFaNum': require('./assets/fonts/IRANSansFaNum_Light.ttf'),

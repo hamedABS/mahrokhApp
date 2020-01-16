@@ -1,5 +1,9 @@
 import React from 'react';
 import {Dimensions, Image, StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView} from 'react-native';
+import PersianCalendarPicker from 'react-native-persian-calendar-picker';
+import Modal from 'react-native-modal';
+import Moment from 'moment';
+import moment from 'moment-jalali';
 
 
 export default class ReserveDetails extends React.Component {
@@ -8,8 +12,9 @@ export default class ReserveDetails extends React.Component {
         super();
         this.state = {
             selectedReservedTime: '',
-            selectedStartDate: null,
-            note: ''
+            selectedStartDate: 'تاریخ را انتخاب کنید.',
+            note: '',
+            modalIsVisible: false,
         }
     }
 
@@ -40,6 +45,11 @@ export default class ReserveDetails extends React.Component {
         })
     }
 
+    onDateChange(date) {
+        let m = moment(Moment(date).format('YYYY/MM/jDD'), 'YYYY/MM/DD')
+        date = m.format('jYYYY/jMM/jDD')
+        this.setState({selectedStartDate: date});
+    }
 
     render() {
         let times = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'];
@@ -51,14 +61,49 @@ export default class ReserveDetails extends React.Component {
         return (
             <View style={{flex: 1, alignItems: 'center'}}>
                 <View style={[styles.itemContainer, {height: height / 8}]}>
-                    {/*   <PersianCalendarPicker
-                        onDateChange={this.onDateChange}
-                        width={350}
-                        hieght={50}
-                    />*/}
-                    {/*<Text>SELECTED DATE:{ startDate }</Text>*/}
-                    <Text style={[styles.itemText, {fontSize: 18}]}>تقویم</Text>
+                    <TouchableOpacity
+                        style={{flexDirection: 'row-reverse', alignContent: 'center', alignItems: 'center'}}
+                        onPress={() => this.setState(this.setState({modalIsVisible: true}))}>
+                        <Image
+                            source={require('../../assets/png/scheduling.png')}
+                            style={{
+                                width: 30,
+                                height: 30,
+                                margin: 10,
+                                alignSelf: 'flex-start'
+                            }}/>
+
+                        <Text style={{
+                            fontFamily: 'IRANSansFaNum',
+                            borderBottomWidth: 1,
+                            borderBottomColor: 'rgba(0,0,0,0.5)',
+                            marginRight:10,
+                            fontSize:14,
+                            color:'rgba(0,0,0,0.9)'
+                        }}> {this.state.selectedStartDate}</Text>
+                    </TouchableOpacity>
                 </View>
+                <Modal isVisible={this.state.modalIsVisible}>
+                    <View style={{
+                        backgroundColor: 'white',
+                        justifyContent: 'space-around',
+                        alignItems: 'center',
+                        alignSelf: 'center',
+                        width: width / 1.1,
+                        height: height / 2,
+                        borderRadius: 25
+                    }}>
+                        <PersianCalendarPicker
+                            isRTL={true}
+                            onDateChange={(date) => this.onDateChange(date)}
+                            width={300}
+                        />
+                        <TouchableOpacity onPress={() => this.setState({modalIsVisible: false})}>
+                            <Text style={[styles.itemText, {fontSize: 18, color: 'green'}]}>تایید</Text>
+                        </TouchableOpacity>
+                    </View>
+                </Modal>
+
                 <View style={[styles.itemContainer, {padding: 10, height: height / 5}]}>
                     <Text style={styles.itemText}>زمان خود را انتخاب کنید.</Text>
                     <ScrollView horizontal>

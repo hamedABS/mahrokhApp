@@ -103,8 +103,8 @@ export default class ProfileSetting extends React.Component {
                         style={styles.icon}/>
                     <Text style={styles.txt}>sara1450</Text>
                 </View>
-                <TouchableHighlight style={styles.btn_register} onPress={this._onRegisterPressButton}>
-                    <Text style={styles.btn_register_txt}>ذخیره</Text>
+                <TouchableHighlight style={styles.btn_save} onPress={this._onRegisterPressButton}>
+                    <Text style={styles.btn_save_txt}>ذخیره</Text>
                 </TouchableHighlight>
             </View>
         )
@@ -142,13 +142,13 @@ const styles = StyleSheet.create({
         writingDirection: 'rtl',
         paddingRight: 10
     },
-    btn_register_txt: {
+    btn_save_txt: {
         fontFamily: 'IRANSansWeb',
         fontSize: width / 23,
         textAlign: 'center',
         color: 'white'
     },
-    btn_register: {
+    btn_save: {
         margin: 10,
         width: width / 3,
         height: height / 18,

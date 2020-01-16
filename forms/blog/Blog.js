@@ -2,7 +2,6 @@ import React from 'react';
 import {Dimensions, Image, StyleSheet, Text, TextInput, View, TouchableOpacity} from 'react-native';
 import BlogList from "./BlogList";
 import BlogArticle from "./BlogArticle";
-import SalonIntroList from "./SalonIntroList";
 
 
 export default class Blog extends React.Component {
@@ -29,7 +28,7 @@ export default class Blog extends React.Component {
             case "theHottest":
                 return <BlogList data={this.props.navigation}/>
             case "salonIntro":
-                return <SalonIntroList data={this.props.navigation}/>;
+                return <BlogList data={this.props.navigation}/>;
             case "theNews":
                 return <BlogList data={this.props.navigation}/>
         }
@@ -130,7 +129,7 @@ const styles = StyleSheet.create({
     },
     sortTypeTxt: {
         fontFamily: 'IRANSansFaNum',
-        fontSize: 16,
+        fontSize: 15,
         color: 'rgba(0,0,0,0.4)',
         textAlign: 'center',
     },
