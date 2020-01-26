@@ -36,25 +36,6 @@ export default class Setting extends React.Component {
                             style={styles.icon}/>
                         <Text style={styles.txt}>تغییر گذر واژه</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.everyItem}
-                                      onPress={() => this.props.navigation.navigate('AboutApp')}>
-                        <Image
-                            source={require('../../assets/png/AJ.png')}
-                            style={styles.icon}/>
-                        <Text style={styles.txt}>درباره ماهرخ</Text>
-                    </TouchableOpacity>
-                    <View style={styles.everyItem}>
-                        <Image
-                            source={require('../../assets/png/call.png')}
-                            style={styles.icon}/>
-                        <Text style={styles.txt}>تماس با ما</Text>
-                    </View>
-                    <TouchableOpacity style={styles.everyItem} onPress={() => this.props.navigation.navigate('FAQ')}>
-                        <Image
-                            source={require('../../assets/png/Group-94.png')}
-                            style={styles.icon}/>
-                        <Text style={styles.txt}>سوالات متداول</Text>
-                    </TouchableOpacity>
                     <View style={styles.everyItem}>
                         <Image
                             source={require('../../assets/png/exit.png')}
@@ -64,7 +45,7 @@ export default class Setting extends React.Component {
                 </View>
                 <View style={{width: width, marginBottom: 10, alignItems: 'center'}}>
                     <Image
-                        source={require('../../assets/png/logo.png')}
+                        source={require('../../assets/png/Logo_new.png')}
                         style={{width: width / 4, height: width / 4}}
                     />
                     <Text style={styles.txt}>version 0.0.1</Text>
@@ -93,7 +74,7 @@ const styles = StyleSheet.create({
         height: 25,
         marginRight: 10,
         marginLeft: 7,
-        tintColor: 'rgba(0,0,0,0.26)'
+        tintColor: '#ddac17'
     },
     txt: {
         fontSize: 16,

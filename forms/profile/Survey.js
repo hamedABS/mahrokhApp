@@ -88,18 +88,14 @@ export default class Survey extends React.Component {
     }
     yesNoBtnPress = (i, isYes) => {
         if (i == 0) {
-            console.log('yes0 changed')
             this.setState({
                 isYesFocused_0: isYes
             })
         } else if (i == 1) {
-            console.log('yes1 changed')
             this.setState({
                 isYesFocused_1: isYes
             })
         } else if (i == 2) {
-            console.log('yes2 changed')
-
             this.setState({
                 isYesFocused_2: isYes
             })
@@ -127,29 +123,29 @@ export default class Survey extends React.Component {
                     {questions.map((item, i) => {
                         return (
                             <View key={i} style={styles.questionItem}>
-                                <Text style={[styles.itemText, {fontSize: 16}]}>{item}</Text>
+                                <Text style={[styles.itemText, {fontSize: width/28}]}>{item}</Text>
                                 <View style={{flexDirection: 'row-reverse'}}>
                                     <TouchableOpacity
                                         onPress={() => this.yesNoBtnPress(i, true)}
                                         style={[this.getStyle(i, true), {marginLeft: 5}]}>
-                                        <Text style={[styles.itemText, {fontSize: 16}]}>بله</Text>
+                                        <Text style={[styles.itemText, {fontSize: width/28}]}>بله</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                         style={this.getStyle(i, false)}
                                         onPress={() => this.yesNoBtnPress(i, false)}>
-                                        <Text style={styles.itemText}>خیر</Text>
+                                        <Text style={[styles.itemText, {fontSize: width/28}]}>خیر</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
                         )
                     })}
                     <View style={styles.questionItem}>
-                        <Text style={[styles.itemText, {fontSize: 16}]}>درحالت کلی چه امتیازی میدهید؟</Text>
+                        <Text style={[styles.itemText, {fontSize: width/28}]}>میزان رضایت شما از آرایشگاه؟</Text>
                         <StarRating
                             disabled={false}
                             starSize={23}
                             emptyStarColor='#707070'
-                            fullStarColor='#FAC917'
+                            fullStarColor='#ddac17'
                             maxStars={5}
                             rating={this.state.starCount}
                             selectedStar={(rating) => this.onStarRatingPress(rating)}
@@ -180,7 +176,7 @@ export default class Survey extends React.Component {
 }
 
 const {width, height} = Dimensions.get("window");
-const questions = ['از برخورد کارکنان راضی بودید ؟', 'کیفیت ارائه کار در سطح مطلوب بود؟', 'باز از این آرایشگاه استفاده می کنید؟']
+const questions = ['از برخورد پرسنل راضی بودید ؟', 'کیفیت ارائه کار در سطح مطلوب بود؟', 'برای خدمات بعدی این آرایشگاه را انتخاب می کنید ؟']
 
 const styles = StyleSheet.create({
     itemContainer: {
@@ -210,8 +206,8 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     yesNoBtn: {
-        width: 60,
-        height: 30,
+        width: 33,
+        height: 25,
         borderWidth: 1,
         borderRadius: 25,
         borderColor: '#707070'
@@ -219,7 +215,7 @@ const styles = StyleSheet.create({
     icon: {
         width: 20,
         height: 20,
-        tintColor: 'rgba(0,0,0,0.26)',
+        tintColor: '#ddac17',
         margin: 10,
         alignSelf: 'flex-start'
     },
@@ -243,7 +239,7 @@ const styles = StyleSheet.create({
         width: width / 2,
         height: height / 13,
         alignItems: 'center',
-        backgroundColor: '#A537FD',
+        backgroundColor: '#ddac17',
         borderRadius: 50,
     },
 })

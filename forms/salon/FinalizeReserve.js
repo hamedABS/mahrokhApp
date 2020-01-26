@@ -10,8 +10,6 @@ import {
     ScrollView,
     TouchableHighlight
 } from 'react-native';
-import MapView from "react-native-maps";
-import {color} from "react-native-reanimated";
 
 
 export default class FinalizeReserve extends React.Component {
@@ -60,7 +58,7 @@ export default class FinalizeReserve extends React.Component {
                         <Text style={styles.itemText}>مالیات:0 تومان</Text>
                     </View>
                     <View>
-                        <Text style={[styles.itemText, {color: '#B08C3E', marginTop:10}]}> مبلغ نهایی:70 هزار تومان</Text>
+                        <Text style={[styles.itemText, {color: '#B08C3E'}]}> مبلغ نهایی:70 هزار تومان</Text>
                     </View>
                 </View>
                 <View>
@@ -94,7 +92,7 @@ const styles = StyleSheet.create({
     },
     invoiceView: {
         width: width / 2.3,
-        height: height / 5,
+        height: height / 4.7,
         marginTop: 20,
         borderRadius: 5,
         shadowColor: "#000",
@@ -109,7 +107,7 @@ const styles = StyleSheet.create({
     },
     invoiceViewFirstPart: {
         width: "100%",
-        height: "70%",
+        height: "80%",
         borderBottomColor: 'rgba(0,0,0,0.46)',
         borderBottomWidth: 1
     },
@@ -124,7 +122,7 @@ const styles = StyleSheet.create({
         height: height / 18,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#A537FD',
+        backgroundColor: '#ddac17',
         borderRadius: 50,
         marginTop: 20
     },

@@ -31,6 +31,7 @@ export default class RegisterClass extends Component {
         this.state = {
             name: '',
             phoneNumber: '',
+            email:'',
             password: '',
             repeatPassword: '',
             checked: false
@@ -73,6 +74,18 @@ export default class RegisterClass extends Component {
                     <View style={styles.txt_input_container}>
                         <Image
                             style={styles.txt_input_img}
+                            source={require('../../assets/png/mail.png')}
+                        />
+                        <TextInput
+                            style={styles.txt_input}
+                            placeholder='ایمیل'
+                            autoCapitalize='words'
+                            onChangeText={(email) => this.setState({ email })}
+                            value={this.state.email} />
+                    </View>
+                    <View style={styles.txt_input_container}>
+                        <Image
+                            style={styles.txt_input_img}
                             source={require('../../assets/png/locked.png')}
                         />
                         <TextInput
@@ -103,11 +116,12 @@ export default class RegisterClass extends Component {
                             <Text style={styles.btn_register_txt} >ساخت حساب کاربری</Text>
                         </View>
                     </TouchableHighlight>
+                    <Text style={[styles.rules_txt,{fontSize:13}]} > * لطفا قبل از استفاده از ماهرخ حتما  شرایط و قوانین مطالعه شود.</Text>
                     <View style={styles.rules_chk}>
                         <CheckBox
                             value={this.state.checked}
                             onChange={() => this.setState({ checked: !this.state.checked })} />
-                        <Text style={styles.rules_txt}>شرایط و قوانین را میپذریم.</Text>
+                        <Text style={styles.rules_txt}>شرایط و قوانین را می پذریم.</Text>
                     </View>
 
                 </View>
@@ -146,14 +160,14 @@ const styles = StyleSheet.create({
         width: width,
         textAlign: 'right',
         writingDirection: 'rtl',
-        paddingRight: width / 4
+        paddingRight: 10
     },
 
     txt_input_img: {
         height: 35,
         width: 35,
         marginRight: width / 45,
-        tintColor:'rgba(0,0,0,0.5)',
+        tintColor:'#ddac17',
     },
     header: {
         height: height / 14,
@@ -168,7 +182,7 @@ const styles = StyleSheet.create({
         borderColor: 'grey',
         backgroundColor: '#E4DFE6',
         borderTopWidth: 1,
-        height: height / 6,
+        height: height / 5,
         alignItems: 'center',
     },
     btn_register_txt: {
@@ -183,7 +197,7 @@ const styles = StyleSheet.create({
         width: width / 2,
         height: height / 13,
         alignItems: 'center',
-        backgroundColor: '#A537FD',
+        backgroundColor: '#ddac17',
         borderRadius: 50,
     },
     rules_chk: {
@@ -193,6 +207,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     rules_txt: {
+        fontFamily: 'IRANSansWeb',
         fontSize: 15,
         textAlign: 'center',
         marginTop: 3

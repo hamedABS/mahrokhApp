@@ -24,7 +24,7 @@ import ChangePasswordPage from "./forms/profile/ChangePasswordPage"
 import FAQ from "./forms/support/FAQ";
 import Login from "./forms/auth/LoginPage";
 import {createBottomTabNavigator} from "react-navigation-tabs";
-import {Image,Text,StyleSheet} from "react-native";
+import {Image, Text, StyleSheet} from "react-native";
 import React from "react";
 
 export const HomeStack = createStackNavigator({
@@ -33,7 +33,8 @@ export const HomeStack = createStackNavigator({
     SalonInfo: SalonInfo,
     FinalizeReserve: FinalizeReserve,
     NewReserve: NewReserve,
-    ReservedSalons: ReservedSalons
+    ReservedSalons: ReservedSalons,
+    ReserveDetails: ReserveDetails,
 }, {
     initialRouteName: 'Home'
 })
@@ -70,8 +71,8 @@ BlogStack.navigationOptions = ({navigation}) => {
 export const ReservationStack = createStackNavigator({
     Reservation: SalonsList,
     Salon: Salon,
-    SalonInfo: SalonInfo,
-    Filter:Filter
+    Filter: Filter,
+    SalonInfo: SalonInfo
 })
 
 ReservationStack.navigationOptions = ({navigation}) => {
@@ -125,14 +126,14 @@ export const AuthStack = createStackNavigator({
 
 export const TabNavigator = createBottomTabNavigator(
     {
-        Profile: {screen: ProfileStack, title: 'خانه'},
+        Profile: ProfileStack,
         Support: SupportStack,
         Reservation: ReservationStack,
         Blog: BlogStack,
         Home: HomeStack
     },
     {
-        initialRouteName: 'Profile',
+        initialRouteName: 'Home',
         defaultNavigationOptions: ({navigation}) => ({
             tabBarIcon: ({focused, horizontal, tintColor}) => {
                 const {routeName} = navigation.state;
@@ -148,33 +149,33 @@ export const TabNavigator = createBottomTabNavigator(
                 } else if (routeName == 'Profile') {
                     icon = require('./assets/png/woman.png')
                 }
-                return <Image style={{width: 20, height: 21, tintColor: tintColor}}
+                return <Image style={{width: 21, height: 23, tintColor: tintColor}}
                               source={icon}/>
             },
-            tabBarLabel:()=>{
+            tabBarLabel: ({focused, horizontal, tintColor}) => {
                 const {routeName} = navigation.state;
                 if (routeName == 'Home') {
-                    return <Text style={styles.label}>ماهرخ</Text>
+                    return <Text style={[styles.label, {color: tintColor}]}>ماهرخ</Text>
                 } else if (routeName == 'Blog') {
-                    return <Text style={styles.label}>بلاگ</Text>
+                    return <Text style={[styles.label, {color: tintColor}]}>بلاگ</Text>
                 } else if (routeName == 'Reservation') {
-                    return <Text style={styles.label}>رزرو سالن</Text>
+                    return <Text style={[styles.label, {color: tintColor}]}>رزرو سالن</Text>
                 } else if (routeName == 'Support') {
-                    return <Text style={styles.label}> پشتیبانی</Text>
+                    return <Text style={[styles.label, {color: tintColor}]}> پشتیبانی</Text>
                 } else if (routeName == 'Profile') {
-                    return <Text style={styles.label}>پروفایل من</Text>
+                    return <Text style={[styles.label, {color: tintColor}]}>پروفایل من</Text>
                 }
             }
         }), tabBarOptions: {
-            activeTintColor: '#B08C3E',
+            activeTintColor: '#FAC918',
             inactiveTintColor: 'rgb(0,0,0)',
         },
     });
 
 const styles = StyleSheet.create({
-    label:{
-        textAlign:'center',
-        fontFamily:'IRANSansWeb',
-        fontSize:11,
+    label: {
+        textAlign: 'center',
+        fontFamily: 'IRANSansWeb',
+        fontSize: 11,
     }
 })

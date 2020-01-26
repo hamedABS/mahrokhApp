@@ -22,11 +22,6 @@ export default class BlogList extends React.Component {
                                     justifyContent: 'space-between',
                                     marginTop: 10
                                 }}>
-                                    <Text style={{
-                                        fontSize: 12,
-                                        fontFamily: 'IRANSansFaNum',
-                                        color: '#B08C3E'
-                                    }}>#داغترین</Text>
                                     <Image
                                         source={require('../../assets/png/tag-(1).png')}
                                         style={{width: 15, height: 20}}/>
@@ -52,7 +47,7 @@ export default class BlogList extends React.Component {
                                     }}>{data.likeCount}</Text>
                                     <Image
                                         source={require('../../assets/png/heart.png')}
-                                        style={{width: 16, height: 14, marginTop: 5}}/>
+                                        style={{width: 16, height: 14, marginTop: 5, tintColor:'#ddac17'}}/>
                                 </View>
                             </TouchableOpacity>
                         )

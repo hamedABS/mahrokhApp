@@ -1,5 +1,6 @@
 import React from 'react';
 import {Dimensions, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import StarRating from "react-native-star-rating";
 
 export default class SalonsList extends React.Component {
 
@@ -58,7 +59,14 @@ export default class SalonsList extends React.Component {
                                     </View>
                                     <View style={{margin: 10, width: width / 4, height: height / 16, marginLeft: 30}}>
                                         <View style={{flexDirection: 'row',}}>
-                                            {this._returnStars(salon.score)}
+                                            <StarRating
+                                                disabled={true}
+                                                starSize={13}
+                                                emptyStarColor='#707070'
+                                                fullStarColor='#FAC917'
+                                                maxStars={5}
+                                                rating={salon.score}
+                                            />
                                         </View>
                                         <Text style={{
                                             alignSelf: 'flex-start',

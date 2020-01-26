@@ -28,7 +28,7 @@ export default class AboutApp extends React.Component {
         return (
 
             <View style={{flex: 1, justifyContent: 'space-around'}}>
-                <View style={{height: height / 2.5, alignItems: 'center', marginTop: 30, padding: 20}}>
+                <View style={{height: height / 2, alignItems: 'center', marginTop: 30, padding: 20}}>
                     <Text style={{fontFamily: 'IRANSansWebMedium', fontSize: 16, alignSelf: 'flex-end'}}>درباره
                         ماهرخ</Text>
                     <Text style={{fontFamily: 'IRANSansWebLight', fontSize: 13, marginTop: 15}}>لورم ایپسوم متن ساختگی
@@ -39,7 +39,7 @@ export default class AboutApp extends React.Component {
                 </View>
                 <View style={{height: height / 3, width: width, alignItems: 'center'}}>
                     <Image
-                        source={require('../../assets/png/logo.png')}
+                        source={require('../../assets/png/Logo_new.png')}
                         style={{width: width / 4, height: width / 4}}
                     />
                     <Text style={styles.txt}>version 0.0.1</Text>

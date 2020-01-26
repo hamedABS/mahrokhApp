@@ -1,17 +1,40 @@
 import React from 'react';
 import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import MapView from "react-native-maps";
+// import Mapir from "mapir-react-native-sdk";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
+import {Marker} from 'react-native-maps';
+import Routing from "../Routing";
 
+const API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImUzNDJhZTY3NmYwNTZkMWU0ZjdkNWF' +
+    'mN2I4NTExNDdmYzVkM2VkNDlkMjQxOGNkOTkxOWZhNmJjM2VmN2NmNWM1YmMxNDA0NjFlOWYxNGIwIn0.e' +
+    'yJhdWQiOiI3Mjg4IiwianRpIjoiZTM0MmFlNjc2ZjA1NmQxZTRmN2Q1YWY3Yjg1MTE0N2ZjNWQzZWQ0OWQyNDE4Y' +
+    '2Q5OTE5ZmE2YmMzZWY3Y2Y1YzViYzE0MDQ2MWU5ZjE0YjAiLCJpYXQiOjE1Nzc2MDg2MDMsIm5iZiI6MTU3NzYwODYwMywiZ' +
+    'XhwIjoxNTgwMTE0MjAzLCJzdWIiOiIiLCJzY29wZXMiOlsiYmFzaWMiXX0.lfi0xRKATVpeBMQNiy5Ld3IsWWbWtPLBaeDcK6rLix' +
+    'Mh6UOTQOyu7JeLLqBvFGn0vFl7VKYXsYvRlLtpehXtRv_SumSh23XXAxJOWOS6kbWfwNJvmkNnPoI8DbS48SNLZr3vw3dn_TR0l7uWFnhy' +
+    'KZE3fZsEbqDqN2vq1-CN3Hz0IzMQf8qRxuB9qK7hGrQ9JOF-Oy4SzuFVN4KO_w9a8tJ00L3E1pgr6-b901WQUNLWyq2FC0RxXUzSMBZw96N0jzG' +
+    '1_xA2DnuWcn07y016jQbo1vpgZdC-Dbo2VjtmpCJu28J0742rPdXZMwoJQSGBvkVTcrKXWWZAyMSKWY5KsQ';
 
 export default class SalonInfo extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            location: ''
+            location: '',
+            markers: [],
+            region: {},
+            coords: [{
+                latitude: 35.726981,
+                longitude: 51.424158
+            }]
         }
+    }
+
+
+    onRegionChange(region) {
+        console.log(region)
+        // this.setState({region});
     }
 
     static navigationOptions = ({navigation}) => {
@@ -50,16 +73,30 @@ export default class SalonInfo extends React.Component {
         }
 
         let location = await Location.getCurrentPositionAsync({});
-        this.setState({location: location});
+        console.log(location)
+        this.setState({
+            location: location,
+            markers: [{
+                coordinate: location.coords,
+                color: 'red'
+            }],
+            region: {
+                latitude: location.coords.latitude,
+                longitude: location.coords.longitude,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+            }
+        });
     };
 
     render() {
         let text = 'Waiting..';
         let location;
         let locationIsLoad = false;
+        let id = 0;
         if (this.state.errorMessage) {
             text = this.state.errorMessage;
-            locationIsLoad=false
+            locationIsLoad = false
         } else if (this.state.location) {
             text = JSON.stringify(this.state.location);
             location = JSON.parse(text);
@@ -67,24 +104,35 @@ export default class SalonInfo extends React.Component {
             console.log(location.coords.longitude);
             locationIsLoad = true;
         }
-        console.log(text)
         if (locationIsLoad) {
-            let latitude = this.state.location.coords.latitude;
-            let longitude = this.state.location.coords.longitude;
             return (
                 <View>
                     <MapView style={{width: width, height: height / 4}}
-                             initialRegion={{
-                                 latitude: latitude,
-                                 longitude: longitude,
-                                 latitudeDelta: 0.0922,
-                                 longitudeDelta: 0.0421,
-                             }}
+                             region={this.state.region}
+                             onRegionChange={(region) => this.onRegionChange(region)}
                              showsMyLocationButton={true}
                              followsUserLocation={true}
                              showsCompass={true}
                              showsIndoors={true}
-                    />
+                    >
+                        {this.state.markers.map(marker => (
+                            <Marker
+                                coordinate={marker.coordinate}
+                                pinColor={marker.color}
+                                key={id++}
+                            />
+                        ))}
+
+                        <MapView.Polyline
+                            coordinates={this.state.coords}
+                            strokeWidth={2}
+                            strokeColor="red"/>
+                    </MapView>
+
+                    {/*  <Mapir apiKey={API_KEY} zoomLevel={13} centerCoordinate={[51.422548, 35.732573]}
+                           style={{width: width, height: height / 4}}>
+                        <Mapir.UserLocation />
+                    </Mapir>*/}
 
                     <View style={styles.address}>
                         <Text style={{
@@ -94,7 +142,8 @@ export default class SalonInfo extends React.Component {
                             color: '#00000099'
                         }}>زعفرانیه
                             - مقدس اردبیلی- پلاک 2</Text>
-                        <TouchableOpacity style={styles.routingBtn}>
+                        <TouchableOpacity style={styles.routingBtn}
+                                          onPress={() => Routing.onDoTheDirectionOnPress(this.state.location.coords.latitude, this.state.location.coords.longitude)}>
                             <Text style={{
                                 fontSize: 15,
                                 fontFamily: 'IRANSansFaNum',
@@ -109,7 +158,7 @@ export default class SalonInfo extends React.Component {
                         <Text style={[styles.titlesBaseStyle, {alignSelf: 'flex-end'}]}>ساعات کاری</Text>
                         <View style={styles.workingTimeItem}>
                             <View style={{flexDirection: 'row-reverse', alignItems: 'center'}}>
-                                <View style={{width: 10, height: 10, backgroundColor: '#A537FD', borderRadius: 50}}/>
+                                <View style={{width: 10, height: 10, backgroundColor: '#ddac17', borderRadius: 50}}/>
                                 <Text style={[styles.workingItemText, {fontSize: 15, marginRight: 10}]}>شنبه الی
                                     چهارشنبه</Text>
                             </View>
@@ -117,7 +166,7 @@ export default class SalonInfo extends React.Component {
                         </View>
                         <View style={styles.workingTimeItem}>
                             <View style={{flexDirection: 'row-reverse', alignItems: 'center'}}>
-                                <View style={{width: 10, height: 10, backgroundColor: '#A537FD', borderRadius: 50}}/>
+                                <View style={{width: 10, height: 10, backgroundColor: '#ddac17', borderRadius: 50}}/>
                                 <Text style={[styles.workingItemText, {fontSize: 15, marginRight: 10}]}>پنجشنبه</Text>
                             </View>
                             <Text style={[styles.workingItemText, {fontSize: 15}]}>۹-۲۰</Text>

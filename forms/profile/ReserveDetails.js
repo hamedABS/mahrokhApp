@@ -1,9 +1,23 @@
 import React from 'react';
-import {Dimensions, Image, StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import MapView from "react-native-maps";
-
+import Routing from "../Routing";
 
 export default class ReserveDetails extends React.Component {
+
+    constructor() {
+        super();
+
+        this.state = {
+            location: '',
+            markers: [],
+            region: {},
+            coords: [{
+                latitude: 35.726981,
+                longitude: 51.424158
+            }]
+        }
+    }
 
     static navigationOptions = ({navigation}) => {
         let headerBackImage = <Image source={require('../../assets/png/left.png')}
@@ -43,16 +57,12 @@ export default class ReserveDetails extends React.Component {
                     <Text style={styles.itemText}>آدرس آرایشگاه:مرداماد چهار راه امیرخان نرسیده به میدان پلاک 10</Text>
                 </View>
                 <View style={[styles.itemContainer,{height:height/11}]}>
-                    <Text style={styles.itemText}>وضعیت مالی:پرداخت شده است</Text>
+                    <Text style={styles.itemText}>صورت حساب: پرداخت شده است</Text>
                 </View>
                 <View>
                     <MapView style={{width: width, height: height / 4}}
-                             initialRegion={{
-                                 latitude: 37.78825,
-                                 longitude: -122.4324,
-                                 latitudeDelta: 0.0922,
-                                 longitudeDelta: 0.0421,
-                             }}
+                             region={this.state.region}
+                             onRegionChange={(region) => this.onRegionChange(region)}
                              showsMyLocationButton={true}
                              followsUserLocation={true}
                              showsCompass={true}
@@ -62,7 +72,8 @@ export default class ReserveDetails extends React.Component {
                     <View style={styles.address}>
                         <Text style={{fontSize: 17, fontFamily: 'IRANSansFaNum', textAlign: 'center', color: '#00000099'}}>زعفرانیه
                             - مقدس اردبیلی- پلاک 2</Text>
-                        <TouchableOpacity style={styles.routingBtn}>
+                        <TouchableOpacity style={styles.routingBtn}
+                                          onPress={() => Routing.onDoTheDirectionOnPress(this.state.location.coords.latitude, this.state.location.coords.longitude)}>
                             <Text style={{
                                 fontSize: 15,
                                 fontFamily: 'IRANSansFaNum',

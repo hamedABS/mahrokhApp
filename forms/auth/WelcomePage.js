@@ -22,7 +22,7 @@ export default class WelcomePage extends Component {
 
     render() {
         console.log("rendering... ")
-        var image = require('../../assets/png/logo.png')
+        var image = require('../../assets/png/Logo_new.png')
         return (
             <View style={styles.container}>
                 <Image
@@ -76,12 +76,14 @@ const styles = StyleSheet.create({
         width: width / 2,
         height: height / 13,
         alignItems: 'center',
-        backgroundColor: '#A732D2',
+        alignContent:'center',
+        backgroundColor: '#ddac17',
         borderRadius: 50,
     },
     btn_register_txt: {
         fontSize: width / 15,
         textAlign: 'center',
+        marginTop: 5,
         color: 'white',
         fontFamily: 'IRANSansWeb'
     },

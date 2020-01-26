@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
         padding: 5,
         marginTop: height / 10,
         height: height / 2.7,
-        width: width / 1.6
+        width: width / 1.3
     },
     buttonCircle: {
         width: 40,
@@ -141,10 +141,10 @@ const slides = [
         image: require('./assets/png/Group-31.png'),
 
     },
-    {
+   /* {
         key: 'page 3',
         title: 'فروشگاه آنلاین',
         text: 'خرید از فروشگاه آنلاین و آرایش حرفه ای بصورت کاملا تخصصی',
         image: require('./assets/png/Group-36.png'),
-    },
+    },*/
 ]

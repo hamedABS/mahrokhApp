@@ -70,7 +70,7 @@ export default class FAQ extends React.Component {
                 <View style={{marginTop: 20}}>
                     <View style={{width: width, marginBottom: 10, alignItems: 'center'}}>
                         <Image
-                            source={require('../../assets/png/logo.png')}
+                            source={require('../../assets/png/Logo_new.png')}
                             style={{width: width / 4, height: width / 4}}
                         />
                         <Text style={styles.txt}>version 0.0.1</Text>
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
         height: 20,
         marginRight: 10,
         marginLeft: 7,
-        tintColor: 'rgba(0,0,0,0.26)',
+        tintColor: '#ddac17',
     },
     txt: {
         fontSize: 16,

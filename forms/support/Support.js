@@ -35,18 +35,18 @@ export default class Support extends React.Component {
         return (
             <View style={{flex: 1, alignItems: 'center'}}>
                 <Image
-                    source={require('../../assets/png/logo.png')}
+                    source={require('../../assets/png/Logo_new.png')}
                     style={{width: width / 2, height: width / 2}}
                 />
                 <TouchableOpacity style={styles.everyItem} onPress={()=> this.props.navigation.navigate('AboutApp')}>
                     <Image
-                        source={require('../../assets/png/wallet.png')}
+                        source={require('../../assets/png/info.png')}
                         style={styles.icon}/>
                     <Text style={styles.txt}>درباره ماهرخ</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.everyItem}>
                     <Image
-                        source={require('../../assets/png/document.png')}
+                        source={require('../../assets/png/call.png')}
                         style={styles.icon}/>
                     <Text style={styles.txt}>تماس با ماهرخ</Text>
                 </TouchableOpacity>
@@ -56,12 +56,12 @@ export default class Support extends React.Component {
                         style={styles.icon}/>
                     <Text style={styles.txt}>گزارش مشکل</Text>
                 </View>
-                <View style={styles.everyItem}>
+                <TouchableOpacity style={styles.everyItem} onPress={() => this.props.navigation.navigate('FAQ')}>
                     <Image
-                        source={require('../../assets/png/share.png')}
+                        source={require('../../assets/png/Group-94.png')}
                         style={styles.icon}/>
-                    <Text style={styles.txt}>معرفی به دوستان</Text>
-                </View>
+                    <Text style={styles.txt}>سوالات متداول</Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         height: 25,
         marginRight: 10,
         marginLeft: 5,
-        tintColor: 'rgba(0,0,0,0.26)'
+        tintColor: '#ddac17'
     },
     txt: {
         fontSize: 16,

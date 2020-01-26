@@ -75,8 +75,6 @@ export default class ReserveDetails extends React.Component {
 
                         <Text style={{
                             fontFamily: 'IRANSansFaNum',
-                            borderBottomWidth: 1,
-                            borderBottomColor: 'rgba(0,0,0,0.5)',
                             marginRight:10,
                             fontSize:14,
                             color:'rgba(0,0,0,0.9)'
@@ -130,7 +128,7 @@ export default class ReserveDetails extends React.Component {
                         borderBottomColor: 'rgba(0,0,0,0.4)'
                     }}>
                         <Text style={styles.itemText}>کرلی مو</Text>
-                        <Text style={styles.itemText}>۵۰ هزار تومن</Text>
+                        <Text style={styles.itemText}>۵۰ هزار تومان</Text>
                     </View>
                     <View style={{
                         width: width,
@@ -243,7 +241,7 @@ const styles = StyleSheet.create({
     icon: {
         width: 20,
         height: 20,
-        tintColor: 'rgba(0,0,0,0.26)',
+        tintColor: '#ddac17',
         margin: 10,
         alignSelf: 'flex-start'
     },
@@ -267,7 +265,7 @@ const styles = StyleSheet.create({
         height: height / 18,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#A537FD',
+        backgroundColor: '#ddac17',
         borderRadius: 50,
         marginTop: 20
     },

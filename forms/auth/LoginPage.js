@@ -111,13 +111,13 @@ const styles = StyleSheet.create({
         width: width,
         textAlign: 'right',
         writingDirection: 'rtl',
-        paddingRight: width / 4
+        paddingRight: 10
     },
 
     txt_input_img: {
-        tintColor: 'rgba(0,0,0,0.4)',
-        height: height / 21,
-        width: width / 13,
+        tintColor: '#ddac17',
+        height: 35,
+        width: 35,
         marginRight: width / 45
     },
     footer: {
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     },
     btn_register_txt: {
         fontFamily: 'IRANSansWeb',
-        fontSize: width / 18,
+        fontSize: width / 16,
         textAlign: 'center',
         padding: 8,
         color: 'white'
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         width: width / 2,
         height: height / 13,
         alignItems: 'center',
-        backgroundColor: '#A537FD',
+        backgroundColor: '#ddac17',
         borderRadius: 50,
     },
     rules_chk: {
@@ -149,6 +149,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     rules_txt: {
+        fontFamily: 'IRANSansWeb',
         fontSize: 15,
         textAlign: 'center',
         marginTop: 3

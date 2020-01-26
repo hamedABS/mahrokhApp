@@ -52,17 +52,17 @@ export default class SalonService extends React.Component {
                 <TouchableOpacity style={{borderTopColor: '#70707080', borderTopWidth: 1}}
                                   onPress={() => parentProps.navigation.navigate('NewReserve', {services: this.state.reservedServices})}>
                     <View style={{
-                        width: width / 2.9,
-                        height: height / 17,
-                        backgroundColor: '#A537FD',
+                        padding:5,
+                        backgroundColor: '#ddac17',
                         borderRadius: 25,
-                        marginTop: 15
+                        marginTop: 15,
+                        alignItems:'center',
+                        alignContent:'center'
                     }}>
                         <Text style={{
                             color: 'white',
                             fontFamily: 'IRANSansFaNum',
                             textAlign: 'center',
-                            marginTop: 8
                         }}>{this.state.serviceReservedCount} خدمت آماده رزرو</Text>
                     </View>
                 </TouchableOpacity>

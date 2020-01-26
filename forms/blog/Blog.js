@@ -42,13 +42,13 @@ export default class Blog extends React.Component {
                         return this._onSortTypePress('theNewest')
                     }}
                                       style={[styles.blogSortTypeViewTxt, this.state.focusedSortType == 'theNewest' ? styles.blogSortTypeViewTxtOnFocused : null]}>
-                        <Text style={[styles.sortTypeTxt]}>جدید ترین</Text>
+                        <Text style={[styles.sortTypeTxt]}>مطالب</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {
                         return this._onSortTypePress('theHottest')
                     }}
                                       style={[styles.blogSortTypeViewTxt, this.state.focusedSortType == 'theHottest' ? styles.blogSortTypeViewTxtOnFocused : null]}>
-                        <Text style={styles.sortTypeTxt}>داغ ترین</Text>
+                        <Text style={styles.sortTypeTxt}>داغ ترین ها</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => {
                         return this._onSortTypePress('salonIntro')
@@ -60,7 +60,7 @@ export default class Blog extends React.Component {
                         return this._onSortTypePress('theNews')
                     }}
                                       style={[styles.blogSortTypeViewTxt, this.state.focusedSortType == 'theNews' ? styles.blogSortTypeViewTxtOnFocused : null]}>
-                        <Text style={styles.sortTypeTxt}>اخبار</Text>
+                        <Text style={styles.sortTypeTxt}>اخبار ماهرخ</Text>
                     </TouchableOpacity>
                 </View>
                 {

@@ -90,7 +90,9 @@ export default class Salon extends React.Component {
                                 dotsTouchable: true,
                                 nextTitle: '',
                                 prevTitle: '',
-                            }}>
+                            }}
+                            loop={true}
+                            timeout={5}>
                         <ImageBackground style={styles.slider_image} source={require('../../assets/png/jhfjhg.png')}/>
                         <Image style={styles.slider_image} source={require('../../assets/png/jhfjhg.png')}/>
                         <Image style={styles.slider_image} source={require('../../assets/png/jhfjhg.png')}/>
@@ -221,7 +223,7 @@ const styles = StyleSheet.create({
     chooseOptionFocused: {
         width: width / 3.6,
         height: 30,
-        backgroundColor: '#CBA145',
+        backgroundColor: '#ddac17',
         borderRadius: 25,
     },
     chooseOptionNotFocused: {

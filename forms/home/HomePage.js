@@ -14,10 +14,28 @@ import {
 import StarRating from 'react-native-star-rating'
 
 export default class Home extends React.Component {
+
     static navigationOptions = ({navigation}) => {
+        let rightBtn =
+            <TouchableOpacity onPress={() => navigation.navigate('ReservedSalons')}>
+                <Image source={require('../../assets/png/calendar.png')}
+                       style={{width: 23, height: 26, marginRight: 15}}/>
+            </TouchableOpacity>
+
+        let headerTitle =
+            <Image
+                source={require('../../assets/png/Logo_new.png')}
+                style={{width: 60, height: 60,alignSelf:'center', marginLeft:width/2.5}}
+            />
         return {
-            headerTitle: () => <LogoTitle data={navigation}/>
-        }
+
+            headerTitle: () => {
+                return headerTitle
+            },
+            headerRight: () => {
+                return rightBtn;
+            }
+        };
     };
 
     render() {
@@ -69,7 +87,7 @@ export default class Home extends React.Component {
                     </View>
                     <View style={styles.aroundSalonsSlider}>
                         <Text style={{margin: 5, marginRight: 20, marginBottom: 10, fontFamily: 'IRANSansWeb'}}>سالن های
-                            اطراف من</Text>
+                            زیبایی</Text>
                         <ScrollView horizontal>
                             {
                                 [1, 2, 3, 4, 5, 6].map(value => {
@@ -80,8 +98,8 @@ export default class Home extends React.Component {
                             }
                         </ScrollView>
                     </View>
-                    <View style={styles.bePrettyBlogSlider}>
-                        <Text style={{marginRight: 20, fontFamily: 'IRANSansWeb'}}>بلاگ زیبا شو</Text>
+                    <View style={styles.blogSlider}>
+                        <Text style={{marginRight: 20, marginTop: 10, fontFamily: 'IRANSansWeb'}}>بلاگ</Text>
                         <ScrollView horizontal>
                             {
                                 [1, 2, 3, 4, 5, 6].map(value => {
@@ -93,31 +111,6 @@ export default class Home extends React.Component {
                         </ScrollView>
                     </View>
                 </ScrollView>
-            </View>
-        )
-    }
-}
-
-
-class LogoTitle extends React.Component {
-    render() {
-        return (
-            <View style={styles.headerLogo}>
-                <TouchableOpacity style={{padding: 15}}
-                                  onPress={() => this.props.data.navigate('ReservedSalons')}>
-                    <View>
-                        <Image
-                            source={require('../../assets/png/calendar.png')}
-                            style={{width: 24, height: 26}}
-                        />
-                    </View>
-                </TouchableOpacity>
-
-                <Image
-                    source={require('../../assets/png/logo.png')}
-                    style={{width: 60, height: 60}}
-                />
-                <View style={{width: 45}}></View>
             </View>
         )
     }
@@ -169,8 +162,8 @@ class SalonTile extends React.Component {
                 <Image
                     source={require('../../assets/png/salon1.png')}
                     style={{
-                        width: 75,
-                        height: 75,
+                        width: width /3.8,
+                        height: width / 3.8,
                         margin: 6,
                         borderRadius: 50,
                         overflow: 'hidden'
@@ -201,7 +194,7 @@ class AroundSalonTile extends React.Component {
                         }}
                     />
                     <View>
-                        <View style={{flexDirection: 'row', marginLeft:5,marginTop:2}}>
+                        <View style={{flexDirection: 'row', marginLeft: 5, marginTop: 2}}>
                             <StarRating
                                 disabled={true}
                                 starSize={13}
@@ -211,7 +204,9 @@ class AroundSalonTile extends React.Component {
                                 rating={4}
                             />
                         </View>
-                        <Text style={{fontSize: 8, alignSelf: 'flex-start', fontFamily: 'IRANSansFaNum',marginLeft:5}}>۳۰ نظر</Text>
+                        <Text
+                            style={{fontSize: 8, alignSelf: 'flex-start', fontFamily: 'IRANSansFaNum', marginLeft: 5}}>۳۰
+                            نظر</Text>
                         <Text style={{fontSize: 14, fontFamily: 'IRANSansFaNum', color: '#00000099'}}> کایزن</Text>
                         <Text style={{fontSize: 9, marginRight: 5, fontFamily: 'IRANSansFaNum', color: '#00000099'}}>زعفرانیه
                             مقدس اردبیلی</Text>
@@ -250,8 +245,8 @@ class Blog extends React.Component {
             <ImageBackground
                 source={require('../../assets/png/brownHairGirl.png')}
                 style={{
-                    width: width / 2,
-                    height: height / 6,
+                    width: width / 1.7,
+                    height: height / 5.8,
                     borderRadius: 10,
                     overflow: 'hidden',
                     margin: 10,
@@ -262,7 +257,7 @@ class Blog extends React.Component {
                 <TouchableOpacity onPress={this._onPressButton}>
                     <View style={styles.blogTouchable}>
                         <Text
-                            style={{textAlign: 'center', fontSize: 8, fontFamily:'IRANSansFaNum'}}>سشوار حرفه ای</Text>
+                            style={{textAlign: 'center', fontSize: 8, fontFamily: 'IRANSansFaNum'}}>سشوار حرفه ای</Text>
                         <Image source={require('../../assets/png/right.png')}
                                style={{width: 15, height: 10}}/>
 
@@ -311,7 +306,7 @@ const styles = StyleSheet.create({
         height: 30,
         backgroundColor: 'white',
         borderRadius: 20,
-        margin: 47,
+        margin: 40,
         marginRight: 5,
         flexDirection: 'row',
         alignItems: 'center',
@@ -320,7 +315,7 @@ const styles = StyleSheet.create({
     },
     bestSalonsSlider: {
         width: width,
-        height: height / 5,
+        height: height / 5 + 15,
         marginTop: 20,
     },
     aroundSalonsSlider: {
@@ -333,7 +328,7 @@ const styles = StyleSheet.create({
         borderBottomStartRadius: 5,
         borderColor: '#00000029',
         borderWidth: 1,
-        width: width / 2.7,
+        width: width / 2.3,
         height: '100%',
         backgroundColor: 'white',
         shadowOffset: {
@@ -343,9 +338,10 @@ const styles = StyleSheet.create({
         shadowOpacity: 1.0,
         shadowColor: '#000000'
     },
-    bePrettyBlogSlider: {
+    blogSlider: {
         width: width,
         height: height / 4,
+        marginTop: 10
     },
     star: {
         width: 10,
@@ -357,9 +353,9 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginBottom: 10,
         margin: 5,
-        alignItems:'center',
+        alignItems: 'center',
         alignContent: 'center',
         flexDirection: 'row',
-        padding:5,
+        padding: 5,
     }
 });

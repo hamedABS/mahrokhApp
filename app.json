@@ -11,10 +11,10 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/png/logo.png",
+    "icon": "./assets/png/Logo_new.png",
     "splash": {
-      "image": "./assets/png/logo.png",
-      "resizeMode": "cover",
+      "image": "./assets/png/Logo_new.png",
+      "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {

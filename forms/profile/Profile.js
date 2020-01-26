@@ -13,8 +13,6 @@ export default class Profile extends React.Component {
         }
 
     }
-
-
     static navigationOptions = ({navigation}) => {
         let leftBtn =
             <TouchableOpacity onPress={() => navigation.navigate('ReservedSalons')}>
@@ -51,7 +49,7 @@ export default class Profile extends React.Component {
 
 
     render() {
-        let numbers = ['40000', '3000', '2000', '10000']
+        let numbers = ['50000', '100000', '150000', '200000']
         return (
             <View>
                 <View style={{flex: 1, alignItems: 'center'}}>
@@ -126,7 +124,7 @@ export default class Profile extends React.Component {
                                         onPress={() => this.setState({modalIsVisible: !this.state.modalIsVisible})}
                                         style={{margin: 20}}>
                                         <Text
-                                            style={[styles.txt, styles.modalHeaderText, {color: '#A537FD'}]}>تایید</Text>
+                                            style={[styles.txt, styles.modalHeaderText, {color: '#ddac17'}]}>تایید</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -209,7 +207,7 @@ const styles = StyleSheet.create({
         height: 25,
         marginRight: 10,
         marginLeft: 5,
-        tintColor: 'rgba(0,0,0,0.26)'
+        tintColor: '#ddac17'
     },
     txt: {
         fontSize: 16,
