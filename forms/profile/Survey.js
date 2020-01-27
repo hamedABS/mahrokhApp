@@ -128,12 +128,12 @@ export default class Survey extends React.Component {
                                     <TouchableOpacity
                                         onPress={() => this.yesNoBtnPress(i, true)}
                                         style={[this.getStyle(i, true), {marginLeft: 5}]}>
-                                        <Text style={[styles.itemText, {fontSize: width/28}]}>بله</Text>
+                                        <Text style={[styles.itemText, {fontSize: width/25}]}>بله</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                         style={this.getStyle(i, false)}
                                         onPress={() => this.yesNoBtnPress(i, false)}>
-                                        <Text style={[styles.itemText, {fontSize: width/28}]}>خیر</Text>
+                                        <Text style={[styles.itemText, {fontSize: width/25}]}>خیر</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -176,7 +176,7 @@ export default class Survey extends React.Component {
 }
 
 const {width, height} = Dimensions.get("window");
-const questions = ['از برخورد پرسنل راضی بودید ؟', 'کیفیت ارائه کار در سطح مطلوب بود؟', 'برای خدمات بعدی این آرایشگاه را انتخاب می کنید ؟']
+const questions = ['از برخورد پرسنل راضی بودید ؟', 'کیفیت ارائه کار در سطح مطلوب بود؟', 'برای خدمات بعدی این آرایشگاه را \nانتخاب می کنید ؟']
 
 const styles = StyleSheet.create({
     itemContainer: {
@@ -206,8 +206,10 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     yesNoBtn: {
-        width: 33,
-        height: 25,
+        width: 60,
+        height: 45,
+        alignItems:'center',
+        alignContent:'center',
         borderWidth: 1,
         borderRadius: 25,
         borderColor: '#707070'

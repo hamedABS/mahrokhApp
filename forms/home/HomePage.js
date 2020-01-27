@@ -28,7 +28,6 @@ export default class Home extends React.Component {
                 style={{width: 60, height: 60,alignSelf:'center', marginLeft:width/2.5}}
             />
         return {
-
             headerTitle: () => {
                 return headerTitle
             },

@@ -21,19 +21,6 @@ export default class SalonsList extends React.Component {
         this.props.navigation.navigate('Salon')
     }
 
-    _returnStars = (score) => {
-        let stars = [];
-        for (let i = 0; i < score; i++) {
-            stars.push(<Image key={i} source={require('../../assets/png/star3x_gold.png')}
-                              style={styles.star}/>)
-        }
-        for (let i = score; i < 5; i++) {
-            stars.push(<Image key={i} source={require('../../assets/png/star3x.png')}
-                              style={styles.star}/>)
-        }
-        return stars;
-    }
-
     render() {
         return (
             <ScrollView>
@@ -140,10 +127,6 @@ const styles = StyleSheet.create({
         width: width / 1.1,
         height: height / 5,
         borderRadius: 10,
-    },
-    star: {
-        width: 15,
-        height: 15,
     },
     titlesBaseStyle: {
         fontSize: 22,

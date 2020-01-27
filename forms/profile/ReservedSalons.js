@@ -39,7 +39,7 @@ export default class ReservedSalons extends React.Component {
                                 style={{width: width, height: height / 2.5}}>
                         {
                             mockData.map((item, index) => {
-                                return <SalonReservedItem key={index} data={item} btnText='1'
+                                return <SalonReservedItem key={index} data={item} btnText={1}
                                                           parentProps={this.props}/>
                             })
                         }
@@ -52,7 +52,7 @@ export default class ReservedSalons extends React.Component {
 
                     {
                         mockData.map((item, index) => {
-                            return <SalonReservedItem key={index} data={item} btnText='2'
+                            return <SalonReservedItem key={index} data={item} btnText={2}
                                                       parentProps={this.props}/>
                         })
                     }
@@ -65,9 +65,6 @@ export default class ReservedSalons extends React.Component {
 
 
 export class SalonReservedItem extends React.Component {
-
-    _onPress = () => {
-    }
 
     render() {
         let data = [this.props.data];

@@ -17,7 +17,7 @@ export default class Profile extends React.Component {
         let leftBtn =
             <TouchableOpacity onPress={() => navigation.navigate('ReservedSalons')}>
                 <Image source={require('../../assets/png/calendar.png')}
-                       style={{width: 18, height: 20, marginLeft: 10}}/>
+                       style={{width: 21, height: 23, marginLeft: 15}}/>
             </TouchableOpacity>
 
         let headerTitle =
@@ -32,7 +32,7 @@ export default class Profile extends React.Component {
             <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
                 <Image
                     source={require('../../assets/png/settings3x.png')}
-                    style={{width: 20, height: 20, marginRight: 10, tintColor: '#C8992E'}}/>
+                    style={{width: 23, height: 23, marginRight: 15, tintColor: '#C8992E'}}/>
             </TouchableOpacity>
         return {
             headerLeft: () => {

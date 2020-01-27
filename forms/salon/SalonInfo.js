@@ -1,20 +1,12 @@
 import React from 'react';
 import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import MapView from "react-native-maps";
+import {Popup, showLocation} from "react-native-map-link";
 // import Mapir from "mapir-react-native-sdk";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
-import {Marker} from 'react-native-maps';
+import MyMapView from '../MyMapView'
 import Routing from "../Routing";
 
-const API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImUzNDJhZTY3NmYwNTZkMWU0ZjdkNWF' +
-    'mN2I4NTExNDdmYzVkM2VkNDlkMjQxOGNkOTkxOWZhNmJjM2VmN2NmNWM1YmMxNDA0NjFlOWYxNGIwIn0.e' +
-    'yJhdWQiOiI3Mjg4IiwianRpIjoiZTM0MmFlNjc2ZjA1NmQxZTRmN2Q1YWY3Yjg1MTE0N2ZjNWQzZWQ0OWQyNDE4Y' +
-    '2Q5OTE5ZmE2YmMzZWY3Y2Y1YzViYzE0MDQ2MWU5ZjE0YjAiLCJpYXQiOjE1Nzc2MDg2MDMsIm5iZiI6MTU3NzYwODYwMywiZ' +
-    'XhwIjoxNTgwMTE0MjAzLCJzdWIiOiIiLCJzY29wZXMiOlsiYmFzaWMiXX0.lfi0xRKATVpeBMQNiy5Ld3IsWWbWtPLBaeDcK6rLix' +
-    'Mh6UOTQOyu7JeLLqBvFGn0vFl7VKYXsYvRlLtpehXtRv_SumSh23XXAxJOWOS6kbWfwNJvmkNnPoI8DbS48SNLZr3vw3dn_TR0l7uWFnhy' +
-    'KZE3fZsEbqDqN2vq1-CN3Hz0IzMQf8qRxuB9qK7hGrQ9JOF-Oy4SzuFVN4KO_w9a8tJ00L3E1pgr6-b901WQUNLWyq2FC0RxXUzSMBZw96N0jzG' +
-    '1_xA2DnuWcn07y016jQbo1vpgZdC-Dbo2VjtmpCJu28J0742rPdXZMwoJQSGBvkVTcrKXWWZAyMSKWY5KsQ';
 
 export default class SalonInfo extends React.Component {
 
@@ -22,20 +14,12 @@ export default class SalonInfo extends React.Component {
         super();
         this.state = {
             location: '',
-            markers: [],
-            region: {},
-            coords: [{
-                latitude: 35.726981,
-                longitude: 51.424158
-            }]
+            isVisible: false,
+            options: {},
+            locationIsLoaded: false
         }
     }
 
-
-    onRegionChange(region) {
-        console.log(region)
-        // this.setState({region});
-    }
 
     static navigationOptions = ({navigation}) => {
         let headerBackImage = <Image source={require('../../assets/png/left.png')}
@@ -73,62 +57,37 @@ export default class SalonInfo extends React.Component {
         }
 
         let location = await Location.getCurrentPositionAsync({});
-        console.log(location)
         this.setState({
             location: location,
-            markers: [{
-                coordinate: location.coords,
-                color: 'red'
-            }],
-            region: {
-                latitude: location.coords.latitude,
-                longitude: location.coords.longitude,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
-            }
+            options: {
+                latitude: 35.764482,
+                longitude: 51.395893,
+                sourceLatitude: location.coords.latitude,
+                sourceLongitude: location.coords.longitude,
+                title: 'The White House',  // optional
+                googleForceLatLon: true,
+                dialogTitle: 'مسیر یابی کنید', // optional (default: 'Open in Maps')
+                alwaysIncludeGoogle: true, // optional, true will always add Google Maps to iOS and open in Safari, even if app is not installed (default: false)
+                dialogMessage: 'از چه اپلیکیشنی میخواهید استفاده کنید؟',
+            },
+            locationIsLoaded: true
         });
+
     };
 
     render() {
-        let text = 'Waiting..';
-        let location;
-        let locationIsLoad = false;
-        let id = 0;
-        if (this.state.errorMessage) {
-            text = this.state.errorMessage;
-            locationIsLoad = false
-        } else if (this.state.location) {
-            text = JSON.stringify(this.state.location);
-            location = JSON.parse(text);
-            console.log(location.coords.latitude);
-            console.log(location.coords.longitude);
-            locationIsLoad = true;
-        }
-        if (locationIsLoad) {
+        if (this.state.locationIsLoaded)
             return (
                 <View>
-                    <MapView style={{width: width, height: height / 4}}
-                             region={this.state.region}
-                             onRegionChange={(region) => this.onRegionChange(region)}
-                             showsMyLocationButton={true}
-                             followsUserLocation={true}
-                             showsCompass={true}
-                             showsIndoors={true}
-                    >
-                        {this.state.markers.map(marker => (
-                            <Marker
-                                coordinate={marker.coordinate}
-                                pinColor={marker.color}
-                                key={id++}
-                            />
-                        ))}
-
-                        <MapView.Polyline
-                            coordinates={this.state.coords}
-                            strokeWidth={2}
-                            strokeColor="red"/>
-                    </MapView>
-
+                    <Popup
+                        isVisible={this.state.isVisible}
+                        onCancelPressed={() => this.setState({isVisible: false})}
+                        //appsWhiteList={["Waze"]}
+                        onAppPressed={() => this.setState({isVisible: false})}
+                        onBackButtonPressed={() => this.setState({isVisible: false})}
+                        options={this.state.options}
+                    />
+                    <MyMapView/>
                     {/*  <Mapir apiKey={API_KEY} zoomLevel={13} centerCoordinate={[51.422548, 35.732573]}
                            style={{width: width, height: height / 4}}>
                         <Mapir.UserLocation />
@@ -143,7 +102,7 @@ export default class SalonInfo extends React.Component {
                         }}>زعفرانیه
                             - مقدس اردبیلی- پلاک 2</Text>
                         <TouchableOpacity style={styles.routingBtn}
-                                          onPress={() => Routing.onDoTheDirectionOnPress(this.state.location.coords.latitude, this.state.location.coords.longitude)}>
+                                          onPress={() => {this.setState({isVisible: true})}}>
                             <Text style={{
                                 fontSize: 15,
                                 fontFamily: 'IRANSansFaNum',
@@ -213,7 +172,8 @@ export default class SalonInfo extends React.Component {
                     </View>
                 </View>
             )
-        } else return null;
+
+        else return null;
     }
 }
 

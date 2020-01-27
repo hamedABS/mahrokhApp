@@ -1,7 +1,8 @@
 import React from 'react';
+import StarRating from 'react-native-star-rating'
+
 import {
     Dimensions,
-    Image,
     StyleSheet,
     Text,
     View
@@ -17,11 +18,15 @@ export default class Comments extends React.Component {
                         <View key={i} style={styles.commentContainer}>
                             <Text style={styles.commentText} key={i}> {item} </Text>
                             <View style={{flexDirection: 'row', marginLeft:10}}>
-                                <Image source={require('../../assets/png/star3x_gold.png')} style={styles.star}/>
-                                <Image source={require('../../assets/png/star3x_gold.png')} style={styles.star}/>
-                                <Image source={require('../../assets/png/star3x_gold.png')} style={styles.star}/>
-                                <Image source={require('../../assets/png/star3x_gold.png')} style={styles.star}/>
-                                <Image source={require('../../assets/png/star3x.png')} style={styles.star}/>
+                                <StarRating
+                                    disabled={false}
+                                    starSize={16}
+                                    emptyStarColor='#707070'
+                                    fullStarColor='#ddac17'
+                                    maxStars={5}
+                                    rating={5}
+                                    selectedStar={(rating) => this.onStarRatingPress(rating)}
+                                />
                             </View>
                         </View>
                     )
@@ -54,10 +59,6 @@ const styles = StyleSheet.create({
         shadowRadius: 2.22,
 
         elevation: 3,
-    },
-    star: {
-        width: 16,
-        height: 16,
     },
     commentText: {
         fontSize: 14,

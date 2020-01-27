@@ -12,7 +12,7 @@ const AppContainer = createAppContainer(createSwitchNavigator(
         Tab: TabNavigator
     },
     {
-        initialRouteName: 'AppIntro',
+        initialRouteName: 'Tab',
     }
 ));
 

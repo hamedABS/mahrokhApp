@@ -35,6 +35,7 @@ export const HomeStack = createStackNavigator({
     NewReserve: NewReserve,
     ReservedSalons: ReservedSalons,
     ReserveDetails: ReserveDetails,
+    Survey:Survey,
 }, {
     initialRouteName: 'Home'
 })

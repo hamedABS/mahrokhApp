@@ -2,9 +2,19 @@ import React from 'react';
 import MapView, {Marker} from "react-native-maps";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
-import {View} from "react-native";
+import {Dimensions, View} from "react-native";
 
-export default class MapView extends React.Component {
+const API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImUzNDJhZTY3NmYwNTZkMWU0ZjdkNWF' +
+    'mN2I4NTExNDdmYzVkM2VkNDlkMjQxOGNkOTkxOWZhNmJjM2VmN2NmNWM1YmMxNDA0NjFlOWYxNGIwIn0.e' +
+    'yJhdWQiOiI3Mjg4IiwianRpIjoiZTM0MmFlNjc2ZjA1NmQxZTRmN2Q1YWY3Yjg1MTE0N2ZjNWQzZWQ0OWQyNDE4Y' +
+    '2Q5OTE5ZmE2YmMzZWY3Y2Y1YzViYzE0MDQ2MWU5ZjE0YjAiLCJpYXQiOjE1Nzc2MDg2MDMsIm5iZiI6MTU3NzYwODYwMywiZ' +
+    'XhwIjoxNTgwMTE0MjAzLCJzdWIiOiIiLCJzY29wZXMiOlsiYmFzaWMiXX0.lfi0xRKATVpeBMQNiy5Ld3IsWWbWtPLBaeDcK6rLix' +
+    'Mh6UOTQOyu7JeLLqBvFGn0vFl7VKYXsYvRlLtpehXtRv_SumSh23XXAxJOWOS6kbWfwNJvmkNnPoI8DbS48SNLZr3vw3dn_TR0l7uWFnhy' +
+    'KZE3fZsEbqDqN2vq1-CN3Hz0IzMQf8qRxuB9qK7hGrQ9JOF-Oy4SzuFVN4KO_w9a8tJ00L3E1pgr6-b901WQUNLWyq2FC0RxXUzSMBZw96N0jzG' +
+    '1_xA2DnuWcn07y016jQbo1vpgZdC-Dbo2VjtmpCJu28J0742rPdXZMwoJQSGBvkVTcrKXWWZAyMSKWY5KsQ';
+
+
+export default class MyMapView extends React.Component {
 
     constructor() {
         super();
@@ -17,6 +27,11 @@ export default class MapView extends React.Component {
                 longitude: 51.424158
             }]
         }
+    }
+
+
+    onRegionChange(region) {
+        // this.setState({region});
     }
 
     componentDidMount() {
@@ -32,9 +47,15 @@ export default class MapView extends React.Component {
         }
 
         let location = await Location.getCurrentPositionAsync({});
-        console.log(location)
         this.setState({
             location: location,
+            camera:{
+                center:{
+                    latitude: location.coords.latitude,
+                    longitude: location.coords.longitude,
+                },
+                zoom:1
+            },
             markers: [{
                 coordinate: location.coords,
                 color: 'red'
@@ -66,7 +87,7 @@ export default class MapView extends React.Component {
 
         if (locationIsLoad) {
             return (
-                <View>
+                <View style={{width: width, height: height / 4}}>
                     <MapView style={{width: width, height: height / 4}}
                              region={this.state.region}
                              onRegionChange={(region) => this.onRegionChange(region)}
@@ -90,6 +111,13 @@ export default class MapView extends React.Component {
                     </MapView>
                 </View>
             )
-        } else return null;
+        } else {
+            console.log("location not loaded yet...")
+            return null;
+        }
     }
 }
+
+const {width, height} = Dimensions.get("window");
+
+

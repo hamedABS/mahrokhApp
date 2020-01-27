@@ -1,21 +1,20 @@
 import React from 'react';
 import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import MapView from "react-native-maps";
 import Routing from "../Routing";
+import MyMapView from "../MyMapView";
+import * as Permissions from "expo-permissions";
+import * as Location from "expo-location";
+import {Popup} from "react-native-map-link";
 
 export default class ReserveDetails extends React.Component {
 
     constructor() {
         super();
-
         this.state = {
             location: '',
-            markers: [],
-            region: {},
-            coords: [{
-                latitude: 35.726981,
-                longitude: 51.424158
-            }]
+            isVisible: false,
+            options: {},
+            locationIsLoaded: false
         }
     }
 
@@ -27,7 +26,7 @@ export default class ReserveDetails extends React.Component {
             <Text style={{
                 textAlign: 'center',
                 fontFamily: 'IRANSansWeb',
-                width: width/1.3,
+                width: width / 1.3,
                 fontSize: 16
             }}>جزییات رزرو</Text>
         return {
@@ -40,40 +39,75 @@ export default class ReserveDetails extends React.Component {
         };
     };
 
+    componentDidMount() {
+        this._getLocationAsync()
+    }
+
+    _getLocationAsync = async () => {
+        let {status} = await Permissions.askAsync(Permissions.LOCATION);
+        if (status !== 'granted') {
+            this.setState({
+                errorMessage: 'Permission to access location was denied',
+            });
+        }
+
+        let location = await Location.getCurrentPositionAsync({});
+        this.setState({
+            location: location,
+            options: {
+                latitude: 35.764482,
+                longitude: 51.395893,
+                sourceLatitude: location.coords.latitude,
+                sourceLongitude: location.coords.longitude,
+                title: 'The White House',  // optional
+                googleForceLatLon: true,
+                dialogTitle: 'مسیر یابی کنید', // optional (default: 'Open in Maps')
+                alwaysIncludeGoogle: true, // optional, true will always add Google Maps to iOS and open in Safari, even if app is not installed (default: false)
+                dialogMessage: 'از چه اپلیکیشنی میخواهید استفاده کنید؟',
+            },
+            locationIsLoaded: true
+        });
+
+    };
+
     render() {
         return (
             <View style={{flex: 1, alignItems: 'center'}}>
-                <View style={[styles.itemContainer,{height:height/4}]} >
-                    <TouchableOpacity onPress={()=> this.props.navigation.navigate('Salon')}>
+                <Popup
+                    isVisible={this.state.isVisible}
+                    onCancelPressed={() => this.setState({isVisible: false})}
+                    onAppPressed={() => this.setState({isVisible: false})}
+                    onBackButtonPressed={() => this.setState({isVisible: false})}
+                    options={this.state.options}
+                />
+                <View style={[styles.itemContainer, {height: height / 4}]}>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Salon')}>
                         <Image
                             source={require('../../assets/png/salon1.png')}
                             style={{width: width / 4, height: width / 4, borderRadius: 50}}
                         />
                     </TouchableOpacity>
-                    <Text style={[styles.itemText,{fontSize: 18}]}>رزرو آرایشگاه کایزن</Text>
+                    <Text style={[styles.itemText, {fontSize: 18}]}>رزرو آرایشگاه کایزن</Text>
                 </View>
-                <View style={[styles.itemContainer,{padding:10, height:height/8}]}>
+                <View style={[styles.itemContainer, {padding: 10, height: height / 8}]}>
                     <Text style={styles.itemText}>زمان رزرو:چهارشنبه ساعت 10 صبح</Text>
                     <Text style={styles.itemText}>آدرس آرایشگاه:مرداماد چهار راه امیرخان نرسیده به میدان پلاک 10</Text>
                 </View>
-                <View style={[styles.itemContainer,{height:height/11}]}>
+                <View style={[styles.itemContainer, {height: height / 11}]}>
                     <Text style={styles.itemText}>صورت حساب: پرداخت شده است</Text>
                 </View>
                 <View>
-                    <MapView style={{width: width, height: height / 4}}
-                             region={this.state.region}
-                             onRegionChange={(region) => this.onRegionChange(region)}
-                             showsMyLocationButton={true}
-                             followsUserLocation={true}
-                             showsCompass={true}
-                             showsIndoors={true}
-                    />
-
+                    <MyMapView/>
                     <View style={styles.address}>
-                        <Text style={{fontSize: 17, fontFamily: 'IRANSansFaNum', textAlign: 'center', color: '#00000099'}}>زعفرانیه
+                        <Text style={{
+                            fontSize: 17,
+                            fontFamily: 'IRANSansFaNum',
+                            textAlign: 'center',
+                            color: '#00000099'
+                        }}>زعفرانیه
                             - مقدس اردبیلی- پلاک 2</Text>
                         <TouchableOpacity style={styles.routingBtn}
-                                          onPress={() => Routing.onDoTheDirectionOnPress(this.state.location.coords.latitude, this.state.location.coords.longitude)}>
+                                          onPress={() => {this.setState({isVisible: true})}}>
                             <Text style={{
                                 fontSize: 15,
                                 fontFamily: 'IRANSansFaNum',
@@ -102,7 +136,7 @@ const styles = StyleSheet.create({
     itemText: {
         fontSize: 12,
         fontFamily: 'IRANSansFaNum',
-        textAlign:'center'
+        textAlign: 'center'
     },
     itemImage: {
         width: width / 3,
@@ -113,12 +147,12 @@ const styles = StyleSheet.create({
     },
     details: {
         width: width / 6,
-        justifyContent:'center',
+        justifyContent: 'center',
         height: '20%',
         borderRadius: 50,
         borderColor: '#B08C3E',
         borderWidth: 1,
-        marginBottom:10,
+        marginBottom: 10,
         alignSelf: 'flex-end'
     },
     address: {
@@ -130,7 +164,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     routingBtn: {
-        justifyContent:'center',
+        justifyContent: 'center',
         width: width / 4.8,
         height: 27,
         borderRadius: 25,

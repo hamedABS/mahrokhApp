@@ -1,4 +1,5 @@
 import React from 'react';
+import StarRating from 'react-native-star-rating'
 import {
     Dimensions,
     Image,
@@ -100,12 +101,16 @@ export default class Salon extends React.Component {
                 </View>
                 <View style={{borderBottomWidth: 1, borderBottomColor: '#00000029'}}>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                        <View style={{flexDirection: 'row', marginLeft: 10}}>
-                            <Image source={require('../../assets/png/star3x_gold.png')} style={styles.star}/>
-                            <Image source={require('../../assets/png/star3x_gold.png')} style={styles.star}/>
-                            <Image source={require('../../assets/png/star3x_gold.png')} style={styles.star}/>
-                            <Image source={require('../../assets/png/star3x_gold.png')} style={styles.star}/>
-                            <Image source={require('../../assets/png/star3x.png')} style={styles.star}/>
+                        <View style={{flexDirection: 'row', marginLeft: 10, marginTop:5}}>
+                            <StarRating
+                                disabled={false}
+                                starSize={14}
+                                emptyStarColor='#707070'
+                                fullStarColor='#ddac17'
+                                maxStars={5}
+                                rating={5}
+                                selectedStar={(rating) => this.onStarRatingPress(rating)}
+                            />
                         </View>
                         <Text style={{
                             fontSize: 22,
@@ -205,11 +210,6 @@ const styles = StyleSheet.create({
         height: height / 3,
         width: width,
         backgroundColor: 'red'
-    },
-    star: {
-        width: 14,
-        height: 14,
-        marginTop: 20
     },
     optionsContainer: {
         flexDirection: 'row-reverse',
