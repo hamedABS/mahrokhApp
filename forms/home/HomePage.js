@@ -9,7 +9,7 @@ import {
     Text,
     TextInput,
     TouchableOpacity,
-    View
+    View,
 } from 'react-native';
 import StarRating from 'react-native-star-rating'
 
@@ -25,7 +25,7 @@ export default class Home extends React.Component {
         let headerTitle =
             <Image
                 source={require('../../assets/png/Logo_new.png')}
-                style={{width: 60, height: 60,alignSelf:'center', marginLeft:width/2.5}}
+                style={{width: 60, height: 60, alignSelf: 'center', marginLeft: width / 2.4}}
             />
         return {
             headerTitle: () => {
@@ -40,7 +40,7 @@ export default class Home extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <ScrollView>
+                <ScrollView showsHorizontalScrollIndicator={false}>
                     <View style={styles.filterWrapper}>
                         <View style={styles.filter}>
                             <Image
@@ -60,7 +60,8 @@ export default class Home extends React.Component {
                         </View>
                     </View>
                     <View style={styles.discountSlider}>
-                        <ScrollView horizontal>
+                        <ScrollView horizontal
+                                    showsHorizontalScrollIndicator={false}>
                             <DiscountTile/>
                             <DiscountTile/>
                         </ScrollView>
@@ -74,7 +75,8 @@ export default class Home extends React.Component {
                             fontFamily: 'IRANSansWeb'
                         }}>برترین سالن
                             ها</Text>
-                        <ScrollView horizontal>
+                        <ScrollView horizontal
+                                    showsHorizontalScrollIndicator={false}>
                             {
                                 [1, 2, 3, 4, 5, 6].map(value => {
                                     return (
@@ -87,7 +89,8 @@ export default class Home extends React.Component {
                     <View style={styles.aroundSalonsSlider}>
                         <Text style={{margin: 5, marginRight: 20, marginBottom: 10, fontFamily: 'IRANSansWeb'}}>سالن های
                             زیبایی</Text>
-                        <ScrollView horizontal>
+                        <ScrollView horizontal
+                                    showsHorizontalScrollIndicator={false}>
                             {
                                 [1, 2, 3, 4, 5, 6].map(value => {
                                     return (
@@ -99,7 +102,8 @@ export default class Home extends React.Component {
                     </View>
                     <View style={styles.blogSlider}>
                         <Text style={{marginRight: 20, marginTop: 10, fontFamily: 'IRANSansWeb'}}>بلاگ</Text>
-                        <ScrollView horizontal>
+                        <ScrollView horizontal
+                                    showsHorizontalScrollIndicator={false}>
                             {
                                 [1, 2, 3, 4, 5, 6].map(value => {
                                     return (
@@ -161,7 +165,7 @@ class SalonTile extends React.Component {
                 <Image
                     source={require('../../assets/png/salon1.png')}
                     style={{
-                        width: width /3.8,
+                        width: width / 3.8,
                         height: width / 3.8,
                         margin: 6,
                         borderRadius: 50,
