@@ -37,7 +37,7 @@ export const HomeStack = createStackNavigator({
     ReserveDetails: ReserveDetails,
     Survey:Survey,
 }, {
-    initialRouteName: 'Home'
+    initialRouteName: 'Salon'
 })
 HomeStack.navigationOptions = ({navigation}) => {
     let tabBarVisible = true;

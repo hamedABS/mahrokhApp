@@ -53,9 +53,9 @@ export default class ReserveDetails extends React.Component {
 
     render() {
         let times = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'];
+        times = times.reverse();
         let services = this.props.navigation.getParam('services');
         console.log(services)
-        times = times.reverse();
         const {selectedStartDate} = this.state;
         const startDate = selectedStartDate ? selectedStartDate.toString() : '';
         return (

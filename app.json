@@ -13,8 +13,6 @@
     "orientation": "portrait",
     "icon": "./assets/png/Logo_new.png",
     "splash": {
-      "image": "./assets/png/Logo_new.png",
-      "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {

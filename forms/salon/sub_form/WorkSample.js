@@ -17,13 +17,13 @@ export default class WorkSample extends React.Component {
                 <View style={styles.sampleItem}>
                     <Text style={styles.sampleText}>نمونه کار مو</Text>
                     <View style={styles.imageContainer}>
-                        <Image source={require('../../assets/png/young-brunette-hair_2x.png')}
+                        <Image source={require('../../../assets/png/young-brunette-hair_2x.png')}
                                style={styles.girls}
                         />
-                        <Image source={require('../../assets/png/young-female-model-posing-2x.png')}
+                        <Image source={require('../../../assets/png/young-female-model-posing-2x.png')}
                                style={styles.girls}
                         />
-                        <Image source={require('../../assets/png/closeUp-portrait-woman112x.png')}
+                        <Image source={require('../../../assets/png/closeUp-portrait-woman112x.png')}
                                style={styles.girls}
                         />
                     </View>
@@ -31,13 +31,13 @@ export default class WorkSample extends React.Component {
                 <View style={styles.sampleItem}>
                     <Text style={styles.sampleText}>نمونه کار پوست و مو</Text>
                     <View style={styles.imageContainer}>
-                        <Image source={require('../../assets/png/young-brunette-hair_2x.png')}
+                        <Image source={require('../../../assets/png/young-brunette-hair_2x.png')}
                                style={styles.girls}
                         />
-                        <Image source={require('../../assets/png/young-female-model-posing-2x.png')}
+                        <Image source={require('../../../assets/png/young-female-model-posing-2x.png')}
                                style={styles.girls}
                         />
-                        <Image source={require('../../assets/png/closeUp-portrait-woman112x.png')}
+                        <Image source={require('../../../assets/png/closeUp-portrait-woman112x.png')}
                                style={styles.girls}
                         />
                     </View>

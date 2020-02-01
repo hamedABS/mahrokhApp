@@ -10,9 +10,9 @@ import {
     View
 } from 'react-native';
 import Swiper from "react-native-web-swiper";
-import SalonService from "./SalonService";
-import WorkSample from "./WorkSample";
-import Comments from "./Comments";
+import SalonService from "./sub_form/SalonService";
+import WorkSample from "./sub_form/WorkSample";
+import Comments from "./sub_form/Comments";
 
 export default class Salon extends React.Component {
 
