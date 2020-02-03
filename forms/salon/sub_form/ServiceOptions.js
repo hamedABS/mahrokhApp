@@ -23,22 +23,24 @@ export default class ServiceOptions extends React.Component {
         this.state = {
             selectedReservedTime: '',
             selectedStartDate: 'تاریخ را انتخاب کنید.',
-            note: '',
+            // note: '',
             selectedPersonnel: '',
             service: {},
             propsLoaded: false
         }
+
+        console.log("hey from there");
     }
 
     onDateChange(date) {
+        console.log("date changing ");
         let m = moment(Moment(date).format('YYYY/MM/jDD'), 'YYYY/MM/DD')
         m.add(1, 'day')
         let service = this.state.service;
         service.startDate = m;
         date = m.format('jYYYY/jMM/jDD')
         this.setState({
-            selectedStartDate: date,
-            service: service
+            selectedStartDate: m,
         });
     }
 
@@ -52,14 +54,15 @@ export default class ServiceOptions extends React.Component {
     }
 
     _selectPersonnel = (personnel) => {
+        console.log("personnel setting")
         let service = this.state.service;
         service.personnelName = personnel;
         this.setState({
             selectedPersonnel: personnel,
-            service: service
         })
     }
     _renderWhenPersonnelSelected = () => {
+        console.log("personnel renderring");
         if (this.state.selectedPersonnel === '') {
             return (
                 <TouchableOpacity style={{
@@ -80,31 +83,40 @@ export default class ServiceOptions extends React.Component {
                 </TouchableOpacity>
             )
         }
+
     }
     _confirmPress = () => {
-        this.props.setService(this.state.service)
+        let service = this.state.service;
+        service.startDate = this.state.selectedStartDate;
+        service.time = this.state.selectedReservedTime;
+        service.personnelName = this.state.selectedPersonnel;
+        console.log("in this fucking class")
+        console.log(service)
+
+        this.props.setService(service)
     }
 
     componentDidMount() {
+        console.log("hey dude");
         let service = this.props.service;
+        console.log(service)
         if (service != null) {
             service = new Service(service.id, service.name, service.startDate, service.time, service.personnelName)
             this.setState({
                 selectedReservedTime: service.time != null ? service.time : '',
                 selectedStartDate: service.startDate != null ? service.startDate : 'تاریخ را انتخاب کنید.',
-                note: service.note != null ? service.note : '',
                 selectedPersonnel: service.personnelName != null ? service.personnelName : '',
                 service: service,
                 propsLoaded: true
             })
         }
-
     }
 
     render() {
         let times = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'];
         let personnel = ['پریسا رضایی', 'پریسیما رضایی', 'سیما رضایی']
         times = times.reverse();
+        console.log(this.state.propsLoaded)
         if (this.state.propsLoaded) {
             return (
                 <Modal isVisible={true} style={{flexDirection: 'row'}}>
@@ -123,7 +135,7 @@ export default class ServiceOptions extends React.Component {
                             <View style={{width: width, flexDirection: 'row-reverse', justifyContent: 'space-around'}}>
                                 <Text style={[styles.itemText, {marginRight: 75}]}>پرسنل مورد نظر را انتخاب کنید.</Text>
                                 <TouchableOpacity
-                                    onPress={this.props.action}
+                                    onPress={this.props.cancel}
                                     style={{marginRight: 30, marginTop: 5}}>
                                     <Image
                                         source={require('../../../assets/png/cancel.png')}
@@ -239,7 +251,7 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     timeItemWhenFocused: {
-        backgroundColor: '#A537FD4D'
+        backgroundColor: '#ddac17'
     },
     personnelTile: {
         margin: 2,

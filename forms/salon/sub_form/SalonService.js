@@ -15,6 +15,8 @@ export default class SalonService extends React.Component {
     constructor() {
         super();
         this.setReservedServices = this.setReservedServices.bind(this)
+        this._setServiceOptionsVisibleFalse = this._setServiceOptionsVisibleFalse.bind(this)
+        this._setReservedServicesAndRelatedStates = this._setReservedServicesAndRelatedStates.bind(this);
 
         let tmp = services.map((value, index) => {
             return new Service(index, value.name)
@@ -22,7 +24,7 @@ export default class SalonService extends React.Component {
 
         this.state = {
             serviceReservedCount: 0,
-            focusedStatuses: [false, false, false, false, false, false],
+            chosenServices: [false, false, false, false, false, false],
             reservedServices: [],
             toBeReserved: tmp,
             isServiceOptionsVisible: false,
@@ -35,6 +37,37 @@ export default class SalonService extends React.Component {
             isServiceOptionsVisible: true,
             focusedService: i
         })
+    }
+
+    _setServiceOptionsVisibleFalse = () => {
+        this.setState({
+            isServiceOptionsVisible: false
+        })
+    }
+
+
+    _setReservedServicesAndRelatedStates = (reservedServices) => {
+        try {
+            console.log("hey i'm fired");
+            console.log(reservedServices)
+            let chosenServices = [false, false, false, false, false, false];
+            for (let i = 0; i < reservedServices.length; i++) {
+                let service = reservedServices[i];
+                console.log("in for")
+                console.log(service)
+                chosenServices[service.id] = true
+            }
+            console.log(chosenServices)
+
+            this.setState({
+                reservedServices: reservedServices,
+                serviceReservedCount: reservedServices.length,
+                chosenServices: chosenServices,
+            })
+        } catch (e) {
+            console.log("fuck")
+            console.log(e.stack)
+        }
     }
 
 
@@ -54,15 +87,17 @@ export default class SalonService extends React.Component {
             tmp.push(service)
         }
 
-        let focusedStatuses = this.state.focusedStatuses;
-        focusedStatuses[service.id] = true
+        //let chosenServices = this.state.chosenServices;
+        //chosenServices[service.id] = true
 
-        this.setState({
+        /*this.setState({
             reservedServices: tmp,
             serviceReservedCount: tmp.length,
-            focusedStatuses:focusedStatuses,
+            chosenServices:chosenServices,
             isServiceOptionsVisible: false,
-        })
+        })*/
+        this._setReservedServicesAndRelatedStates(tmp)
+        this._setServiceOptionsVisibleFalse()
         console.log(this.state.reservedServices)
         console.log("///////////")
     }
@@ -76,7 +111,7 @@ export default class SalonService extends React.Component {
         console.log(service)
 
         return this.state.isServiceOptionsVisible ?
-            <ServiceOptions service={service}
+            <ServiceOptions cancel={this._setServiceOptionsVisibleFalse} service={service}
                             setService={this.setReservedServices}/> : null;
     }
 
@@ -93,8 +128,8 @@ export default class SalonService extends React.Component {
                             <View key={i} style={styles.serviceItem}>
                                 <Text style={styles.serviceText}>{item.name}</Text>
                                 <TouchableOpacity onPress={() => this._onAddBtnPress(i, item)}>
-                                    <Image source={this.state.focusedStatuses[i] ? checked : plus}
-                                           style={this.state.focusedStatuses[i] ? styles.plus : [styles.plus, {opacity: 0.5}]}
+                                    <Image source={this.state.chosenServices[i] ? checked : plus}
+                                           style={this.state.chosenServices[i] ? styles.plus : [styles.plus, {opacity: 0.5}]}
                                     />
                                 </TouchableOpacity>
                             </View>
@@ -102,7 +137,9 @@ export default class SalonService extends React.Component {
                     })
                 }
                 <TouchableOpacity style={{borderTopColor: '#70707080', borderTopWidth: 1}}
-                                  onPress={() => parentProps.navigation.navigate('NewReserve', {services: this.state.reservedServices})}>
+                                  onPress={() => parentProps.navigation.navigate('ReserveNew', {
+                                      services: this.state.reservedServices,
+                                      updateParentStates: (reservedServices) => this._setReservedServicesAndRelatedStates(reservedServices)})}>
                     <View style={{
                         padding: 5,
                         backgroundColor: '#ddac17',
@@ -174,5 +211,3 @@ const styles = StyleSheet.create({
         height: 20,
     }
 })
-
-

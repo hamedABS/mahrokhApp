@@ -11,7 +11,8 @@ export default class SalonIntroList extends React.Component {
 
     render() {
         return (
-            <ScrollView contentContainerStyle={{alignItems: 'center'}}>
+            <ScrollView contentContainerStyle={{alignItems: 'center'}}
+                        showsHorizontalScrollIndicator={false}>
                 {
                     mockData.map((data, index) => {
                         return (

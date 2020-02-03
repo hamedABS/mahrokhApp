@@ -18,7 +18,7 @@ import ProfileSetting from "./forms/profile/ProfileSetting";
 import FinalizeReserve from "./forms/salon/FinalizeReserve";
 import SalonIntro from "./forms/blog/SalonIntro";
 import AboutApp from "./forms/support/AboutApp";
-import NewReserve from "./forms/salon/NewReserve";
+import ReserveNew from "./forms/salon/ReserveNew";
 import Survey from "./forms/profile/Survey";
 import ChangePasswordPage from "./forms/profile/ChangePasswordPage"
 import FAQ from "./forms/support/FAQ";
@@ -32,7 +32,7 @@ export const HomeStack = createStackNavigator({
     Salon: Salon,
     SalonInfo: SalonInfo,
     FinalizeReserve: FinalizeReserve,
-    NewReserve: NewReserve,
+    ReserveNew: ReserveNew,
     ReservedSalons: ReservedSalons,
     ReserveDetails: ReserveDetails,
     Survey:Survey,
