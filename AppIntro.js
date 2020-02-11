@@ -2,7 +2,6 @@ import React from 'react';
 import {StyleSheet, Text, View, Image, Dimensions, TouchableHighlight} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Icon from 'react-native-ionicons';
-import * as Font from 'expo-font';
 
 
 export default class AppIntro extends React.Component {
@@ -13,6 +12,9 @@ export default class AppIntro extends React.Component {
         }
     }
 
+    static navigationOptions = {
+        headerShown: false,
+    };
 
     _renderItem = ({item}) => {
         return (
@@ -100,22 +102,24 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap'
     },
     title_text: {
-        fontSize: width / 15,
-        padding: 30,
-        paddingBottom: 10,
-        fontFamily: 'IRANSansWebBold'
+        fontSize: 22,
+        marginBottom: 10,
+        marginTop: 25,
+        fontFamily: 'IRANSansWebBold',
+        textAlign:'center'
     },
     main_text: {
-        fontSize: width / 20,
+        fontSize: 18,
         paddingLeft: 10,
         paddingRight: 10,
-        fontFamily: 'IRANSansFaNum'
+        fontFamily: 'IRANSansFaNum',
+        textAlign:'center'
     },
     slider_image: {
         padding: 5,
         marginTop: height / 10,
-        height: height / 2.7,
-        width: width / 1.3
+        height: 300,
+        width: 300
     },
     buttonCircle: {
         width: 40,
@@ -130,21 +134,21 @@ const styles = StyleSheet.create({
 const slides = [
     {
         key: 'page 1',
-        title: 'با ما زیبا شوید',
-        text: ' با استفاده از این اپلیکیشن شما میتوانید زیبا شوید. تمام مراحل زیبا شدنتان را میتوانید دنبال کنید',
+        title: 'انتخاب سالن زیبایی',
+        text: 'سالن زیبایی، خدمات و پرسنل مورد نظر خود را با توجه به نمونه کارها انتخاب نمایید.',
         image: require('./assets/png/Group-29.png'),
     },
     {
         key: 'page 2',
-        title: 'رزرو آنلاین آرایشگاه',
-        text: 'رزرو آنلاین فروشگاه با انواع خدمات مختلف بصورت مجزا و دقیق',
+        title: 'رزرواسیون آنلاین',
+        text: 'بدون محدودیت زمان و مکان ، زمان دقیق مراجعه به سالن زیبایی خود را رزرو نمایید',
         image: require('./assets/png/Group-31.png'),
 
     },
-   /* {
+    {
         key: 'page 3',
-        title: 'فروشگاه آنلاین',
-        text: 'خرید از فروشگاه آنلاین و آرایش حرفه ای بصورت کاملا تخصصی',
+        title: 'پرداخت آنلاین و ثبت قطعی نوبت',
+        text: 'شما می توانید با پرداخت بخشی از هزینه خدمات مورد نظر بصورت آنلاین و یا از موجودی کیف پول ، رزرو خود را قطعی نمایید',
         image: require('./assets/png/Group-36.png'),
-    },*/
+    },
 ]

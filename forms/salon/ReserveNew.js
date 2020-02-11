@@ -1,16 +1,7 @@
 import React from 'react';
-import {
-    Dimensions,
-    Image,
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
-    TouchableOpacity,
-    ScrollView,
-    TouchableWithoutFeedback
-} from 'react-native';
-import Modal from 'react-native-modal';
+import {Dimensions, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import moment from 'moment-jalali';
+import Moment from 'moment';
 import ServiceOptions from "./sub_form/ServiceOptions";
 
 
@@ -82,18 +73,23 @@ export default class ReserveNew extends React.Component {
             })
 
             this.props.navigation.state.params.updateParentStates(servicesTmp);
-
-
         } catch (e) {
             console.log(e.stack)
         }
 
     }
 
-    setReservedServices = (service) => {
+    _calculateWholePrice = () => {
+        let services = this.props.navigation.getParam('services')
+        let wholePrice = 0;
+        services.forEach(function (service) {
+            wholePrice += service.price
+        })
+        return wholePrice;
+    }
 
+    setReservedServices = (service) => {
         let tmp = this.props.navigation.getParam("services");
-        console.log("*******")
         console.log(service)
         console.log("length: " + this.state.reservedServices.length)
         let index = tmp.findIndex(item => item.id == service.id)
@@ -109,6 +105,9 @@ export default class ReserveNew extends React.Component {
             isServiceOptionsVisible: false,
         })
         this.props.navigation.state.params.updateParentStates(tmp);
+        tmp = this.props.navigation.getParam("services");
+
+        console.log(tmp)
 
         console.log(this.state.reservedServices)
         console.log("**********")
@@ -125,6 +124,8 @@ export default class ReserveNew extends React.Component {
 
     render() {
         let services = this.props.navigation.getParam('services');
+        console.log("int top render");
+        console.log(services)
         return (
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-between', padding: 10}}>
                 <View>
@@ -162,7 +163,9 @@ export default class ReserveNew extends React.Component {
                     </View>
                 </View>
                 <TouchableOpacity style={styles.pay_btn}
-                                  onPress={() => this.props.navigation.navigate('FinalizeReserve')}>
+                                  onPress={() => this.props.navigation.navigate('FinalizeReserve', {
+                                      wholePrice: this._calculateWholePrice(),
+                                  })}>
                     <Text style={styles.btn_pay_txt}>پرداخت و ثبت</Text>
                 </TouchableOpacity>
             </View>
@@ -171,23 +174,19 @@ export default class ReserveNew extends React.Component {
 }
 
 export class ServiceRow extends React.Component {
-
     constructor() {
         super();
         this.state = {
-            service: ''
+            service: '',
         }
     }
 
-    componentDidMount() {
-        let service = this.props.service;
-        this.setState({
-            service: service
-        })
-    }
-
     render() {
-        let service = this.state.service;
+        let service = this.props.service;
+        let m = moment(Moment(service.startDate).format('YYYY/MM/jDD'), 'YYYY/MM/DD')
+        m.add(-1, 'day')
+        let date = m.format('jYYYY/jMM/jDD')
+
         console.log("render service: ")
         console.log(service)
         return (
@@ -198,7 +197,7 @@ export class ServiceRow extends React.Component {
                 />
                 <View>
                     <Text
-                        style={styles.itemText}>{"" + service.name + " - " + service.startDate + "\nساعت - " + service.time}</Text>
+                        style={styles.itemText}>{"" + service.name + " - " + date + "\nساعت - " + service.time}</Text>
                     <Text style={styles.itemText}>پرسنل مورد نظر:‌ {service.personnelName} </Text>
                 </View>
                 <View>
@@ -217,7 +216,7 @@ export class ServiceRow extends React.Component {
                             />
                         </TouchableOpacity>
                     </View>
-                    <Text style={styles.itemText}>۵۰۰۰۰ تومان {service.price}</Text>
+                    <Text style={[styles.itemText, {marginTop: 5}]}>{service.price} تومان </Text>
 
                 </View>
             </View>
@@ -287,7 +286,7 @@ const styles = StyleSheet.create({
     icon: {
         width: 20,
         height: 20,
-        tintColor: '#ddac17',
+        tintColor: '#e6b618',
     },
     txt_input: {
         fontFamily: 'IRANSansFaNum',
@@ -308,7 +307,7 @@ const styles = StyleSheet.create({
         height: height / 18,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#ddac17',
+        backgroundColor: '#e6b618',
         borderRadius: 50,
         marginTop: 20,
     },

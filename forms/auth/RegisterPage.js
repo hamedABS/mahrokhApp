@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
         height: 35,
         width: 35,
         marginRight: width / 45,
-        tintColor:'#ddac17',
+        tintColor:'#e6b618',
     },
     header: {
         height: height / 14,
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
         width: width / 2,
         height: height / 13,
         alignItems: 'center',
-        backgroundColor: '#ddac17',
+        backgroundColor: '#e6b618',
         borderRadius: 50,
     },
     rules_chk: {

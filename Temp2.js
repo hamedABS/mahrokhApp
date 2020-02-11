@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {View, Dimensions, StyleSheet, ScrollView, Image, Text} from 'react-native';
-import {Video} from 'expo-av';
 
 
 export default class Temp extends Component {

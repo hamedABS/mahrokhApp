@@ -117,7 +117,7 @@ export default class SalonInfo extends React.Component {
                         <Text style={[styles.titlesBaseStyle, {alignSelf: 'flex-end'}]}>ساعات کاری</Text>
                         <View style={styles.workingTimeItem}>
                             <View style={{flexDirection: 'row-reverse', alignItems: 'center'}}>
-                                <View style={{width: 10, height: 10, backgroundColor: '#ddac17', borderRadius: 50}}/>
+                                <View style={{width: 10, height: 10, backgroundColor: '#e6b618', borderRadius: 50}}/>
                                 <Text style={[styles.workingItemText, {fontSize: 15, marginRight: 10}]}>شنبه الی
                                     چهارشنبه</Text>
                             </View>
@@ -125,7 +125,7 @@ export default class SalonInfo extends React.Component {
                         </View>
                         <View style={styles.workingTimeItem}>
                             <View style={{flexDirection: 'row-reverse', alignItems: 'center'}}>
-                                <View style={{width: 10, height: 10, backgroundColor: '#ddac17', borderRadius: 50}}/>
+                                <View style={{width: 10, height: 10, backgroundColor: '#e6b618', borderRadius: 50}}/>
                                 <Text style={[styles.workingItemText, {fontSize: 15, marginRight: 10}]}>پنجشنبه</Text>
                             </View>
                             <Text style={[styles.workingItemText, {fontSize: 15}]}>۹-۲۰</Text>

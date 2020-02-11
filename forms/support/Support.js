@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View, Linking} from 'react-native';
 
 export default class Support extends React.Component {
     static navigationOptions = ({navigation}) => {
@@ -12,11 +12,6 @@ export default class Support extends React.Component {
             width:width,
             fontSize: 16
         }}>پشتیبانی</Text>
-        let rightBtn = <TouchableOpacity>
-            <Image
-                source={require('../../assets/png/call.png')}
-                style={{width: 25, height: 25, marginRight: 10, tintColor: '#C8992E'}}/>
-        </TouchableOpacity>
         return {
             headerBackImage: () => {
                 return headerBackImage
@@ -24,14 +19,11 @@ export default class Support extends React.Component {
             headerTitle: () => {
                 return headerTitle
             },
-            headerRight: () => {
-                return rightBtn;
-            }
-
         };
     };
 
     render() {
+        let phoneNumber = '09178187580' ;
         return (
             <View style={{flex: 1, alignItems: 'center'}}>
                 <Image
@@ -44,7 +36,7 @@ export default class Support extends React.Component {
                         style={styles.icon}/>
                     <Text style={styles.txt}>درباره ماهرخ</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.everyItem}>
+                <TouchableOpacity style={styles.everyItem} onPress={()=>Linking.openURL(`tel:${phoneNumber}`)}>
                     <Image
                         source={require('../../assets/png/call.png')}
                         style={styles.icon}/>
@@ -84,7 +76,7 @@ const styles = StyleSheet.create({
         height: 25,
         marginRight: 10,
         marginLeft: 5,
-        tintColor: '#ddac17'
+        tintColor: '#e6b618'
     },
     txt: {
         fontSize: 16,

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Dimensions, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, Picker} from 'react-native';
 import StarRating from "react-native-star-rating";
 
 export default class SalonsList extends React.Component {
@@ -74,19 +74,45 @@ export default class SalonsList extends React.Component {
 }
 
 class Search extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            language: ''
+        }
+    }
 
     render() {
         let navigation = this.props.data;
         return (
-            <View style={{flexDirection: 'row-reverse', width: width, alignItems: 'center', height: height / 12}}>
+            <View style={{
+                flexDirection: 'row-reverse',
+                width: width,
+                alignItems: 'center',
+                justifyContent: 'center',
+                alignContent: 'center',
+                height: height / 12
+            }}>
                 <TouchableOpacity onPress={() => navigation.navigate('Filter')}>
                     <Image
                         source={require('../../assets/png/filter.png')}
                         style={styles.headerIcon}/>
                 </TouchableOpacity>
-                <Image
-                    source={require('../../assets/png/placeholder3x.png')}
-                    style={styles.headerIcon}/>
+                {/*<Image
+                        source={require('../../assets/png/placeholder3x.png')}
+                        style={styles.headerIcon}/>*/}
+
+                <Picker
+                    selectedValue={this.state.language}
+                    style={{height: 50, width: 100}}
+                    mode={'dialog'}
+                    onValueChange={(itemValue, itemIndex) =>
+                        this.setState({language: itemValue})
+                    }>
+                    <Picker.Item label="شیراز" value="shiraz"/>
+                    <Picker.Item label="تهران" value="tehran"/>
+                    <Picker.Item label="اهواز" value="ahvaz"/>
+                    <Picker.Item label="اصفهان" value="esfahan"/>
+                </Picker>
 
                 <View style={styles.filterWrapper}>
                     <View style={styles.filter}>
@@ -102,7 +128,14 @@ class Search extends React.Component {
                             }}
                         />
                         <TextInput
-                            style={{padding: 2, width: width / 2, fontFamily: 'IRANSansFaNum'}}
+                            style={{
+                                padding: 2,
+                                width: width / 2,
+                                fontFamily: 'IRANSansFaNum',
+                                textAlign: 'right',
+                                writingDirection: 'rtl',
+                            }}
+                            returnKeyType={'search'}
                             placeholder='جستجوی سالن'/>
                     </View>
                 </View>
@@ -124,8 +157,8 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     salonImage: {
-        width: width / 1.1,
-        height: height / 5,
+        width: width - 10,
+        height: height / 4.7,
         borderRadius: 10,
     },
     titlesBaseStyle: {
@@ -137,10 +170,11 @@ const styles = StyleSheet.create({
     headerIcon: {
         width: 18,
         height: 24,
-        marginRight: 20
+        tintColor:'#e6b618'
     },
     filterWrapper: {
-        width: width / 1.3,
+        marginTop: 7,
+        width: width / 1.5,
         height: height / 12,
         alignItems: 'center',
     },

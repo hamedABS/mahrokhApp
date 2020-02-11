@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         height: 25,
         marginRight: 10,
         marginLeft: 7,
-        tintColor: '#ddac17'
+        tintColor: '#e6b618'
     },
     txt: {
         fontSize: 16,

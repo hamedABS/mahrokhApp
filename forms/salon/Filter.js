@@ -18,8 +18,21 @@ export default class Filter extends React.Component {
         let headerBackImage = <Image source={require('../../assets/png/left.png')}
                                      style={{width: 20, height: 20}}
         />;
+
+        let headerTitle =
+            <Text style={{
+                textAlign: 'center',
+                fontFamily: 'IRANSansWeb',
+                width: width / 1.4,
+                fontSize: 16
+            }}>فیلترها</Text>
         return {
-            headerBackImage: ()=> {return headerBackImage}
+            headerBackImage: () => {
+                return headerBackImage
+            },
+            headerTitle: () => {
+                return headerTitle
+            },
         }
     }
 
@@ -27,11 +40,14 @@ export default class Filter extends React.Component {
     constructor() {
         super();
         this.state = {
-            serviceKind: '',
-            serviceKindModalIsVisible: false,
+            serviceType: '',
+            serviceTypeModalIsVisible: false,
             favoriteSwitch: false,
             newSwitch: false,
-            hasDiscountSwitch: false
+            hasDiscountSwitch: false,
+            newest: false,
+            mostRated: true,
+            region1:''
         }
     }
 
@@ -41,14 +57,14 @@ export default class Filter extends React.Component {
             <View style={styles.container}>
                 <View style={styles.filterItem}>
                     <Text style={styles.txt}>نوع خدمت</Text>
-                    <Text style={[styles.txt,{fontSize:16}]}>{this.state.serviceKind}</Text>
-                    <TouchableOpacity onPress={() => this.setState({serviceKindModalIsVisible: true})}>
+                    <Text style={[styles.txt, {fontSize: 16}]}>{this.state.serviceType}</Text>
+                    <TouchableOpacity onPress={() => this.setState({serviceTypeModalIsVisible: true})}>
                         <Image
                             source={require('../../assets/png/leftCircle.png')}
                             style={{width: 20, height: 20}}/>
                     </TouchableOpacity>
 
-                    <Modal isVisible={this.state.serviceKindModalIsVisible}>
+                    <Modal isVisible={this.state.serviceTypeModalIsVisible}>
                         <View style={{
                             backgroundColor: 'white',
                             justifyContent: 'space-around',
@@ -57,24 +73,20 @@ export default class Filter extends React.Component {
                             width: width / 1.1,
                             borderRadius: 25
                         }}>
-                            <TouchableOpacity onPress={() => this.setState({
-                                serviceKindModalIsVisible: false,
-                                serviceKind: 'خدمات مو'
-                            })}>
-                                <Text style={styles.txt}>خدمات مو</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => this.setState({
-                                serviceKindModalIsVisible: false,
-                                serviceKind: 'خدمات پوست'
-                            })}>
-                                <Text style={styles.txt}> خدمات پوست</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => this.setState({
-                                serviceKindModalIsVisible: false,
-                                serviceKind: 'خدمات ناخن'
-                            })}>
-                                <Text style={styles.txt}>خدمات ناخن</Text>
-                            </TouchableOpacity>
+                            {
+                                serviceTypes.map((serviceType, index) => {
+                                    return (
+                                        <TouchableOpacity key={index}
+                                                          style={[styles.serviceType, this.state.serviceType == serviceType ? {backgroundColor: '#F7DDA4'} : null]}
+                                                          onPress={() => this.setState({
+                                                              serviceTypeModalIsVisible: false,
+                                                              serviceType: serviceType
+                                                          })}>
+                                            <Text style={styles.txt}>{serviceType}</Text>
+                                        </TouchableOpacity>
+                                    )
+                                })
+                            }
                         </View>
                     </Modal>
                 </View>
@@ -112,7 +124,26 @@ export default class Filter extends React.Component {
                             thumbColor='#B08C3E'
                             trackColor={{false: 'rgba(145,145,145,0.44)', true: '#F7DDA4'}}/>
                 </View>
-                <TouchableHighlight style={styles.btn_save} onPress={()=> this.props.navigation.goBack()}>
+
+                <Text style={[styles.txt, {fontSize: 20}]}>مرتب سازی بر اساس</Text>
+
+                <View style={styles.filterItem}>
+                    <Text style={styles.txt}>بیشترین امتیاز</Text>
+                    <Switch onValueChange={(value) => this.setState({mostRated: value, newest: !value})}
+                            value={this.state.mostRated}
+                            thumbColor='#B08C3E'
+                            trackColor={{false: 'rgba(145,145,145,0.44)', true: '#F7DDA4'}}/>
+                </View>
+
+                <View style={styles.filterItem}>
+                    <Text style={styles.txt}>جدید ترین</Text>
+                    <Switch onValueChange={(value) => this.setState({newest: value, mostRated: !value})}
+                            value={this.state.newest}
+                            thumbColor='#B08C3E'
+                            trackColor={{false: 'rgba(145,145,145,0.44)', true: '#F7DDA4'}}/>
+                </View>
+
+                <TouchableHighlight style={styles.btn_save} onPress={() => this.props.navigation.goBack()}>
                     <Text style={styles.btn_save_txt}>ذخیره</Text>
                 </TouchableHighlight>
             </View>
@@ -120,6 +151,7 @@ export default class Filter extends React.Component {
     }
 }
 
+const serviceTypes = ['همه', 'خدمات عروس', 'خدمات پوست', 'جوان سازی و زیبایی', 'خدمات صورت', 'خدمات مو', 'خدمات ناخن', 'خدمات لیزر', 'خدمات بدن', 'ماساژ و اسپا',]
 
 const {width, height} = Dimensions.get("window");
 
@@ -158,11 +190,6 @@ const styles = StyleSheet.create({
         color: '#00000099',
         margin: 5,
     },
-    headerIcon: {
-        width: 18,
-        height: 24,
-        marginRight: 20
-    },
     btn_save_txt: {
         fontFamily: 'IRANSansWeb',
         fontSize: width / 23,
@@ -175,8 +202,17 @@ const styles = StyleSheet.create({
         height: height / 18,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#ddac17',
+        backgroundColor: '#e6b618',
         borderRadius: 50,
         marginTop: 50
     },
+
+    serviceType: {
+        width: width / 1.1 - 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgba(0,0,0,0.4)',
+        borderRadius: 25
+    }
 });

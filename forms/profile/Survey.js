@@ -145,7 +145,7 @@ export default class Survey extends React.Component {
                             disabled={false}
                             starSize={23}
                             emptyStarColor='#707070'
-                            fullStarColor='#ddac17'
+                            fullStarColor='#e6b618'
                             maxStars={5}
                             rating={this.state.starCount}
                             selectedStar={(rating) => this.onStarRatingPress(rating)}
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     icon: {
         width: 20,
         height: 20,
-        tintColor: '#ddac17',
+        tintColor: '#e6b618',
         margin: 10,
         alignSelf: 'flex-start'
     },
@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
         width: width / 2,
         height: height / 13,
         alignItems: 'center',
-        backgroundColor: '#ddac17',
+        backgroundColor: '#e6b618',
         borderRadius: 50,
     },
 })

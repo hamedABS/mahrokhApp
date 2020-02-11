@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
         width: 20,
         marginRight: 10,
         marginLeft: 10,
-        tintColor: '#ddac17'
+        tintColor: '#e6b618'
     },
     footer: {
         alignItems: 'center',
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
         width: width / 2,
         height: height / 13,
         alignItems: 'center',
-        backgroundColor: '#ddac17',
+        backgroundColor: '#e6b618',
         borderRadius: 50,
     },
 });

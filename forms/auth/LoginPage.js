@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     },
 
     txt_input_img: {
-        tintColor: '#ddac17',
+        tintColor: '#e6b618',
         height: 35,
         width: 35,
         marginRight: width / 45
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         width: width / 2,
         height: height / 13,
         alignItems: 'center',
-        backgroundColor: '#ddac17',
+        backgroundColor: '#e6b618',
         borderRadius: 50,
     },
     rules_chk: {

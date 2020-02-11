@@ -7,11 +7,36 @@ import {
     TextInput,
     View,
     TouchableOpacity,
-    ScrollView,
     TouchableHighlight
 } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import Constants from 'expo-constants';
+import * as Permissions from 'expo-permissions';
 
 export default class ProfileSetting extends React.Component {
+
+    constructor() {
+        super()
+        this.state = {
+            name: '',
+            town:'',
+            phoneNumber: '',
+            password: '',
+            repeatPassword: '',
+            checked: false,
+            photoUri: null
+        }
+    }
+
+    componentDidMount() {
+        this.getPermissionAsync();
+        let photoUri = this.props.navigation.getParam("photoUri");
+        this.setState({
+            photoUri:photoUri
+        })
+
+    }
+
     static navigationOptions = ({navigation}) => {
         let headerBackImage = <Image source={require('../../assets/png/left.png')}
                                      style={{width: 20, height: 20}}
@@ -32,27 +57,21 @@ export default class ProfileSetting extends React.Component {
         };
     };
 
-    constructor() {
-        super()
-        this.state = {
-            name: '',
-            phoneNumber: '',
-            password: '',
-            repeatPassword: '',
-            checked: false
-        }
-    }
 
     render() {
+        let {photoUri} = this.state;
+        let photo = photoUri == null ? require("../../assets/png/woman_prof.png") : {uri: photoUri}
         return (
             <View style={{flex: 1, alignItems: 'center'}}>
                 <View style={[styles.itemContainer, {height: height / 4}]}>
                     <View onPress={() => this.props.navigation.navigate('Salon')}>
                         <Image
-                            source={require('../../assets/png/brownHairGirl.png')}
+                            source={photo}
                             style={{width: width / 4, height: width / 4, borderRadius: 50}}
                         />
-                        <TouchableOpacity style={{width: 15, height: 15, position:'absolute', marginTop: 80, marginLeft: 12}}>
+                        <TouchableOpacity
+                            onPress={this._pickImage}
+                            style={{width: 15, height: 15, position: 'absolute', marginTop: 80, marginLeft: 12}}>
                             <Image
                                 source={require('../../assets/png/plus.png')}
                                 style={{width: 15, height: 15}}
@@ -94,8 +113,8 @@ export default class ProfileSetting extends React.Component {
                         defaultValue="Tehran"
                         placeholder='شهر'
                         autoCapitalize='words'
-                        onChangeText={(name) => this.setState({name})}
-                        value={this.state.name}/>
+                        onChangeText={(town) => this.setState({town})}
+                        value={this.state.town}/>
                 </View>
                 <View style={styles.everyItem}>
                     <Image
@@ -108,6 +127,35 @@ export default class ProfileSetting extends React.Component {
                 </TouchableHighlight>
             </View>
         )
+    }
+
+
+    _pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1
+        });
+
+        if (!result.cancelled) {
+            this.props.navigation.state.params.updateProfilePhoto(result.uri);
+            this.setState({photoUri: result.uri});
+        }
+    };
+
+    getPermissionAsync = async () => {
+        if (Constants.platform.ios) {
+            const {status} = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+            if (status !== 'granted') {
+                alert('Sorry, we need camera roll permissions to make this work!');
+            }
+        }
+    }
+
+    _onRegisterPressButton = ()=>{
+        this.props.navigation.state.params.updateName(this.state.name);
+        this.props.navigation.goBack();
     }
 }
 
@@ -128,7 +176,7 @@ const styles = StyleSheet.create({
         height: 25,
         marginRight: 10,
         marginLeft: 5,
-        tintColor: '#ddac17'
+        tintColor: '#e6b618'
     },
     txt: {
         fontSize: 16,
@@ -154,7 +202,7 @@ const styles = StyleSheet.create({
         height: height / 18,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#ddac17',
+        backgroundColor: '#e6b618',
         borderRadius: 50,
         marginTop: 50
     },

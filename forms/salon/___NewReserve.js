@@ -4,7 +4,7 @@ import PersianCalendarPicker from 'react-native-persian-calendar-picker';
 import Modal from 'react-native-modal';
 import Moment from 'moment';
 import moment from 'moment-jalali';
-
+import deprecatedModule from "expo/build/deprecatedModule";
 
 export default class ReserveDetails extends React.Component {
 

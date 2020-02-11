@@ -47,7 +47,7 @@ export default class BlogList extends React.Component {
                                     }}>{data.likeCount}</Text>
                                     <Image
                                         source={require('../../assets/png/heart.png')}
-                                        style={{width: 16, height: 14, marginTop: 5, tintColor:'#ddac17'}}/>
+                                        style={{width: 16, height: 14, marginTop: 5, tintColor:'#e6b618'}}/>
                                 </View>
                             </TouchableOpacity>
                         )
@@ -64,14 +64,14 @@ const {width, height} = Dimensions.get("window");
 const styles = StyleSheet.create({
     blogItem: {
         flex: 1,
-        width: width / 1.1,
+        width: width - 10,
         height: height / 2.5,
         marginTop: 8,
         borderBottomColor: 'rgba(0,0,0,0.4)',
         borderBottomWidth: 1
     },
     blogImage: {
-        width: width / 1.1,
+        width: width -10,
         height: height / 4
     }
 })

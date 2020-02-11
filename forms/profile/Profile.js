@@ -1,5 +1,6 @@
 import React from 'react';
-import {Dimensions, Image, StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View,Share
+} from 'react-native';
 import Modal from 'react-native-modal';
 
 
@@ -9,15 +10,18 @@ export default class Profile extends React.Component {
         super();
         this.state = {
             modalIsVisible: false,
-            chargeItem: '0'
+            chargeItem: '0',
+            purchase: '',
+            photoUri: null,
+            name: 'سارا'
         }
-
     }
+
     static navigationOptions = ({navigation}) => {
         let leftBtn =
             <TouchableOpacity onPress={() => navigation.navigate('ReservedSalons')}>
-                <Image source={require('../../assets/png/calendar.png')}
-                       style={{width: 21, height: 23, marginLeft: 15}}/>
+                <Image source={require('../../assets/png/list.png')}
+                       style={{width: 23, height: 24, marginLeft: 15, tintColor:'#e6b618'}}/>
             </TouchableOpacity>
 
         let headerTitle =
@@ -47,9 +51,10 @@ export default class Profile extends React.Component {
         };
     };
 
-
     render() {
         let numbers = ['50000', '100000', '150000', '200000']
+        let {photoUri} = this.state;
+        let photo = photoUri == null ? require("../../assets/png/woman_prof.png") : {uri: photoUri}
         return (
             <View>
                 <View style={{flex: 1, alignItems: 'center'}}>
@@ -63,13 +68,17 @@ export default class Profile extends React.Component {
                         alignSelf: 'flex-end',
                         marginLeft: 25,
                     }}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('ProfileSetting')}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('ProfileSetting', {
+                            photoUri: photoUri,
+                            updateProfilePhoto: (uri) => this._updateProfilePhoto(uri),
+                            updateName: (name) => this._updateName(name)
+                        })}>
                             <Image
-                                source={require('../../assets/png/brownHairGirl.png')}
+                                source={photo}
                                 style={{width: width / 4, height: width / 4, borderRadius: 50}}
                             />
                         </TouchableOpacity>
-                        <Text style={styles.txt}>سارا رضایی</Text>
+                        <Text style={styles.txt}>{this.state.name}</Text>
                     </View>
                     <View style={[styles.everyItem, {justifyContent: 'space-between'}]}>
                         <Modal isVisible={this.state.modalIsVisible}>
@@ -78,7 +87,7 @@ export default class Profile extends React.Component {
                                     <Text style={[styles.txt, styles.modalHeaderText]}>افزایش اعتبار کیف پول</Text>
                                     <TouchableOpacity
                                         onPress={() => this.setState({modalIsVisible: !this.state.modalIsVisible})}
-                                        style={{marginTop:10 ,marginLeft: 20 }}>
+                                        style={{marginTop: 10, marginLeft: 20}}>
                                         <Image
                                             source={require('../../assets/png/cancel.png')}
                                             style={{
@@ -121,10 +130,13 @@ export default class Profile extends React.Component {
                                 </View>
                                 <View style={styles.modalFooter}>
                                     <TouchableOpacity
-                                        onPress={() => this.setState({modalIsVisible: !this.state.modalIsVisible})}
+                                        onPress={() => this.setState({
+                                            modalIsVisible: false,
+                                            purchase: this.state.chargeItem
+                                        })}
                                         style={{margin: 20}}>
                                         <Text
-                                            style={[styles.txt, styles.modalHeaderText, {color: '#ddac17'}]}>تایید</Text>
+                                            style={[styles.txt, styles.modalHeaderText, {color: '#e6b618'}]}>تایید</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -147,7 +159,7 @@ export default class Profile extends React.Component {
                             borderColor: 'rgba(0,0,0,0.26)',
                             marginRight: 15,
                         }} onPress={() => this.setState({modalIsVisible: true})}>
-                            <Text style={[styles.txt, {fontSize: 12}]}> اعتبار {this.state.chargeItem} تومان</Text>
+                            <Text style={[styles.txt, {fontSize: 12}]}> اعتبار {this.state.purchase} تومان</Text>
                             <Image
                                 source={require('../../assets/png/plus2.png')}
                                 style={{
@@ -159,33 +171,59 @@ export default class Profile extends React.Component {
                                 }}/>
                         </TouchableOpacity>
                     </View>
-                    <View style={styles.everyItem}>
+                    <TouchableOpacity style={styles.everyItem} onPress={()=>this.props.navigation.navigate('SalonList')}>
                         <Image
                             source={require('../../assets/png/heart-1.png')}
                             style={styles.icon}/>
                         <Text style={styles.txt}>سالن مورد علاقه من</Text>
-                    </View>
-                    <View style={styles.everyItem}>
-                        <Image
-                            source={require('../../assets/png/edit.png')}
-                            style={styles.icon}/>
-                        <Text style={styles.txt}>نظرات من</Text>
-                    </View>
-                    <View style={styles.everyItem}>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.everyItem} onPress={()=> this._onShare()}>
                         <Image
                             source={require('../../assets/png/share.png')}
                             style={styles.icon}/>
                         <Text style={styles.txt}>معرفی به دوستان</Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </View>
         )
     }
 
+    _onShare = async () =>{
+        try {
+            const result = await Share.share({
+                message:
+                    'اپلیکیشن ماهرخ کد معرف ۲۵۱۲۵',
+            });
+
+            if (result.action === Share.sharedAction) {
+                if (result.activityType) {
+                    // shared with activity type of result.activityType
+                } else {
+                    // shared
+                }
+            } else if (result.action === Share.dismissedAction) {
+                // dismissed
+            }
+        } catch (error) {
+            alert(error.message);
+        }
+    }
+
     _onItemPressed(item) {
-        console.log(item)
         this.setState({
             chargeItem: item
+        })
+    }
+
+    _updateProfilePhoto = (uri) => {
+        this.setState({
+            photoUri: uri
+        })
+    }
+
+    _updateName = (name) => {
+        this.setState({
+            name: name
         })
     }
 }
@@ -207,7 +245,7 @@ const styles = StyleSheet.create({
         height: 25,
         marginRight: 10,
         marginLeft: 5,
-        tintColor: '#ddac17'
+        tintColor: '#e6b618'
     },
     txt: {
         fontSize: 16,
@@ -237,7 +275,7 @@ const styles = StyleSheet.create({
         borderBottomColor: 'rgba(0,0,0,0.4)',
         height: height / 10,
         width: width / 1.1,
-        padding:15,
+        padding: 15,
         backgroundColor: 'white',
         borderBottomWidth: 1,
         borderTopEndRadius: 25,

@@ -7,9 +7,8 @@ import {
     TextInput,
     View,
     TouchableOpacity,
-    ScrollView,
-    TouchableHighlight
 } from 'react-native';
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from "react-native-simple-radio-button";
 
 
 export default class FinalizeReserve extends React.Component {
@@ -35,33 +34,93 @@ export default class FinalizeReserve extends React.Component {
         };
     };
 
+    constructor() {
+        super();
+        this.state = {
+            value: '',
+            toBePayPrice: ''
+        }
+    }
+
+    _radioPress = (value) => {
+        let wholePrice = this.props.navigation.getParam('wholePrice');
+        let discount = 20000;
+
+        if (value == 0) {
+            this.setState({
+                value: value,
+                toBePayPrice: wholePrice - discount
+            })
+        } else {
+            let toBe‍PayPrice = (wholePrice - discount) / 5
+            this.setState({
+                value: value,
+                toBePayPrice: toBe‍PayPrice
+            })
+        }
+    }
+
     render() {
+        let discount = 20000;
+        let wholePrice = this.props.navigation.getParam('wholePrice');
         return (
             <View style={{flex: 1, alignItems: 'center'}}>
                 <View style={[styles.itemContainer, {height: height / 4}]}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Salon')}>
-                        <Image
-                            source={require('../../assets/png/salon1.png')}
-                            style={{width: width / 4, height: width / 4, borderRadius: 50}}
-                        />
-                    </TouchableOpacity>
-                    <Text style={[styles.itemText, {fontSize: 22}]}>رزرو آرایشگاه کایزن</Text>
+                    <View style={{flexDirection: 'row-reverse', alignItems: 'center', alignContent: 'center'}}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Salon')}>
+                            <Image
+                                source={require('../../assets/png/salon1.png')}
+                                style={{width: width / 5, height: width / 5, borderRadius: 50, marginLeft: 10}}
+                            />
+                        </TouchableOpacity>
+                        <Text style={[styles.itemText, {fontSize: 22}]}>رزرو آرایشگاه کایزن</Text>
+                    </View>
+                    <Text style={[styles.itemText, {fontSize: 15, marginTop: 10}]}>آدرس آرایشگاه:میرداماد چهار راه
+                        امیرخان نرسیده به میدان پلاک 10</Text>
                 </View>
-                <View style={[styles.itemContainer, {padding: 10, height: height / 8}]}>
-                    <Text style={styles.itemText}>زمان رزرو:چهارشنبه ساعت 10 صبح</Text>
-                    <Text style={styles.itemText}>آدرس آرایشگاه:میرداماد چهار راه امیرخان نرسیده به میدان پلاک 10</Text>
-                </View>
+
                 <View style={styles.invoiceView}>
                     <View style={styles.invoiceViewFirstPart}>
-                        <Text style={styles.itemText}>مجموع سبد خرید:90 هزارتومان</Text>
-                        <Text style={styles.itemText}> تخفیف:20 هزار تومان</Text>
-                        <Text style={styles.itemText}>مالیات:0 تومان</Text>
+                        <Text style={styles.itemText}> مجموع سبد خرید:{wholePrice} </Text>
+                        <Text style={styles.itemText}> تخفیف: {discount} تومان </Text>
+                        <Text style={[styles.itemText, {color: '#B08C3E'}]}>مبلغ نهایی: {wholePrice - discount} </Text>
                     </View>
-                    <View>
-                        <Text style={[styles.itemText, {color: '#B08C3E'}]}> مبلغ نهایی:70 هزار تومان</Text>
+                    <View style={{alignItems: 'center', alignContent: 'center'}}>
+                        <Text style={[styles.itemText, {color: '#B08C3E'}]}>مبلغ
+                            نهایی: {this.state.toBePayPrice} </Text>
                     </View>
                 </View>
-                <View>
+
+                <RadioForm
+                    style={{flexDirection: 'column', justifyContent: 'flex-end', marginTop: 30}}
+                    animation={true}
+                >
+                    {
+                        radio_props.map((obj, i) => (
+                            <RadioButton key={i}>
+                                <RadioButtonLabel
+                                    obj={obj}
+                                    onPress={(value) => this._radioPress(value)}
+                                    labelStyle={{fontSize: 17, color: 'rgba(0,0,0,0.5)', fontFamily: 'IRANSansFaNum'}}
+                                />
+                                <RadioButtonInput
+                                    obj={obj}
+                                    isSelected={this.state.value === i}
+                                    onPress={(value) => this._radioPress(value)}
+                                    borderWidth={1}
+                                    buttonInnerColor={'#e6b618'}
+                                    buttonOuterColor={this.state.value === i ? '#a27d3d' : '#000'}
+                                    buttonSize={12}
+                                    buttonOuterSize={16}
+                                    buttonWrapStyle={{marginLeft: 10}}
+                                />
+
+                            </RadioButton>
+                        ))
+                    }
+                </RadioForm>
+
+                <View style={{flexDirection: 'row-reverse', justifyContent: 'space-around', width: width}}>
                     <TouchableOpacity style={styles.pay_btn} onPress={this._onRegisterPressButton}>
                         <Text style={styles.btn_pay_txt}>پرداخت آنلاین</Text>
                     </TouchableOpacity>
@@ -69,6 +128,7 @@ export default class FinalizeReserve extends React.Component {
                         <Text style={[styles.btn_pay_txt, {color: 'black'}]}>پرداخت از کیف پول</Text>
                     </TouchableOpacity>
                 </View>
+
             </View>
         )
     }
@@ -76,6 +136,14 @@ export default class FinalizeReserve extends React.Component {
 
 
 const {width, height} = Dimensions.get("window");
+const radio_props = [
+    {
+        label: "کل مبلغ رزرو را میپردازم.              ",
+        value: 0
+    }, {
+        label: "فقط مبلغ پیش پرداخت را میپردازم\n (۲۰٪ مبلغ)",
+        value: 1
+    }]
 const styles = StyleSheet.create({
     itemContainer: {
         width: width,
@@ -88,7 +156,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: 'IRANSansFaNum',
         textAlign: 'center',
-        color:'rgba(0,0,0,0.58)'
+        color: 'rgba(0,0,0,0.58)'
     },
     invoiceView: {
         width: width / 2.3,
@@ -107,7 +175,7 @@ const styles = StyleSheet.create({
     },
     invoiceViewFirstPart: {
         width: "100%",
-        height: "80%",
+        height: "70%",
         borderBottomColor: 'rgba(0,0,0,0.46)',
         borderBottomWidth: 1
     },
@@ -122,7 +190,7 @@ const styles = StyleSheet.create({
         height: height / 18,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#ddac17',
+        backgroundColor: '#e6b618',
         borderRadius: 50,
         marginTop: 20
     },

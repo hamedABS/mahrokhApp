@@ -78,10 +78,16 @@ class Search extends React.Component {
 
     render() {
         return (
-            <View style={{flexDirection: 'row-reverse', width: width, alignItems: 'center', height: height / 12}}>
-                <Image
-                    source={require('../../assets/png/filter.png')}
-                    style={styles.headerIcon}/>
+            <View style={{
+                flexDirection: 'row-reverse',
+                width: width,
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: height / 12
+            }}>
+                {/*<Image*/}
+                {/*    source={require('../../assets/png/filter.png')}*/}
+                {/*    style={styles.headerIcon}/>*/}
 
                 <View style={styles.filterWrapper}>
                     <View style={styles.filter}>
@@ -91,13 +97,16 @@ class Search extends React.Component {
                                 width: 15,
                                 height: 15,
                                 tintColor: '#0000004C',
-                                marginRight: 30,
+                                marginRight: 10,
                                 marginLeft: 5,
                                 margin: 10
                             }}
                         />
                         <TextInput
-                            style={{padding: 2, width: width / 2, fontFamily: 'IRANSansFaNum'}}
+                            style={{
+                                padding: 2, width: width / 2, fontFamily: 'IRANSansFaNum', textAlign: 'right',
+                                writingDirection: 'rtl',
+                            }}
                             placeholder='جستجوی مطالب'/>
                     </View>
                 </View>
@@ -142,9 +151,10 @@ const styles = StyleSheet.create({
     },
     blogSortTypeViewTxtOnFocused: {
         borderBottomWidth: 2,
-        borderBottomColor: '#A537FD',
+        borderBottomColor: '#e6b618',
     },
     filterWrapper: {
+        marginTop: 7,
         width: width / 1.3,
         height: height / 12,
         alignItems: 'center',

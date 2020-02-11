@@ -37,7 +37,7 @@ export const HomeStack = createStackNavigator({
     ReserveDetails: ReserveDetails,
     Survey:Survey,
 }, {
-    initialRouteName: 'Salon'
+    initialRouteName: 'Home'
 })
 HomeStack.navigationOptions = ({navigation}) => {
     let tabBarVisible = true;
@@ -71,9 +71,12 @@ BlogStack.navigationOptions = ({navigation}) => {
 
 export const ReservationStack = createStackNavigator({
     Reservation: SalonsList,
-    Salon: Salon,
     Filter: Filter,
-    SalonInfo: SalonInfo
+    Salon: Salon,
+    SalonInfo: SalonInfo,
+    ReserveNew: ReserveNew,
+    FinalizeReserve: FinalizeReserve,
+
 })
 
 ReservationStack.navigationOptions = ({navigation}) => {
@@ -102,9 +105,11 @@ export const ProfileStack = createStackNavigator({
     ChangePasswordPage: ChangePasswordPage,
     ProfileSetting: ProfileSetting,
     FAQ: FAQ,
-    Survey: Survey
+    Survey: Survey,
+    SalonList: SalonsList,
+
 }, {
-    initialRouteName: 'Profile'
+    initialRouteName: 'Profile',
 })
 
 ProfileStack.navigationOptions = ({navigation}) => {
@@ -144,13 +149,13 @@ export const TabNavigator = createBottomTabNavigator(
                 } else if (routeName == 'Blog') {
                     icon = require('./assets/png/copy.png')
                 } else if (routeName == 'Reservation') {
-                    icon = require('./assets/png/calendar.png')
+                    icon = require('./assets/png/list.png')
                 } else if (routeName == 'Support') {
                     icon = require('./assets/png/telemarketer.png')
                 } else if (routeName == 'Profile') {
                     icon = require('./assets/png/woman.png')
                 }
-                return <Image style={{width: 21, height: 23, tintColor: tintColor}}
+                return <Image style={{width: 24, height: 24, tintColor: tintColor}}
                               source={icon}/>
             },
             tabBarLabel: ({focused, horizontal, tintColor}) => {
@@ -168,7 +173,7 @@ export const TabNavigator = createBottomTabNavigator(
                 }
             }
         }), tabBarOptions: {
-            activeTintColor: '#FAC918',
+            activeTintColor: '#e6b618',
             inactiveTintColor: 'rgb(0,0,0)',
         },
     });

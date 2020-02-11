@@ -70,9 +70,12 @@ export default class RegisterClass2 extends Component {
         return (
             <KeyboardAvoidingView style={styles.containter}
                                   behavior="padding" enabled>
-                <Text style={styles.txt_1}>لطفا کد ارسال شده را وارد کنید</Text>
-                <Text style={styles.txt_2}>برای تایید شماره تلفن، لطفا کد ارسال شده را در کادر زیر وارد کنید در صورتی که
-                    کد برایتان ارسال نشده، درخواست ارسال مجدد کد را ارسال کنید</Text>
+
+                <View style={{alignItems:'center', justifyContent:'center',marginTop:10, padding:15}}>
+                    <Text style={[styles.txt,{fontSize:18, marginBottom:20}]}>لطفا کد ارسال شده را وارد کنید</Text>
+                    <Text style={[styles.txt,{fontSize:16}]}>برای تایید شماره تلفن، لطفا کد ارسال شده را در کادر زیر وارد کنید در صورتی که
+                        کد برایتان ارسال نشده، درخواست ارسال مجدد کد را ارسال کنید.</Text>
+                </View>
 
                 <View style={styles.content}>
                     <TextInput
@@ -80,11 +83,11 @@ export default class RegisterClass2 extends Component {
                         placeholder="کد"
                         keyboardType="numeric"
                         onChangeText={(code) => this.setState({code})}
-                        value={this.state.code}/>
+                        value={this.state.txt}/>
                     <TouchableHighlight>
-                        <Text style={styles.code}>ارسال دوباره کد؟</Text>
+                        <Text style={styles.txt}>ارسال دوباره کد؟</Text>
                     </TouchableHighlight>
-                    <Text>{this.state.minute}:{this.state.second}</Text>
+                    <Text style={styles.txt}>{this.state.minute}:{this.state.second}</Text>
                 </View>
 
                 <View style={styles.footer}>
@@ -113,32 +116,20 @@ const styles = StyleSheet.create({
     containter: {
         flex: 1,
         justifyContent: 'space-between',
-        fontFamily:'IRANSansWeb'
     },
+
+    txt:{
+        color: 'rgba(0,0,0,0.6)',
+        fontFamily:'IRANSansWeb',
+        textAlign:'center',
+    },
+
     content: {
         height: height / 5,
         justifyContent: 'space-around',
         alignItems: "center"
     },
 
-    txt_1: {
-        paddingRight: 5,
-        fontWeight: 'bold',
-        fontSize: 18,
-        color: '#00000099'
-    },
-    txt_2: {
-        paddingRight: 10,
-        height: 65,
-        paddingLeft: 10,
-        fontSize: 16,
-        color: '#00000099'
-
-    },
-    txt_resend_code: {
-        fontSize: 16,
-        color: '#00000099'
-    },
 
     txt_input: {
         height: 60,
@@ -148,11 +139,12 @@ const styles = StyleSheet.create({
         borderColor: '#B08C3E',
         borderRadius: 10,
         textAlign: "center",
-        fontSize: 20
+        fontSize: 20,
+        fontFamily:'IRANSansWeb'
     },
 
     txt_input_img: {
-        tintColor:'#ddac17',
+        tintColor:'#e6b618',
         height: height / 21,
         width: width / 13,
         marginRight: width / 45
@@ -186,7 +178,7 @@ const styles = StyleSheet.create({
         width: width / 2,
         height: height / 13,
         alignItems: 'center',
-        backgroundColor: '#ddac17',
+        backgroundColor: '#e6b618',
         borderRadius: 50,
     },
     rules_chk: {
@@ -199,6 +191,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         textAlign: 'center',
         marginTop: 3,
-        color: '#B08C3E'
+        color: '#B08C3E',
+        fontFamily:'IRANSansWeb'
     }
 });

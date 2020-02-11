@@ -7,7 +7,6 @@ import {
     ScrollView,
     StyleSheet,
     Text,
-    TextInput,
     TouchableOpacity,
     View,
 } from 'react-native';
@@ -18,8 +17,8 @@ export default class Home extends React.Component {
     static navigationOptions = ({navigation}) => {
         let rightBtn =
             <TouchableOpacity onPress={() => navigation.navigate('ReservedSalons')}>
-                <Image source={require('../../assets/png/calendar.png')}
-                       style={{width: 23, height: 26, marginRight: 15}}/>
+                <Image source={require('../../assets/png/list.png')}
+                       style={{width: 26, height: 26, marginRight: 15, tintColor:'#e6b618'}}/>
             </TouchableOpacity>
 
         let headerTitle =
@@ -41,7 +40,7 @@ export default class Home extends React.Component {
         return (
             <View style={styles.container}>
                 <ScrollView showsHorizontalScrollIndicator={false}>
-                    <View style={styles.filterWrapper}>
+                    {/* <View style={styles.filterWrapper}>
                         <View style={styles.filter}>
                             <Image
                                 source={require('../../assets/png/search.png')}
@@ -58,7 +57,7 @@ export default class Home extends React.Component {
                                 style={{padding: 2, width: width / 2.5, fontFamily: 'IRANSansFaNum'}}
                                 placeholder='دنبال چه چیزی هستید؟'/>
                         </View>
-                    </View>
+                    </View>*/}
                     <View style={styles.discountSlider}>
                         <ScrollView horizontal
                                     showsHorizontalScrollIndicator={false}>
@@ -70,7 +69,6 @@ export default class Home extends React.Component {
                         <Text style={{
                             margin: 5,
                             marginRight: 20,
-                            marginBottom: 10,
                             marginTop: 0,
                             fontFamily: 'IRANSansWeb'
                         }}>برترین سالن
@@ -87,7 +85,7 @@ export default class Home extends React.Component {
                         </ScrollView>
                     </View>
                     <View style={styles.aroundSalonsSlider}>
-                        <Text style={{margin: 5, marginRight: 20, marginBottom: 10, fontFamily: 'IRANSansWeb'}}>سالن های
+                        <Text style={{marginRight: 20, marginBottom: 10, fontFamily: 'IRANSansWeb'}}>سالن های
                             زیبایی</Text>
                         <ScrollView horizontal
                                     showsHorizontalScrollIndicator={false}>
@@ -144,7 +142,7 @@ class DiscountTile extends React.Component {
                             style={{textAlign: 'center', fontFamily: 'IRANSansFaNum', marginLeft: 5}}>تخفیف
                             ویژه کایزن</Text>
                         <Image source={require('../../assets/png/right.png')}
-                               style={{width: 20, height: 15, marginRight: 3}}/>
+                               style={{width: 20, height: 15, marginRight: 2}}/>
                     </View>
                 </TouchableOpacity>
             </ImageBackground>
@@ -161,13 +159,14 @@ class SalonTile extends React.Component {
 
     render() {
         return (
-            <TouchableOpacity onPress={this._onPress}>
+            <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}} onPress={this._onPress}>
                 <Image
                     source={require('../../assets/png/salon1.png')}
                     style={{
                         width: width / 3.8,
                         height: width / 3.8,
-                        margin: 6,
+                        marginLeft: 5,
+                        marginRight: 5,
                         borderRadius: 50,
                         overflow: 'hidden'
                     }}
@@ -186,7 +185,7 @@ class AroundSalonTile extends React.Component {
 
     render() {
         return (
-            <TouchableOpacity onPress={this._onPress} style={{marginRight: 10, marginLeft: 10}}>
+            <TouchableOpacity onPress={this._onPress} style={{marginRight: 7, marginLeft: 7}}>
                 <View style={styles.aroundSalonsSliderTile}>
                     <Image
                         source={require('../../assets/png/salon1.png')}
@@ -305,11 +304,12 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     linkInDiscount: {
-        width: 130,
         height: 30,
+        padding: 5,
         backgroundColor: 'white',
         borderRadius: 20,
-        margin: 40,
+        margin: height / 8 - 40,
+        alignSelf: 'flex-start',
         marginRight: 5,
         flexDirection: 'row',
         alignItems: 'center',
@@ -318,13 +318,12 @@ const styles = StyleSheet.create({
     },
     bestSalonsSlider: {
         width: width,
-        height: height / 5 + 15,
+        height: height / 5,
         marginTop: 20,
     },
     aroundSalonsSlider: {
         width: width,
         height: height / 2.8,
-
     },
     aroundSalonsSliderTile: {
         borderBottomEndRadius: 5,

@@ -19,7 +19,7 @@ export default class SalonService extends React.Component {
         this._setReservedServicesAndRelatedStates = this._setReservedServicesAndRelatedStates.bind(this);
 
         let tmp = services.map((value, index) => {
-            return new Service(index, value.name)
+            return new Service(index, value.name, null, null, null, value.price, value.serviceTime)
         })
 
         this.state = {
@@ -71,7 +71,6 @@ export default class SalonService extends React.Component {
     }
 
 
-
     setReservedServices = (service) => {
         let tmp = this.state.reservedServices;
         console.log("///////////")
@@ -87,15 +86,7 @@ export default class SalonService extends React.Component {
             tmp.push(service)
         }
 
-        //let chosenServices = this.state.chosenServices;
-        //chosenServices[service.id] = true
 
-        /*this.setState({
-            reservedServices: tmp,
-            serviceReservedCount: tmp.length,
-            chosenServices:chosenServices,
-            isServiceOptionsVisible: false,
-        })*/
         this._setReservedServicesAndRelatedStates(tmp)
         this._setServiceOptionsVisibleFalse()
         console.log(this.state.reservedServices)
@@ -108,15 +99,24 @@ export default class SalonService extends React.Component {
         if (service == null) {
             service = this.state.toBeReserved[i];
         }
-        console.log(service)
+        // console.log(service)
 
         return this.state.isServiceOptionsVisible ?
             <ServiceOptions cancel={this._setServiceOptionsVisibleFalse} service={service}
                             setService={this.setReservedServices}/> : null;
     }
 
-    render() {
+    _navigateToPage = () => {
         let parentProps = this.props.data;
+        if (this.state.serviceReservedCount != 0){
+            parentProps.navigation.navigate('ReserveNew', {
+                services: this.state.reservedServices,
+                updateParentStates: (reservedServices) => this._setReservedServicesAndRelatedStates(reservedServices)
+            })
+        }
+    }
+
+    render() {
         let plus = require('../../../assets/png/plus.png');
         let checked = require('../../../assets/png/checked.png')
         return (
@@ -124,25 +124,42 @@ export default class SalonService extends React.Component {
                 {this._renderModal()}
                 {
                     this.state.toBeReserved.map((item, i) => {
+                        console.log(item)
                         return (
                             <View key={i} style={styles.serviceItem}>
                                 <Text style={styles.serviceText}>{item.name}</Text>
-                                <TouchableOpacity onPress={() => this._onAddBtnPress(i, item)}>
-                                    <Image source={this.state.chosenServices[i] ? checked : plus}
-                                           style={this.state.chosenServices[i] ? styles.plus : [styles.plus, {opacity: 0.5}]}
-                                    />
-                                </TouchableOpacity>
+                                <View style={{
+                                    flexDirection: 'row-reverse',
+                                    alignContent: 'center',
+                                    alignItems: 'center'
+                                }}>
+                                    <View style={{marginLeft: 20}}>
+                                        <Text style={{
+                                            fontSize: 14,
+                                            fontFamily: 'IRANSansFaNum',
+                                            color: 'rgba(0,0,0,0.5)'
+                                        }}>{item.price} تومان </Text>
+                                        <Text style={{
+                                            fontSize: 14,
+                                            fontFamily: 'IRANSansFaNum',
+                                            color: 'rgba(0,0,0,0.5)'
+                                        }}>{item.serviceTime} دقیقه </Text>
+                                    </View>
+                                    <TouchableOpacity onPress={() => this._onAddBtnPress(i, item)}>
+                                        <Image source={this.state.chosenServices[i] ? checked : plus}
+                                               style={this.state.chosenServices[i] ? styles.plus : [styles.plus, {opacity: 0.5}]}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+
                             </View>
                         )
                     })
                 }
-                <TouchableOpacity style={{borderTopColor: '#70707080', borderTopWidth: 1}}
-                                  onPress={() => parentProps.navigation.navigate('ReserveNew', {
-                                      services: this.state.reservedServices,
-                                      updateParentStates: (reservedServices) => this._setReservedServicesAndRelatedStates(reservedServices)})}>
+                <TouchableOpacity onPress={() => this._navigateToPage()}>
                     <View style={{
                         padding: 5,
-                        backgroundColor: '#ddac17',
+                        backgroundColor: '#e6b618',
                         borderRadius: 25,
                         marginTop: 15,
                         alignItems: 'center',
@@ -163,23 +180,28 @@ export default class SalonService extends React.Component {
 const services = [
     {
         name: 'کاشت ناخن',
-        price: 50
+        price: 50000,
+        serviceTime: '90'
     },
     {
         name: 'کلوپ',
-        price: 50
+        price: 50000,
+        serviceTime: '45'
     },
     {
         name: 'کرلی',
-        price: 60
+        price: 60000,
+        serviceTime: '60'
     },
     {
         name: 'رنگ شیشه',
-        price: 60
+        price: 60000,
+        serviceTime: '45'
     },
     {
         name: 'بافت',
-        price: 100
+        price: 100000,
+        serviceTime: '90'
     }]
 
 
@@ -207,7 +229,7 @@ const styles = StyleSheet.create({
         margin: 5
     },
     plus: {
-        width: 20,
-        height: 20,
+        width: 23,
+        height: 23,
     }
 })

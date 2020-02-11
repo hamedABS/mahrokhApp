@@ -106,7 +106,7 @@ export default class Salon extends React.Component {
                                 disabled={false}
                                 starSize={14}
                                 emptyStarColor='#707070'
-                                fullStarColor='#ddac17'
+                                fullStarColor='#e6b618'
                                 maxStars={5}
                                 rating={5}
                                 selectedStar={(rating) => this.onStarRatingPress(rating)}
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     chooseOptionFocused: {
         width: width / 3.6,
         height: 30,
-        backgroundColor: '#ddac17',
+        backgroundColor: '#e6b618',
         borderRadius: 25,
     },
     chooseOptionNotFocused: {

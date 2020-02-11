@@ -38,7 +38,6 @@ export default class ServiceOptions extends React.Component {
         m.add(1, 'day')
         let service = this.state.service;
         service.startDate = m;
-        date = m.format('jYYYY/jMM/jDD')
         this.setState({
             selectedStartDate: m,
         });
@@ -101,7 +100,7 @@ export default class ServiceOptions extends React.Component {
         let service = this.props.service;
         console.log(service)
         if (service != null) {
-            service = new Service(service.id, service.name, service.startDate, service.time, service.personnelName)
+            service = new Service(service.id, service.name, service.startDate, service.time, service.personnelName,service.price)
             this.setState({
                 selectedReservedTime: service.time != null ? service.time : '',
                 selectedStartDate: service.startDate != null ? service.startDate : 'تاریخ را انتخاب کنید.',
@@ -172,7 +171,7 @@ export default class ServiceOptions extends React.Component {
                                     style={{opacity: 0.5}}
                                     enableDateChange={true}
                                     selectedStartDate={this.state.service.startDate}
-                                    selectedDayColor='#ddac17'
+                                    selectedDayColor='#e6b618'
                                     isRTL={true}
                                     onDateChange={(date) => this.onDateChange(date)}
                                     width={350}
@@ -226,7 +225,7 @@ const styles = StyleSheet.create({
     },
     confirm: {
         padding: 5,
-        backgroundColor: '#ddac17',
+        backgroundColor: '#e6b618',
         borderRadius: 15,
         marginTop: 15,
         width: width / 3,
@@ -251,7 +250,7 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     timeItemWhenFocused: {
-        backgroundColor: '#ddac17'
+        backgroundColor: '#e6b618'
     },
     personnelTile: {
         margin: 2,

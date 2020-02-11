@@ -90,8 +90,9 @@ export default class ReserveDetails extends React.Component {
                     <Text style={[styles.itemText, {fontSize: 18}]}>رزرو آرایشگاه کایزن</Text>
                 </View>
                 <View style={[styles.itemContainer, {padding: 10, height: height / 8}]}>
-                    <Text style={styles.itemText}>زمان رزرو:چهارشنبه ساعت 10 صبح</Text>
-                    <Text style={styles.itemText}>آدرس آرایشگاه:مرداماد چهار راه امیرخان نرسیده به میدان پلاک 10</Text>
+                    <Text style={styles.itemText}>کاشت ناخن۹۸/۱۰/۲۷  ساعت 8 صبح</Text>
+                    <Text style={styles.itemText}>خدامت مو ۹۸/۱۰/۲۶  ساعت 10 صبح</Text>
+                    <Text style={styles.itemText}>کاشت ناخن۹۸/۱۰/۲۸  ساعت 12 صبح</Text>
                 </View>
                 <View style={[styles.itemContainer, {height: height / 11}]}>
                     <Text style={styles.itemText}>صورت حساب: پرداخت شده است</Text>

@@ -22,7 +22,7 @@ export default class Comments extends React.Component {
                                     disabled={false}
                                     starSize={16}
                                     emptyStarColor='#707070'
-                                    fullStarColor='#ddac17'
+                                    fullStarColor='#e6b618'
                                     maxStars={5}
                                     rating={5}
                                     selectedStar={(rating) => this.onStarRatingPress(rating)}

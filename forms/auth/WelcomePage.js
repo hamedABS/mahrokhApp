@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
         height: height / 13,
         alignItems: 'center',
         alignContent:'center',
-        backgroundColor: '#ddac17',
+        backgroundColor: '#e6b618',
         borderRadius: 50,
     },
     btn_register_txt: {
