@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
     icon: {
         width: 20,
         height: 20,
-        tintColor: '#ddac17',
+        tintColor: '#e6b618',
         margin: 10,
         alignSelf: 'flex-start'
     },
@@ -265,7 +265,7 @@ const styles = StyleSheet.create({
         height: height / 18,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#ddac17',
+        backgroundColor: '#e6b618',
         borderRadius: 50,
         marginTop: 20
     },
