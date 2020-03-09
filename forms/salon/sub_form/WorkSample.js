@@ -27,14 +27,14 @@ export default class WorkSample extends React.Component {
             <View style={styles.container}>
                 <View style={styles.sampleItem}>
 
-                    <ImageView
-                        images={images}
-                        imageIndex={0}
-                        isVisible={this.state.isImageViewVisible}
-                        onCancel={() => this.setState({isImageViewVisible: false})}
-                        onClose={() => this.setState({isImageViewVisible: false})}
-                        imageIndex={this.state.currentImage}
-                    />
+                        <ImageView
+                            images={images}
+                            imageIndex={0}
+                            isVisible={this.state.isImageViewVisible}
+                            onCancel={() => this.setState({isImageViewVisible: false})}
+                            onClose={() => this.setState({isImageViewVisible: false})}
+                            imageIndex={this.state.currentImage}
+                        />
 
                     <Text style={styles.sampleText}>نمونه کار مو</Text>
                     <View style={styles.imageContainer}>

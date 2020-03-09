@@ -1,22 +1,14 @@
 import React from 'react';
 import StarRating from 'react-native-star-rating'
-import {
-    Dimensions,
-    Image,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    ImageBackground,
-    TouchableWithoutFeedback,
-    View
-} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
 import Swiper from "react-native-web-swiper";
 import SalonService from "./sub_form/SalonService";
 import WorkSample from "./sub_form/WorkSample";
 import Comments from "./sub_form/Comments";
-import ImageView from "react-native-image-view";
-export default class Salon extends React.Component {
+import ImageView from 'react-native-image-view';
 
+
+export default class Salon extends React.Component {
 
     constructor() {
         super();
@@ -29,7 +21,6 @@ export default class Salon extends React.Component {
             currentImage: 0
         }
     }
-
     static navigationOptions = {
         headerShown: false,
     };
@@ -78,15 +69,18 @@ export default class Salon extends React.Component {
                             }}
                             loop={true}
                             timeout={5}>
-                        <TouchableWithoutFeedback onPress={() => this.setState({isImageViewVisible: true, currentImage:0})}>
+                        <TouchableWithoutFeedback
+                            onPress={() => this.setState({isImageViewVisible: true, currentImage: 0})}>
                             <Image style={styles.slider_image}
                                    source={{uri: 'https://www.aroos.co/wp-content/uploads/2018/07/beauty-salon.jpg'}}/>
                         </TouchableWithoutFeedback>
-                        <TouchableWithoutFeedback onPress={() => this.setState({isImageViewVisible: true, currentImage:1})}>
+                        <TouchableWithoutFeedback
+                            onPress={() => this.setState({isImageViewVisible: true, currentImage: 1})}>
                             <Image style={styles.slider_image}
                                    source={{uri: "https://www.curiouslyconscious.com/wp-content/uploads/2018/02/Le-Fix-Natural-Beauty-Bar.jpg"}}/>
                         </TouchableWithoutFeedback>
-                        <TouchableWithoutFeedback onPress={() => this.setState({isImageViewVisible: true, currentImage:2})}>
+                        <TouchableWithoutFeedback
+                            onPress={() => this.setState({isImageViewVisible: true, currentImage: 2})}>
                             <Image style={styles.slider_image}
                                    source={{uri: "https://i2.wp.com/c2.staticflickr.com/9/8860/28279022265_b668e80d24_o.jpg"}}/>
                         </TouchableWithoutFeedback>
@@ -157,6 +151,7 @@ export default class Salon extends React.Component {
                     </TouchableOpacity>
                 </View>
                 {this._renderSubClasses()}
+                {this._renderImageView()}
             </View>
         );
     }
@@ -182,17 +177,16 @@ export default class Salon extends React.Component {
                 return <SalonService data={this.props}/>
         }
     }
-/*
-    _renderImageView() {
-        return <ImageView
-            images={images}
-            imageIndex={0}
-            isVisible={this.state.isImageViewVisible}
-            onCancel={() => this.setState({isImageViewVisible: false})}
-            onClose={() => this.setState({isImageViewVisible: false})}
-            imageIndex={this.state.currentImage}
-        />
-    }*/
+        _renderImageView() {
+            return <ImageView
+                images={images}
+                imageIndex={0}
+                isVisible={this.state.isImageViewVisible}
+                onCancel={() => this.setState({isImageViewVisible: false})}
+                onClose={() => this.setState({isImageViewVisible: false})}
+                imageIndex={this.state.currentImage}
+            />
+        }
 
 }
 const {width, height} = Dimensions.get("window");

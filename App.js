@@ -3,8 +3,11 @@ import React from 'react';
 import * as Font from 'expo-font';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import AppIntro from './AppIntro';
-import {AuthStack, TabNavigator} from "./Navigations";
-import { I18nManager} from 'react-native';
+import {TabNavigator} from "./navigation/Navigations";
+import AuthStack from './navigation/AuthStack'
+
+import {I18nManager} from 'react-native';
+
 I18nManager.allowRTL(false);
 I18nManager.forceRTL(false);
 
@@ -54,11 +57,3 @@ export default class App extends React.Component {
         } else return null;
     }
 }
-
-/*import React from 'react';
-import Temp from './Temp';
-
-const App = ()=>{
-  return <Temp/>
-}
-export default App*/

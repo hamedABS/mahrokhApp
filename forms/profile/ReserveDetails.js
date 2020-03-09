@@ -22,27 +22,6 @@ export default class ReserveDetails extends React.Component {
         }
     }
 
-    static navigationOptions = ({navigation}) => {
-        let headerBackImage = <Image source={require('../../assets/png/left.png')}
-                                     style={{width: 20, height: 20}}
-        />;
-        let headerTitle =
-            <Text style={{
-                textAlign: 'center',
-                fontFamily: 'IRANSansWeb',
-                width: width / 1.3,
-                fontSize: 16
-            }}>جزییات رزرو</Text>
-        return {
-            headerBackImage: () => {
-                return headerBackImage
-            },
-            headerTitle: () => {
-                return headerTitle
-            },
-        };
-    };
-
     componentDidMount() {
         this._getLocationAsync()
     }
@@ -125,9 +104,9 @@ export default class ReserveDetails extends React.Component {
                                       onPress={() => this.setState({cancelModalIsVisible: true})}>
                         <Image
                             source={require('../../assets/png/cancel.png')}
-                            style={{width: 20, height: 20, borderRadius: 50, tintColor: 'red', marginLeft: 5}}
+                            style={{width: 20, height: 20, borderRadius: 50, marginLeft: 5}}
                         />
-                        <Text style={styles.itemText}>لغو رزرو</Text>
+                        <Text style={[styles.itemText,{color:'red'}]}>لغو رزرو</Text>
                     </TouchableOpacity>
 
                     <View style={{marginBottom: 10, alignItems: 'center', justifyContent: 'center'}}>

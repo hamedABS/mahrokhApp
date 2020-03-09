@@ -12,28 +12,6 @@ import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from "react-
 
 
 export default class FinalizeReserve extends React.Component {
-
-    static navigationOptions = ({navigation}) => {
-        let headerBackImage = <Image source={require('../../assets/png/left.png')}
-                                     style={{width: 20, height: 20}}
-        />;
-        let headerTitle =
-            <Text style={{
-                textAlign: 'center',
-                fontFamily: 'IRANSansWeb',
-                width: width / 1.3,
-                fontSize: 16
-            }}>ثبت رزرو</Text>
-        return {
-            headerBackImage: () => {
-                return headerBackImage
-            },
-            headerTitle: () => {
-                return headerTitle
-            },
-        };
-    };
-
     constructor() {
         super();
         this.state = {

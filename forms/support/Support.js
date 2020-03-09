@@ -27,7 +27,7 @@ export default class Support extends React.Component {
         return (
             <View style={{flex: 1, alignItems: 'center'}}>
                 <Image
-                    source={require('../../assets/png/Logo_new.png')}
+                    source={require('../../assets/png/logo.png')}
                     style={{width: width / 2, height: width / 2}}
                 />
                 <TouchableOpacity style={styles.everyItem} onPress={()=> this.props.navigation.navigate('AboutApp')}>

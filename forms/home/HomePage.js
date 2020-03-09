@@ -24,7 +24,7 @@ export default class Home extends React.Component {
 
         let headerTitle =
             <Image
-                source={require('../../assets/png/Logo_new.png')}
+                source={require('../../assets/png/logo.png')}
                 style={{width: 60, height: 60, alignSelf: 'center', marginLeft: width / 2.4}}
             />
         return {

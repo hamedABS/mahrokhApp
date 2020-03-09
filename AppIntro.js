@@ -1,8 +1,7 @@
 import React from 'react';
-import {StyleSheet, Text, View, Image, Dimensions, TouchableHighlight} from 'react-native';
+import {Dimensions, I18nManager, Image, StyleSheet, Text, View} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Icon from 'react-native-ionicons';
-import {I18nManager} from 'react-native';
 
 I18nManager.allowRTL(false);
 
@@ -74,12 +73,9 @@ export default class AppIntro extends React.Component {
 
 
     render() {
-        console.log('app intro renderring')
         if (this.state.showRealApp) {
-            console.log('app show real')
             return null
         } else {
-            console.log('returining appIntroSlider')
             return <AppIntroSlider renderItem={this._renderItem}
                                    slides={slides}
                                    dotStyle={{backgroundColor: 'rgba(245,203,18,0.36)'}}

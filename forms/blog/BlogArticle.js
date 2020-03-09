@@ -1,12 +1,20 @@
 import React from 'react';
-import {Dimensions, Image, StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 export default class BlogArticle extends React.Component {
     static navigationOptions = {
         headerShown: false,
     };
 
+    state = {
+        likedPost: false,
+    }
+
     render() {
+        let emptyHeart = require('../../assets/png/emptyHeart.png');
+        let filledHeart = require('../../assets/png/heartRedGold.png')
+
+
         return (
             <View style={{flex: 1, justifyContent: 'space-between'}}>
                 <View style={styles.headerTitle}>
@@ -81,9 +89,11 @@ export default class BlogArticle extends React.Component {
                         fontFamily: 'IRANSansFaNum',
                         color: '#323232'
                     }}>مطلب بنظرتون مفید بود ؟</Text>
-                    <Image
-                        source={require('../../assets/png/heartRedGold.png')}
-                        style={{width: 20, height: 16}}/>
+                    <TouchableOpacity onPress={() => this.setState({likedPost: !this.state.likedPost})}>
+                        <Image
+                            source={this.state.likedPost ? filledHeart : emptyHeart}
+                            style={{width: 20, height: 16}}/>
+                    </TouchableOpacity>
                 </View>
             </View>
         )

@@ -3,26 +3,6 @@ import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from 'react
 import Accordion from "react-native-collapsible/Accordion";
 
 export default class FAQ extends React.Component {
-    static navigationOptions = ({navigation}) => {
-        let headerBackImage = <Image source={require('../../assets/png/left.png')}
-                                     style={{width: 20, height: 20}}
-        />;
-        let headerTitle =
-            <Text style={{
-                textAlign: 'center',
-                fontFamily: 'IRANSansWeb',
-                width: width / 1.4,
-                fontSize: 16
-            }}>سوالات متداول</Text>
-        return {
-            headerBackImage: () => {
-                return headerBackImage
-            },
-            headerTitle: () => {
-                return headerTitle
-            },
-        };
-    };
 
     constructor() {
         super();
@@ -70,7 +50,7 @@ export default class FAQ extends React.Component {
                 <View style={{marginTop: 20}}>
                     <View style={{width: width, marginBottom: 10, alignItems: 'center'}}>
                         <Image
-                            source={require('../../assets/png/Logo_new.png')}
+                            source={require('../../assets/png/logo.png')}
                             style={{width: width / 4, height: width / 4}}
                         />
                         <Text style={styles.txt}>version 0.0.1</Text>

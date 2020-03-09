@@ -23,27 +23,6 @@ export default class ReserveNew extends React.Component {
         this._setServiceOptionsVisibleFalse = this._setServiceOptionsVisibleFalse.bind(this)
     }
 
-    static navigationOptions = ({navigation}) => {
-        let headerBackImage = <Image source={require('../../assets/png/left.png')}
-                                     style={{width: 20, height: 20}}
-        />;
-        let headerTitle =
-            <Text style={{
-                textAlign: 'center',
-                fontFamily: 'IRANSansWeb',
-                width: width / 1.3,
-                fontSize: 16
-            }}> رزرو جدید</Text>
-        return {
-            headerBackImage: () => {
-                return headerBackImage
-            },
-            headerTitle: () => {
-                return headerTitle
-            },
-        };
-    };
-
     _setServiceOptionsVisibleFalse = () => {
         this.setState({
             isServiceOptionsVisible: false
@@ -124,8 +103,6 @@ export default class ReserveNew extends React.Component {
 
     render() {
         let services = this.props.navigation.getParam('services');
-        console.log("int top render");
-        console.log(services)
         return (
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-between', padding: 10}}>
                 <View>

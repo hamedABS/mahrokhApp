@@ -23,7 +23,7 @@ export default class WelcomePage extends Component {
 
     render() {
         console.log("rendering... ")
-        let image = require('../../assets/png/Logo_new.png')
+        let image = require('../../assets/png/logo.png')
         return (
             <View style={styles.container}>
                 <Image

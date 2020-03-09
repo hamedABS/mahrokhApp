@@ -12,30 +12,9 @@ export default class Survey extends React.Component {
             isYesFocused_0: 'o',
             isYesFocused_1: 'o',
             isYesFocused_2: 'o',
-            note:''
+            note: ''
         }
     }
-
-    static navigationOptions = ({navigation}) => {
-        let headerBackImage = <Image source={require('../../assets/png/left.png')}
-                                     style={{width: 20, height: 20}}
-        />;
-        let headerTitle =
-            <Text style={{
-                textAlign: 'center',
-                fontFamily: 'IRANSansWeb',
-                width: width / 1.3,
-                fontSize: 16
-            }}>جزییات رزرو</Text>
-        return {
-            headerBackImage: () => {
-                return headerBackImage
-            },
-            headerTitle: () => {
-                return headerTitle
-            },
-        };
-    };
 
     onStarRatingPress(rating) {
         this.setState({
@@ -123,24 +102,24 @@ export default class Survey extends React.Component {
                     {questions.map((item, i) => {
                         return (
                             <View key={i} style={styles.questionItem}>
-                                <Text style={[styles.itemText, {fontSize: width/28}]}>{item}</Text>
+                                <Text style={[styles.itemText, {fontSize: width / 28}]}>{item}</Text>
                                 <View style={{flexDirection: 'row-reverse'}}>
                                     <TouchableOpacity
                                         onPress={() => this.yesNoBtnPress(i, true)}
                                         style={[this.getStyle(i, true), {marginLeft: 5}]}>
-                                        <Text style={[styles.itemText, {fontSize: width/25}]}>بله</Text>
+                                        <Text style={[styles.itemText, {fontSize: width / 25}]}>بله</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                         style={this.getStyle(i, false)}
                                         onPress={() => this.yesNoBtnPress(i, false)}>
-                                        <Text style={[styles.itemText, {fontSize: width/25}]}>خیر</Text>
+                                        <Text style={[styles.itemText, {fontSize: width / 25}]}>خیر</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
                         )
                     })}
                     <View style={styles.questionItem}>
-                        <Text style={[styles.itemText, {fontSize: width/28}]}>میزان رضایت شما از آرایشگاه؟</Text>
+                        <Text style={[styles.itemText, {fontSize: width / 28}]}>میزان رضایت شما از آرایشگاه؟</Text>
                         <StarRating
                             disabled={false}
                             starSize={23}
@@ -164,7 +143,7 @@ export default class Survey extends React.Component {
                         onChangeText={(note) => this.setState({note})}
                         value={this.state.note}/>
                 </View>
-                <TouchableOpacity style={{marginTop:15}} onPress={this._onPressButton}>
+                <TouchableOpacity style={{marginTop: 15}} onPress={this._onPressButton}>
                     <View style={styles.btn}>
                         <Text style={styles.btn_save_txt}>ثبت نظر</Text>
                     </View>
@@ -208,8 +187,8 @@ const styles = StyleSheet.create({
     yesNoBtn: {
         width: 60,
         height: 45,
-        alignItems:'center',
-        alignContent:'center',
+        alignItems: 'center',
+        justifyContent: 'center',
         borderWidth: 1,
         borderRadius: 25,
         borderColor: '#707070'

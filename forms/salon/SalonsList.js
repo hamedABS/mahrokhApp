@@ -1,7 +1,16 @@
 import React from 'react';
-import {Dimensions, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View, Picker} from 'react-native';
+import {
+    Dimensions,
+    I18nManager,
+    Image,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from 'react-native';
 import StarRating from "react-native-star-rating";
-import {I18nManager} from 'react-native';
 import Modal from "react-native-modal";
 
 I18nManager.allowRTL(false);
@@ -92,7 +101,7 @@ export default class SalonsList extends React.Component {
                                            marginTop: -15,
                                            zIndex: 1,
                                            position: 'absolute',
-                                           marginRight:15,
+                                           marginRight: 15,
                                            alignSelf: 'flex-end'
                                        }}/>
 

@@ -1,11 +1,9 @@
 import React from 'react';
 import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Popup, showLocation} from "react-native-map-link";
-// import Mapir from "mapir-react-native-sdk";
+import {Popup} from "react-native-map-link";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
 import MyMapView from '../MyMapView'
-import Routing from "../Routing";
 
 
 export default class SalonInfo extends React.Component {
@@ -102,7 +100,9 @@ export default class SalonInfo extends React.Component {
                         }}>زعفرانیه
                             - مقدس اردبیلی- پلاک 2</Text>
                         <TouchableOpacity style={styles.routingBtn}
-                                          onPress={() => {this.setState({isVisible: true})}}>
+                                          onPress={() => {
+                                              this.setState({isVisible: true})
+                                          }}>
                             <Text style={{
                                 fontSize: 15,
                                 fontFamily: 'IRANSansFaNum',

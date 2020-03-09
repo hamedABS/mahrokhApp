@@ -11,7 +11,7 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/png/Logo_new.png",
+    "icon": "./assets/png/logo.png",
     "splash": {
       "backgroundColor": "#ffffff"
     },
@@ -39,7 +39,7 @@
       ],
       "config": {
         "googleMaps": {
-          "apiKey": "AIzaSyAQRbMQGbUWesPPucmWP_CiijF_qzrcC5c"
+          "apiKey": "AIzaSyBEkvy_tUg2F4by04QzWYXzR_gFpXqj5_Y"
         }
       }
     },

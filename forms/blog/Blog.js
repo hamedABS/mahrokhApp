@@ -1,7 +1,6 @@
 import React from 'react';
 import {Dimensions, Image, StyleSheet, Text, TextInput, View, TouchableOpacity} from 'react-native';
 import BlogList from "./BlogList";
-import BlogArticle from "./BlogArticle";
 
 
 export default class Blog extends React.Component {

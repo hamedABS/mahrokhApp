@@ -7,27 +7,6 @@ import authStyles from "./AuthStyles";
 
 
 export default class Login extends React.Component {
-    static navigationOptions = ({navigation}) => {
-        let headerBackImage = <Image source={require('../../assets/png/left.png')}
-                                     style={{width: 20, height: 20}}
-        />;
-        let headerTitle =
-            <Text style={{
-                textAlign: 'center',
-                fontFamily: 'IRANSansWeb',
-                width: width / 1.4,
-                fontSize: 16
-            }}>ورود</Text>
-        return {
-            headerBackImage: () => {
-                return headerBackImage
-            },
-            headerTitle: () => {
-                return headerTitle
-            },
-        };
-    };
-
     constructor() {
         super()
         this.state = {

@@ -91,9 +91,8 @@ export default class Profile extends React.Component {
                                     <Image
                                         source={require('../../assets/png/cancel.png')}
                                         style={{
-                                            width: 30,
-                                            height: 30,
-                                            tintColor: 'rgb(0,0,0)',
+                                            width: 35,
+                                            height: 35,
                                         }}
                                     />
                                 </TouchableOpacity>

@@ -2,26 +2,6 @@ import React from 'react';
 import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View,ScrollView} from 'react-native';
 
 export default class AboutApp extends React.Component {
-    static navigationOptions = ({navigation}) => {
-        let headerBackImage = <Image source={require('../../assets/png/left.png')}
-                                     style={{width: 20, height: 20}}
-        />;
-        let headerTitle =
-            <Text style={{
-                textAlign: 'center',
-                fontFamily: 'IRANSansWeb',
-                width: width / 1.4,
-                fontSize: 16
-            }}>درباره ماهرخ</Text>
-        return {
-            headerBackImage: () => {
-                return headerBackImage
-            },
-            headerTitle: () => {
-                return headerTitle
-            },
-        };
-    };
 
     render() {
         return (
@@ -46,7 +26,7 @@ export default class AboutApp extends React.Component {
 
                 <View style={{height: height / 5.5, width: width, alignItems: 'center',marginTop:10}}>
                     <Image
-                        source={require('../../assets/png/Logo_new.png')}
+                        source={require('../../assets/png/logo.png')}
                         style={{width: width / 5, height: width / 5}}
                     />
                     <Text style={styles.txt}>version 0.0.1</Text>

@@ -3,40 +3,16 @@ import {
     Dimensions,
     Image,
     StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
     Switch,
+    Text,
     TextInput,
-    TouchableHighlight
+    TouchableHighlight,
+    TouchableOpacity,
+    View
 } from "react-native";
 import Modal from 'react-native-modal';
 
 export default class Filter extends React.Component {
-
-    static navigationOptions = ({navigation}) => {
-        let headerBackImage = <Image source={require('../../assets/png/left.png')}
-                                     style={{width: 20, height: 20}}
-        />;
-
-        let headerTitle =
-            <Text style={{
-                textAlign: 'center',
-                fontFamily: 'IRANSansWeb',
-                width: width / 1.4,
-                fontSize: 16
-            }}>فیلترها</Text>
-        return {
-            headerBackImage: () => {
-                return headerBackImage
-            },
-            headerTitle: () => {
-                return headerTitle
-            }
-        }
-    }
-
-
     constructor() {
         super();
         this.state = {
@@ -49,7 +25,7 @@ export default class Filter extends React.Component {
             mostCheap: false,
             mostExpensive: false,
             mostRated: true,
-            closest:false,
+            closest: false,
             region1: ''
         }
     }
@@ -83,10 +59,11 @@ export default class Filter extends React.Component {
                                     )
                                 })
                             }
-                            <TouchableOpacity style={[styles.modalTile , {backgroundColor: '#f75841',width: width / 1.1}]}
-                                              onPress={() => this.setState({
-                                                  serviceTypeModalIsVisible: false,
-                                              })}>
+                            <TouchableOpacity
+                                style={[styles.modalTile, {backgroundColor: '#f75841', width: width / 1.1}]}
+                                onPress={() => this.setState({
+                                    serviceTypeModalIsVisible: false,
+                                })}>
                                 <Text style={styles.txt}>انصراف</Text>
                             </TouchableOpacity>
                         </View>
@@ -138,7 +115,7 @@ export default class Filter extends React.Component {
                         newest: !value,
                         mostExpensive: !value,
                         mostCheap: !value,
-                        closest:!value
+                        closest: !value
                     })}
                             value={this.state.mostRated}
                             thumbColor='#B08C3E'
@@ -152,7 +129,7 @@ export default class Filter extends React.Component {
                         mostRated: !value,
                         mostExpensive: !value,
                         mostCheap: !value,
-                        closest:!value
+                        closest: !value
                     })}
                             value={this.state.newest}
                             thumbColor='#B08C3E'
@@ -166,7 +143,7 @@ export default class Filter extends React.Component {
                         mostRated: !value,
                         mostExpensive: !value,
                         newest: !value,
-                        closest:!value
+                        closest: !value
                     })}
                             value={this.state.mostCheap}
                             thumbColor='#B08C3E'
@@ -180,7 +157,7 @@ export default class Filter extends React.Component {
                         mostRated: !value,
                         mostCheap: !value,
                         newest: !value,
-                        closest:!value
+                        closest: !value
                     })}
                             value={this.state.mostExpensive}
                             thumbColor='#B08C3E'
@@ -190,7 +167,7 @@ export default class Filter extends React.Component {
                 <View style={styles.filterItem}>
                     <Text style={styles.txt}>نزدیک ترین</Text>
                     <Switch onValueChange={(value) => this.setState({
-                        closest:value,
+                        closest: value,
                         mostExpensive: !value,
                         mostRated: !value,
                         mostCheap: !value,
@@ -272,7 +249,7 @@ const styles = StyleSheet.create({
         borderBottomColor: 'rgba(0,0,0,0.4)',
         borderRadius: 10
     },
-    modalView:{
+    modalView: {
         backgroundColor: 'white',
         justifyContent: 'space-around',
         alignItems: 'center',
