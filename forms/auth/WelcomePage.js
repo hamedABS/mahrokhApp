@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Image, Dimensions, TouchableHighlight} from 'react-native';
+import authStyles from "./AuthStyles";
 
 export default class WelcomePage extends Component {
 
@@ -22,7 +23,7 @@ export default class WelcomePage extends Component {
 
     render() {
         console.log("rendering... ")
-        var image = require('../../assets/png/Logo_new.png')
+        let image = require('../../assets/png/Logo_new.png')
         return (
             <View style={styles.container}>
                 <Image
@@ -30,8 +31,8 @@ export default class WelcomePage extends Component {
                     source={image}
                 />
                 <TouchableHighlight onPress={this._onRegisterPressButton} underlayColor="white">
-                    <View style={styles.btn_register}>
-                        <Text style={styles.btn_register_txt}>ثبت نام</Text>
+                    <View style={authStyles.btn_register}>
+                        <Text style={[authStyles.btn_register_txt,{fontSize:22}]}>ثبت نام</Text>
                     </View>
                 </TouchableHighlight>
                 <TouchableHighlight onPress={this._onLoginButtonPress} underlayColor="white">
@@ -50,8 +51,7 @@ const {width, height} = Dimensions.get("window");
 const styles = StyleSheet.create({
     container: {
         height: height,
-        width,
-        flexWrap: 'wrap',
+        width:width,
         alignItems: 'center'
     },
     title_text: {
@@ -70,22 +70,6 @@ const styles = StyleSheet.create({
         marginTop: height / 7,
         height: height / 2.7,
         width: width / 1.6
-    },
-    btn_register: {
-        margin: 15,
-        width: width / 2,
-        height: height / 13,
-        alignItems: 'center',
-        alignContent:'center',
-        backgroundColor: '#e6b618',
-        borderRadius: 50,
-    },
-    btn_register_txt: {
-        fontSize: width / 15,
-        textAlign: 'center',
-        marginTop: 5,
-        color: 'white',
-        fontFamily: 'IRANSansWeb'
     },
     btn_login: {
         width: width / 2,

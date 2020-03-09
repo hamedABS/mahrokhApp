@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
     icon: {
         width: 20,
         height: 20,
-        tintColor: '#e6b618',
+        tintColor: '#B08C3E',
     },
     txt_input: {
         fontFamily: 'IRANSansFaNum',
@@ -307,7 +307,7 @@ const styles = StyleSheet.create({
         height: height / 18,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#e6b618',
+        backgroundColor: '#B08C3E',
         borderRadius: 50,
         marginTop: 20,
     },

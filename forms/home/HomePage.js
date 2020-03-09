@@ -11,6 +11,7 @@ import {
     View,
 } from 'react-native';
 import StarRating from 'react-native-star-rating'
+import Swiper from "react-native-web-swiper";
 
 export default class Home extends React.Component {
 
@@ -18,7 +19,7 @@ export default class Home extends React.Component {
         let rightBtn =
             <TouchableOpacity onPress={() => navigation.navigate('ReservedSalons')}>
                 <Image source={require('../../assets/png/list.png')}
-                       style={{width: 26, height: 26, marginRight: 15, tintColor:'#e6b618'}}/>
+                       style={{width: 26, height: 26, marginRight: 15, tintColor: '#B08C3E'}}/>
             </TouchableOpacity>
 
         let headerTitle =
@@ -40,30 +41,18 @@ export default class Home extends React.Component {
         return (
             <View style={styles.container}>
                 <ScrollView showsHorizontalScrollIndicator={false}>
-                    {/* <View style={styles.filterWrapper}>
-                        <View style={styles.filter}>
-                            <Image
-                                source={require('../../assets/png/search.png')}
-                                style={{
-                                    width: 15,
-                                    height: 15,
-                                    tintColor: '#0000004C',
-                                    marginRight: 30,
-                                    marginLeft: 5,
-                                    margin: 10
-                                }}
-                            />
-                            <TextInput
-                                style={{padding: 2, width: width / 2.5, fontFamily: 'IRANSansFaNum'}}
-                                placeholder='دنبال چه چیزی هستید؟'/>
-                        </View>
-                    </View>*/}
                     <View style={styles.discountSlider}>
-                        <ScrollView horizontal
-                                    showsHorizontalScrollIndicator={false}>
+                        <Swiper style={styles.discountSlider}
+                                controlsProps={{
+                                    dotsTouchable: true,
+                                    nextTitle: '',
+                                    prevTitle: '',
+                                }}
+                                loop={true}
+                                timeout={5}>
                             <DiscountTile/>
                             <DiscountTile/>
-                        </ScrollView>
+                        </Swiper>
                     </View>
                     <View style={styles.bestSalonsSlider}>
                         <Text style={{
@@ -117,9 +106,9 @@ export default class Home extends React.Component {
     }
 }
 
-class DiscountTile extends React.Component {
+export class DiscountTile extends React.Component {
     _onPressButton = () => {
-        let url = "https://varzesh3.com";
+        let url = "https://mahrokhApp.ir";
         Linking.openURL(url).catch((err) => console.error('An error occurred', err));
     }
 
@@ -150,7 +139,7 @@ class DiscountTile extends React.Component {
     }
 }
 
-class SalonTile extends React.Component {
+export class SalonTile extends React.Component {
 
     _onPress = () => {
         let parentProps = this.props.data;
@@ -176,7 +165,7 @@ class SalonTile extends React.Component {
     }
 }
 
-class AroundSalonTile extends React.Component {
+export class AroundSalonTile extends React.Component {
 
     _onPress = () => {
         let parentProps = this.props.data;
@@ -195,8 +184,8 @@ class AroundSalonTile extends React.Component {
                             overflow: 'hidden'
                         }}
                     />
-                    <View>
-                        <View style={{flexDirection: 'row', marginLeft: 5, marginTop: 2}}>
+                    <View style={{marginBottom: 10, marginLeft: 8}}>
+                        <View style={{flexDirection: 'row', marginTop: 2}}>
                             <StarRating
                                 disabled={true}
                                 starSize={13}
@@ -207,25 +196,29 @@ class AroundSalonTile extends React.Component {
                             />
                         </View>
                         <Text
-                            style={{fontSize: 8, alignSelf: 'flex-start', fontFamily: 'IRANSansFaNum', marginLeft: 5}}>۳۰
+                            style={{fontSize: 8, alignSelf: 'flex-start', fontFamily: 'IRANSansFaNum'}}>۳۰
                             نظر</Text>
                         <Text style={{fontSize: 14, fontFamily: 'IRANSansFaNum', color: '#00000099'}}> کایزن</Text>
                         <Text style={{fontSize: 9, marginRight: 5, fontFamily: 'IRANSansFaNum', color: '#00000099'}}>زعفرانیه
                             مقدس اردبیلی</Text>
-                        <View style={{alignSelf: 'flex-start', flexDirection: 'row', width: 50, height: 26}}>
+                        <View style={{
+                            alignSelf: 'flex-start',
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginBottom: 10
+                        }}>
                             <Image
-                                source={require('../../assets/png/heart2x.png')}
+                                source={require('../../assets/png/heartRedGold.png')}
                                 style={{
                                     width: 14,
                                     height: 12,
-                                    marginLeft: 8,
+                                    marginBottom: 10
                                 }}
                             />
                             <Text style={{
                                 fontSize: 12,
-                                marginBottom: 10,
-                                marginLeft: 3,
-                                alignSelf: 'flex-end',
+                                marginLeft: 3, marginBottom: 10,
                                 fontFamily: 'IRANSansFaNum'
                             }}>250</Text>
                         </View>
@@ -236,7 +229,7 @@ class AroundSalonTile extends React.Component {
     }
 }
 
-class Blog extends React.Component {
+export class Blog extends React.Component {
     _onPressButton = () => {
         let data = this.props.data;
         data.navigation.navigate('Blog')
@@ -326,6 +319,7 @@ const styles = StyleSheet.create({
         height: height / 2.8,
     },
     aroundSalonsSliderTile: {
+        paddingBottom: 10,
         borderBottomEndRadius: 5,
         borderBottomStartRadius: 5,
         borderColor: '#00000029',

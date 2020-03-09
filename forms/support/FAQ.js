@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
         height: 20,
         marginRight: 10,
         marginLeft: 7,
-        tintColor: '#e6b618',
+        tintColor: '#B08C3E',
     },
     txt: {
         fontSize: 16,

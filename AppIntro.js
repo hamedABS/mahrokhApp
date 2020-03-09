@@ -2,7 +2,9 @@ import React from 'react';
 import {StyleSheet, Text, View, Image, Dimensions, TouchableHighlight} from 'react-native';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Icon from 'react-native-ionicons';
+import {I18nManager} from 'react-native';
 
+I18nManager.allowRTL(false);
 
 export default class AppIntro extends React.Component {
     constructor() {
@@ -80,8 +82,8 @@ export default class AppIntro extends React.Component {
             console.log('returining appIntroSlider')
             return <AppIntroSlider renderItem={this._renderItem}
                                    slides={slides}
-                                   dotStyle={{backgroundColor: 'rgba(178,112,244,.4)'}}
-                                   activeDotStyle={{backgroundColor: 'rgba(132,40,224,.9)'}}
+                                   dotStyle={{backgroundColor: 'rgba(245,203,18,0.36)'}}
+                                   activeDotStyle={{backgroundColor: '#ba9542'}}
                                    onDone={this._onDone}
                                    renderNextButton={this._renderNextButton}
                                    renderDoneButton={this._renderDoneButton}
@@ -106,25 +108,25 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginTop: 25,
         fontFamily: 'IRANSansWebBold',
-        textAlign:'center'
+        textAlign: 'center'
     },
     main_text: {
         fontSize: 18,
         paddingLeft: 10,
         paddingRight: 10,
         fontFamily: 'IRANSansFaNum',
-        textAlign:'center'
+        textAlign: 'center'
     },
     slider_image: {
         padding: 5,
         marginTop: height / 10,
-        height: 300,
-        width: 300
+        height: width / 1.3,
+        width: width / 1.3
     },
     buttonCircle: {
         width: 40,
         height: 40,
-        backgroundColor: 'rgba(76, 10, 142, .6)',
+        backgroundColor: '#B08C3E',
         borderRadius: 20,
         justifyContent: 'center',
         alignItems: 'center',
@@ -136,19 +138,25 @@ const slides = [
         key: 'page 1',
         title: 'انتخاب سالن زیبایی',
         text: 'سالن زیبایی، خدمات و پرسنل مورد نظر خود را با توجه به نمونه کارها انتخاب نمایید.',
-        image: require('./assets/png/Group-29.png'),
+        image: require('./assets/png/chooseSalon.png'),
     },
     {
         key: 'page 2',
         title: 'رزرواسیون آنلاین',
         text: 'بدون محدودیت زمان و مکان ، زمان دقیق مراجعه به سالن زیبایی خود را رزرو نمایید',
-        image: require('./assets/png/Group-31.png'),
+        image: require('./assets/png/onlineReserve.png'),
 
     },
     {
         key: 'page 3',
         title: 'پرداخت آنلاین و ثبت قطعی نوبت',
         text: 'شما می توانید با پرداخت بخشی از هزینه خدمات مورد نظر بصورت آنلاین و یا از موجودی کیف پول ، رزرو خود را قطعی نمایید',
-        image: require('./assets/png/Group-36.png'),
+        image: require('./assets/png/onlinePay.png'),
+    },
+    {
+        key: 'page 4',
+        title: 'تعیین موقعیت مکانی',
+        text: 'سالن های زیبایی اطرافتان را مشاهده نمایید. لوکیشن سالن های زیبایی و مسیریابی را روی نقشه ببینید.',
+        image: require('./assets/png/search_intro.png'),
     },
 ]

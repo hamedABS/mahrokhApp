@@ -99,8 +99,6 @@ export default class SalonService extends React.Component {
         if (service == null) {
             service = this.state.toBeReserved[i];
         }
-        // console.log(service)
-
         return this.state.isServiceOptionsVisible ?
             <ServiceOptions cancel={this._setServiceOptionsVisibleFalse} service={service}
                             setService={this.setReservedServices}/> : null;
@@ -159,7 +157,7 @@ export default class SalonService extends React.Component {
                 <TouchableOpacity onPress={() => this._navigateToPage()}>
                     <View style={{
                         padding: 5,
-                        backgroundColor: '#e6b618',
+                        backgroundColor: '#B08C3E',
                         borderRadius: 25,
                         marginTop: 15,
                         alignItems: 'center',

@@ -42,12 +42,12 @@ export default class Support extends React.Component {
                         style={styles.icon}/>
                     <Text style={styles.txt}>تماس با ماهرخ</Text>
                 </TouchableOpacity>
-                <View style={styles.everyItem}>
+                <TouchableOpacity style={styles.everyItem} onPress={()=>Linking.openURL(`tel:${phoneNumber}`)}>
                     <Image
                         source={require('../../assets/png/edit.png')}
                         style={styles.icon}/>
                     <Text style={styles.txt}>گزارش مشکل</Text>
-                </View>
+                </TouchableOpacity>
                 <TouchableOpacity style={styles.everyItem} onPress={() => this.props.navigation.navigate('FAQ')}>
                     <Image
                         source={require('../../assets/png/Group-94.png')}
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
         height: 25,
         marginRight: 10,
         marginLeft: 5,
-        tintColor: '#e6b618'
+        tintColor: '#B08C3E'
     },
     txt: {
         fontSize: 16,

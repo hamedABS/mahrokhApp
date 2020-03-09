@@ -42,7 +42,7 @@ export default class BlogArticle extends React.Component {
                             color: '#323232'
                         }}>چگونه پوستی جذاب داشته باشیم؟</Text>
                         <Image
-                            source={require('../../assets/png/tag-(1).png')}
+                            source={require('../../assets/png/bookmark.png')}
                             style={{width: 15, height: 20}}/>
                     </View>
 
@@ -82,7 +82,7 @@ export default class BlogArticle extends React.Component {
                         color: '#323232'
                     }}>مطلب بنظرتون مفید بود ؟</Text>
                     <Image
-                        source={require('../../assets/png/heart.png')}
+                        source={require('../../assets/png/heartRedGold.png')}
                         style={{width: 20, height: 16}}/>
                 </View>
             </View>

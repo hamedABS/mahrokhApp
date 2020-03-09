@@ -1,8 +1,14 @@
 import React from 'react';
 import {Dimensions, Image, StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView} from 'react-native';
+import ConfirmationDialog from "../ConfirmationDialog";
 
 
 export default class Setting extends React.Component {
+
+    state = {
+        exitModalIsVisible: false
+    }
+
     static navigationOptions = ({navigation}) => {
         let headerBackImage = <Image source={require('../../assets/png/left.png')}
                                      style={{width: 20, height: 20}}
@@ -36,12 +42,12 @@ export default class Setting extends React.Component {
                             style={styles.icon}/>
                         <Text style={styles.txt}>تغییر گذر واژه</Text>
                     </TouchableOpacity>
-                    <View style={styles.everyItem}>
+                    <TouchableOpacity style={styles.everyItem} onPress={() => this.setState({exitModalIsVisible: true})}>
                         <Image
                             source={require('../../assets/png/exit.png')}
                             style={styles.icon}/>
                         <Text style={styles.txt}>خروج از برنامه</Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
                 <View style={{width: width, marginBottom: 10, alignItems: 'center'}}>
                     <Image
@@ -50,11 +56,22 @@ export default class Setting extends React.Component {
                     />
                     <Text style={styles.txt}>version 0.0.1</Text>
                 </View>
+                {
+                    this.state.exitModalIsVisible ?
+                        <ConfirmationDialog message={'آیا مطمئن هستید می خواهید خارج شوید؟'}
+                                            doOnCancel={this._closeModal}
+                                            donOnConfirmation={() => this.props.navigation.navigate("Auth")}/>
+                        : null
+                }
             </View>
 
 
         )
     }
+    _closeModal = () => {
+        this.setState({exitModalIsVisible: false})
+    }
+
 }
 
 
@@ -74,7 +91,7 @@ const styles = StyleSheet.create({
         height: 25,
         marginRight: 10,
         marginLeft: 7,
-        tintColor: '#e6b618'
+        tintColor: '#B08C3E'
     },
     txt: {
         fontSize: 16,

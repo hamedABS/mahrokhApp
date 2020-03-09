@@ -1,10 +1,12 @@
 import React from 'react';
-import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View, TextInput} from 'react-native';
 import Routing from "../Routing";
 import MyMapView from "../MyMapView";
 import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
 import {Popup} from "react-native-map-link";
+import Modal from 'react-native-modal'
+import authStyles from "../auth/AuthStyles";
 
 export default class ReserveDetails extends React.Component {
 
@@ -14,7 +16,9 @@ export default class ReserveDetails extends React.Component {
             location: '',
             isVisible: false,
             options: {},
-            locationIsLoaded: false
+            locationIsLoaded: false,
+            cancelModalIsVisible: false,
+            cancelReason: ''
         }
     }
 
@@ -41,6 +45,16 @@ export default class ReserveDetails extends React.Component {
 
     componentDidMount() {
         this._getLocationAsync()
+    }
+
+    _renderPopup() {
+        return <Popup
+            isVisible={this.state.isVisible}
+            onCancelPressed={() => this.setState({isVisible: false})}
+            onAppPressed={() => this.setState({isVisible: false})}
+            onBackButtonPressed={() => this.setState({isVisible: false})}
+            options={this.state.options}
+        />
     }
 
     _getLocationAsync = async () => {
@@ -70,29 +84,67 @@ export default class ReserveDetails extends React.Component {
 
     };
 
+    _renderCancelModal() {
+        return <Modal isVisible={this.state.cancelModalIsVisible}>
+            <View style={styles.modalContainer}>
+                <Text style={[styles.itemText, {marginTop: 10}]}>دلیل لغو رزرو چیست؟</Text>
+                <TextInput
+                    style={[authStyles.txt_input, {
+                        height: height/10,
+                        width: width / 1.2,
+                        borderRadius: 5,
+                        borderWidth: 1,
+                        borderColor: 'rgba(0,0,0,0.5)'
+                    }]}
+                    autoCapitalize='words'
+                    onChangeText={(cancelReason) => this.setState({cancelReason})}
+                    value={this.state.cancelReason}/>
+
+                <View style={{flexDirection: 'row-reverse', alignItems: 'center',marginBottom: 5}}>
+                    <TouchableOpacity style={{padding: 5, backgroundColor: '#B08C3E', borderRadius: 5, marginLeft: 5}}
+                                      onPress={() => this.setState({cancelModalIsVisible: false})}>
+                        <Text style={styles.itemText}>لغو رزرو</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{padding: 5, backgroundColor: '#f75841', borderRadius: 5}}
+                                      onPress={() => this.setState({cancelModalIsVisible: false})}>
+                        <Text style={styles.itemText}> انصراف از لغو</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </Modal>
+    }
+
+
     render() {
         return (
             <View style={{flex: 1, alignItems: 'center'}}>
-                <Popup
-                    isVisible={this.state.isVisible}
-                    onCancelPressed={() => this.setState({isVisible: false})}
-                    onAppPressed={() => this.setState({isVisible: false})}
-                    onBackButtonPressed={() => this.setState({isVisible: false})}
-                    options={this.state.options}
-                />
+                {this._renderPopup()}
+                {this._renderCancelModal()}
                 <View style={[styles.itemContainer, {height: height / 4}]}>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Salon')}>
+                    <TouchableOpacity style={styles.cancelBtn}
+                                      onPress={() => this.setState({cancelModalIsVisible: true})}>
                         <Image
-                            source={require('../../assets/png/salon1.png')}
-                            style={{width: width / 4, height: width / 4, borderRadius: 50}}
+                            source={require('../../assets/png/cancel.png')}
+                            style={{width: 20, height: 20, borderRadius: 50, tintColor: 'red', marginLeft: 5}}
                         />
+                        <Text style={styles.itemText}>لغو رزرو</Text>
                     </TouchableOpacity>
-                    <Text style={[styles.itemText, {fontSize: 18}]}>رزرو آرایشگاه کایزن</Text>
+
+                    <View style={{marginBottom: 10, alignItems: 'center', justifyContent: 'center'}}>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('Salon')}>
+                            <Image
+                                source={require('../../assets/png/salon1.png')}
+                                style={{width: width / 4, height: width / 4, borderRadius: 50}}
+                            />
+                        </TouchableOpacity>
+                        <Text style={[styles.itemText, {fontSize: 18}]}>رزرو آرایشگاه کایزن</Text>
+                    </View>
+
                 </View>
                 <View style={[styles.itemContainer, {padding: 10, height: height / 8}]}>
-                    <Text style={styles.itemText}>کاشت ناخن۹۸/۱۰/۲۷  ساعت 8 صبح</Text>
-                    <Text style={styles.itemText}>خدامت مو ۹۸/۱۰/۲۶  ساعت 10 صبح</Text>
-                    <Text style={styles.itemText}>کاشت ناخن۹۸/۱۰/۲۸  ساعت 12 صبح</Text>
+                    <Text style={styles.itemText}>کاشت ناخن۹۸/۱۰/۲۷ ساعت 8 صبح</Text>
+                    <Text style={styles.itemText}>خدامت مو ۹۸/۱۰/۲۶ ساعت 10 صبح</Text>
+                    <Text style={styles.itemText}>کاشت ناخن۹۸/۱۰/۲۸ ساعت 12 صبح</Text>
                 </View>
                 <View style={[styles.itemContainer, {height: height / 11}]}>
                     <Text style={styles.itemText}>صورت حساب: پرداخت شده است</Text>
@@ -108,7 +160,9 @@ export default class ReserveDetails extends React.Component {
                         }}>زعفرانیه
                             - مقدس اردبیلی- پلاک 2</Text>
                         <TouchableOpacity style={styles.routingBtn}
-                                          onPress={() => {this.setState({isVisible: true})}}>
+                                          onPress={() => {
+                                              this.setState({isVisible: true})
+                                          }}>
                             <Text style={{
                                 fontSize: 15,
                                 fontFamily: 'IRANSansFaNum',
@@ -172,6 +226,25 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#B08C3E'
     },
+    modalContainer: {
+        backgroundColor: 'white',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        alignSelf: 'center',
+        width: width / 1.1,
+        height: height / 3,
+        borderRadius: 10
+    },
+    cancelBtn: {
+        alignSelf: 'flex-end',
+        flexDirection: 'row-reverse',
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 5,
+        marginTop: 10,
+        marginLeft: 10
+    }
 })
 
 const mockData = [

@@ -23,7 +23,6 @@ export default class ServiceOptions extends React.Component {
         this.state = {
             selectedReservedTime: '',
             selectedStartDate: 'تاریخ را انتخاب کنید.',
-            // note: '',
             selectedPersonnel: '',
             service: {},
             propsLoaded: false
@@ -89,18 +88,16 @@ export default class ServiceOptions extends React.Component {
         service.startDate = this.state.selectedStartDate;
         service.time = this.state.selectedReservedTime;
         service.personnelName = this.state.selectedPersonnel;
-        console.log("in this fucking class")
         console.log(service)
 
         this.props.setService(service)
     }
 
     componentDidMount() {
-        console.log("hey dude");
         let service = this.props.service;
         console.log(service)
         if (service != null) {
-            service = new Service(service.id, service.name, service.startDate, service.time, service.personnelName,service.price)
+            service = new Service(service.id, service.name, service.startDate, service.time, service.personnelName, service.price)
             this.setState({
                 selectedReservedTime: service.time != null ? service.time : '',
                 selectedStartDate: service.startDate != null ? service.startDate : 'تاریخ را انتخاب کنید.',
@@ -112,8 +109,8 @@ export default class ServiceOptions extends React.Component {
     }
 
     render() {
-        let times = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'];
-        let personnel = ['پریسا رضایی', 'پریسیما رضایی', 'سیما رضایی']
+        let times = ['10:00', '10:15', '10:30', '13:30', '13:45', '15:00', '15:15', '15:30', '18:00', '18:15', '18:30'];
+        let personnel = ['پریسا رضایی', 'پریسیما رضایی', 'سیما رضایی', 'اسماء رضایی', 'سما رضایی']
         times = times.reverse();
         console.log(this.state.propsLoaded)
         if (this.state.propsLoaded) {
@@ -139,30 +136,30 @@ export default class ServiceOptions extends React.Component {
                                     <Image
                                         source={require('../../../assets/png/cancel.png')}
                                         style={{
-                                            width: 30,
-                                            height: 30,
-                                            tintColor: 'rgb(0,0,0)',
+                                            width: 35,
+                                            height: 35,
                                         }}
                                     />
                                 </TouchableOpacity>
                             </View>
                             <ScrollView horizontal
+                                        style={{backgroundColor: 'rgba(0,0,0,0.1)', width: width / 1.5, borderRadius: 5}}
                                         showsHorizontalScrollIndicator={false}
                                         contentContainerStyle={{alignItems: 'center'}}>
                                 {personnel.map((item, index) => {
                                     return (
-                                        <TouchableOpacity key={index} onPress={() => this._selectPersonnel(item)}>
-                                            <View style={styles.personnelTile}>
-                                                <Image
-                                                    source={require('../../../assets/png/brownHairGirl.png')}
-                                                    style={[styles.personnelImage, this.state.selectedPersonnel != item ? {opacity: 0.5} : null]}
-                                                />
-                                                <Text style={[styles.titlesBaseStyle, {fontSize: 12}]}>{item}</Text>
-                                            </View>
+                                        <TouchableOpacity
+                                            style={styles.personnelTile} key={index} onPress={() => this._selectPersonnel(item)}>
+                                            <Image
+                                                source={require('../../../assets/png/brownHairGirl.png')}
+                                                style={[styles.personnelImage, this.state.selectedPersonnel != item ? {opacity: 0.5} : null]}
+                                            />
+                                            <Text style={[styles.titlesBaseStyle, {fontSize: 12}]}>{item}</Text>
                                         </TouchableOpacity>
                                     )
                                 })}
                             </ScrollView>
+
                         </View>
                         <View style={[styles.itemContainer, {marginTop: 5, height: height / 2.3}]}>
                             <View style={{height: height / 2.5}}>
@@ -225,7 +222,7 @@ const styles = StyleSheet.create({
     },
     confirm: {
         padding: 5,
-        backgroundColor: '#e6b618',
+        backgroundColor: '#B08C3E',
         borderRadius: 15,
         marginTop: 15,
         width: width / 3,
@@ -250,11 +247,12 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     timeItemWhenFocused: {
-        backgroundColor: '#e6b618'
+        backgroundColor: '#B08C3E'
     },
     personnelTile: {
-        margin: 2,
-        alignItems: 'center'
+        marginTop: 2,
+        marginBottom: 2,
+        alignItems: 'center',
     },
     personnelImage: {
         width: width / 6.7,

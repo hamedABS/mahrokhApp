@@ -19,7 +19,7 @@ export default class ProfileSetting extends React.Component {
         super()
         this.state = {
             name: '',
-            town:'',
+            town: '',
             phoneNumber: '',
             password: '',
             repeatPassword: '',
@@ -32,7 +32,7 @@ export default class ProfileSetting extends React.Component {
         this.getPermissionAsync();
         let photoUri = this.props.navigation.getParam("photoUri");
         this.setState({
-            photoUri:photoUri
+            photoUri: photoUri
         })
 
     }
@@ -64,20 +64,16 @@ export default class ProfileSetting extends React.Component {
         return (
             <View style={{flex: 1, alignItems: 'center'}}>
                 <View style={[styles.itemContainer, {height: height / 4}]}>
-                    <View onPress={() => this.props.navigation.navigate('Salon')}>
+                    <TouchableOpacity onPress={this._pickImage}>
                         <Image
                             source={photo}
                             style={{width: width / 4, height: width / 4, borderRadius: 50}}
                         />
-                        <TouchableOpacity
-                            onPress={this._pickImage}
-                            style={{width: 15, height: 15, position: 'absolute', marginTop: 80, marginLeft: 12}}>
-                            <Image
-                                source={require('../../assets/png/plus.png')}
-                                style={{width: 15, height: 15}}
-                            />
-                        </TouchableOpacity>
-                    </View>
+                        <Image
+                            source={require('../../assets/png/plus.png')}
+                            style={{position: 'absolute', marginTop: 80, marginLeft: 12, width: 20, height: 20}}
+                        />
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.everyItem}>
                     <Image
@@ -153,7 +149,7 @@ export default class ProfileSetting extends React.Component {
         }
     }
 
-    _onRegisterPressButton = ()=>{
+    _onRegisterPressButton = () => {
         this.props.navigation.state.params.updateName(this.state.name);
         this.props.navigation.goBack();
     }
@@ -176,7 +172,7 @@ const styles = StyleSheet.create({
         height: 25,
         marginRight: 10,
         marginLeft: 5,
-        tintColor: '#e6b618'
+        tintColor: '#B08C3E'
     },
     txt: {
         fontSize: 16,
@@ -202,7 +198,7 @@ const styles = StyleSheet.create({
         height: height / 18,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#e6b618',
+        backgroundColor: '#B08C3E',
         borderRadius: 50,
         marginTop: 50
     },

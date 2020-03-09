@@ -21,11 +21,25 @@ import AboutApp from "./forms/support/AboutApp";
 import ReserveNew from "./forms/salon/ReserveNew";
 import Survey from "./forms/profile/Survey";
 import ChangePasswordPage from "./forms/profile/ChangePasswordPage"
+import ForgotPasswordPage from "./forms/auth/ForgotPasswordPage";
 import FAQ from "./forms/support/FAQ";
 import Login from "./forms/auth/LoginPage";
 import {createBottomTabNavigator} from "react-navigation-tabs";
-import {Image, Text, StyleSheet} from "react-native";
+import {Image, Text, StyleSheet,Dimensions} from "react-native";
 import React from "react";
+
+
+export const headerBackImag = <Image source={require('./assets/png/left.png')}
+                                     style={{width: 25, height: 25}}/>
+
+export const HeaderTitle = (text) => <Text
+    style={{
+        fontSize: 18,
+        fontFamily: 'IRANSansWebMedium',
+        textAlign: 'center',
+        alignSelf: 'center',
+        width: width / 1.45
+    }}>{text}</Text>
 
 export const HomeStack = createStackNavigator({
     Home: Home,
@@ -35,7 +49,7 @@ export const HomeStack = createStackNavigator({
     ReserveNew: ReserveNew,
     ReservedSalons: ReservedSalons,
     ReserveDetails: ReserveDetails,
-    Survey:Survey,
+    Survey: Survey,
 }, {
     initialRouteName: 'Home'
 })
@@ -71,8 +85,8 @@ BlogStack.navigationOptions = ({navigation}) => {
 
 export const ReservationStack = createStackNavigator({
     Reservation: SalonsList,
-    Filter: Filter,
     Salon: Salon,
+    Filter: Filter,
     SalonInfo: SalonInfo,
     ReserveNew: ReserveNew,
     FinalizeReserve: FinalizeReserve,
@@ -127,7 +141,21 @@ export const AuthStack = createStackNavigator({
     Welcome: WelcomePage,
     RegisterPage: RegisterClass,
     RegisterPage2: RegisterClass2,
-    Login: Login
+    Login: Login,
+    ForgotPasswordPage:{
+        screen: ForgotPasswordPage,
+        navigationOptions:{
+            headerTitle: () => HeaderTitle(`فراموشی رمز`),
+            headerBackImage: () => headerBackImag,
+        },
+    },
+    ForgotPasswordPage2: {
+        screen: RegisterClass2,
+        navigationOptions:{
+            headerTitle: () => HeaderTitle(`فراموشی رمز`),
+            headerBackImage: () => headerBackImag,
+        },
+    },
 })
 
 export const TabNavigator = createBottomTabNavigator(
@@ -173,10 +201,12 @@ export const TabNavigator = createBottomTabNavigator(
                 }
             }
         }), tabBarOptions: {
-            activeTintColor: '#e6b618',
+            activeTintColor: '#B08C3E',
             inactiveTintColor: 'rgb(0,0,0)',
         },
     });
+export const {width, height} = Dimensions.get("window");
+
 
 const styles = StyleSheet.create({
     label: {

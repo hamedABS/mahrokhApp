@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Image, StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import StarRating from 'react-native-star-rating'
 
 export default class Survey extends React.Component {
@@ -50,11 +50,11 @@ export default class Survey extends React.Component {
             }
             if (yesBtnRendering) {
                 return (this.state.isYesFocused_0 ? [styles.yesNoBtn, {
-                    borderColor: '#B08C3E',
+                    backgroundColor: '#B08C3E',
                 }] : [styles.yesNoBtn])
             } else {
                 return (this.state.isYesFocused_0 ? [styles.yesNoBtn] : [styles.yesNoBtn, {
-                    borderColor: '#B08C3E',
+                    backgroundColor: '#B08C3E',
                 }])
             }
         } else if (i == 1) {
@@ -63,11 +63,11 @@ export default class Survey extends React.Component {
             }
             if (yesBtnRendering) {
                 return (this.state.isYesFocused_1 ? [styles.yesNoBtn, {
-                    borderColor: '#B08C3E',
+                    backgroundColor: '#B08C3E',
                 }] : [styles.yesNoBtn])
             } else {
                 return (this.state.isYesFocused_1 ? [styles.yesNoBtn] : [styles.yesNoBtn, {
-                    borderColor: '#B08C3E',
+                    backgroundColor: '#B08C3E',
                 }])
             }
         } else if (i == 2) {
@@ -76,11 +76,11 @@ export default class Survey extends React.Component {
             }
             if (yesBtnRendering) {
                 return (this.state.isYesFocused_2 ? [styles.yesNoBtn, {
-                    borderColor: '#B08C3E',
+                    backgroundColor: '#B08C3E',
                 }] : [styles.yesNoBtn])
             } else {
                 return (this.state.isYesFocused_2 ? [styles.yesNoBtn] : [styles.yesNoBtn, {
-                    borderColor: '#B08C3E',
+                    backgroundColor: '#B08C3E',
                 }])
             }
         }
@@ -109,7 +109,7 @@ export default class Survey extends React.Component {
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Salon')}>
                         <Image
                             source={require('../../assets/png/salon1.png')}
-                            style={{width: width / 4, height: width / 4, borderRadius: 50}}
+                            style={{width: width / 3, height: width / 3, borderRadius: 100}}
                         />
                     </TouchableOpacity>
                     <Text style={[styles.itemText, {fontSize: 18}]}>رزرو آرایشگاه کایزن</Text>

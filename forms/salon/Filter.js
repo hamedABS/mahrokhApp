@@ -32,7 +32,7 @@ export default class Filter extends React.Component {
             },
             headerTitle: () => {
                 return headerTitle
-            },
+            }
         }
     }
 
@@ -40,14 +40,17 @@ export default class Filter extends React.Component {
     constructor() {
         super();
         this.state = {
-            serviceType: '',
+            serviceType: 'همه',
             serviceTypeModalIsVisible: false,
             favoriteSwitch: false,
-            newSwitch: false,
+            isClinic: false,
             hasDiscountSwitch: false,
             newest: false,
+            mostCheap: false,
+            mostExpensive: false,
             mostRated: true,
-            region1:''
+            closest:false,
+            region1: ''
         }
     }
 
@@ -65,19 +68,12 @@ export default class Filter extends React.Component {
                     </TouchableOpacity>
 
                     <Modal isVisible={this.state.serviceTypeModalIsVisible}>
-                        <View style={{
-                            backgroundColor: 'white',
-                            justifyContent: 'space-around',
-                            alignItems: 'center',
-                            alignSelf: 'center',
-                            width: width / 1.1,
-                            borderRadius: 25
-                        }}>
+                        <View style={styles.modalView}>
                             {
                                 serviceTypes.map((serviceType, index) => {
                                     return (
                                         <TouchableOpacity key={index}
-                                                          style={[styles.serviceType, this.state.serviceType == serviceType ? {backgroundColor: '#F7DDA4'} : null]}
+                                                          style={[styles.modalTile, this.state.serviceType == serviceType ? {backgroundColor: '#F7DDA4'} : null]}
                                                           onPress={() => this.setState({
                                                               serviceTypeModalIsVisible: false,
                                                               serviceType: serviceType
@@ -87,6 +83,12 @@ export default class Filter extends React.Component {
                                     )
                                 })
                             }
+                            <TouchableOpacity style={[styles.modalTile , {backgroundColor: '#f75841',width: width / 1.1}]}
+                                              onPress={() => this.setState({
+                                                  serviceTypeModalIsVisible: false,
+                                              })}>
+                                <Text style={styles.txt}>انصراف</Text>
+                            </TouchableOpacity>
                         </View>
                     </Modal>
                 </View>
@@ -103,13 +105,7 @@ export default class Filter extends React.Component {
                         <TextInput style={styles.txtInput}/>
                     </View>
                 </View>
-                <View style={styles.filterItem}>
-                    <Text style={styles.txt}>جدید</Text>
-                    <Switch onValueChange={(value) => this.setState({newSwitch: value})}
-                            value={this.state.newSwitch}
-                            thumbColor='#B08C3E'
-                            trackColor={{false: 'rgba(145,145,145,0.44)', true: '#F7DDA4'}}/>
-                </View>
+
                 <View style={styles.filterItem}>
                     <Text style={styles.txt}>تخفیف دار</Text>
                     <Switch onValueChange={(value) => this.setState({hasDiscountSwitch: value})}
@@ -118,9 +114,17 @@ export default class Filter extends React.Component {
                             trackColor={{false: 'rgba(145,145,145,0.44)', true: '#F7DDA4'}}/>
                 </View>
                 <View style={styles.filterItem}>
-                    <Text style={styles.txt}>سالن برگزیده</Text>
+                    <Text style={styles.txt}>سالن های برگزیده</Text>
                     <Switch onValueChange={(value) => this.setState({favoriteSwitch: value})}
                             value={this.state.favoriteSwitch}
+                            thumbColor='#B08C3E'
+                            trackColor={{false: 'rgba(145,145,145,0.44)', true: '#F7DDA4'}}/>
+                </View>
+
+                <View style={styles.filterItem}>
+                    <Text style={styles.txt}>کلینیک ها</Text>
+                    <Switch onValueChange={(value) => this.setState({isClinic: value})}
+                            value={this.state.isClinic}
                             thumbColor='#B08C3E'
                             trackColor={{false: 'rgba(145,145,145,0.44)', true: '#F7DDA4'}}/>
                 </View>
@@ -129,7 +133,13 @@ export default class Filter extends React.Component {
 
                 <View style={styles.filterItem}>
                     <Text style={styles.txt}>بیشترین امتیاز</Text>
-                    <Switch onValueChange={(value) => this.setState({mostRated: value, newest: !value})}
+                    <Switch onValueChange={(value) => this.setState({
+                        mostRated: value,
+                        newest: !value,
+                        mostExpensive: !value,
+                        mostCheap: !value,
+                        closest:!value
+                    })}
                             value={this.state.mostRated}
                             thumbColor='#B08C3E'
                             trackColor={{false: 'rgba(145,145,145,0.44)', true: '#F7DDA4'}}/>
@@ -137,13 +147,61 @@ export default class Filter extends React.Component {
 
                 <View style={styles.filterItem}>
                     <Text style={styles.txt}>جدید ترین</Text>
-                    <Switch onValueChange={(value) => this.setState({newest: value, mostRated: !value})}
+                    <Switch onValueChange={(value) => this.setState({
+                        newest: value,
+                        mostRated: !value,
+                        mostExpensive: !value,
+                        mostCheap: !value,
+                        closest:!value
+                    })}
                             value={this.state.newest}
                             thumbColor='#B08C3E'
                             trackColor={{false: 'rgba(145,145,145,0.44)', true: '#F7DDA4'}}/>
                 </View>
 
-                <TouchableHighlight style={styles.btn_save} onPress={() => this.props.navigation.goBack()}>
+                <View style={styles.filterItem}>
+                    <Text style={styles.txt}>ارزان ترین</Text>
+                    <Switch onValueChange={(value) => this.setState({
+                        mostCheap: value,
+                        mostRated: !value,
+                        mostExpensive: !value,
+                        newest: !value,
+                        closest:!value
+                    })}
+                            value={this.state.mostCheap}
+                            thumbColor='#B08C3E'
+                            trackColor={{false: 'rgba(145,145,145,0.44)', true: '#F7DDA4'}}/>
+                </View>
+
+                <View style={styles.filterItem}>
+                    <Text style={styles.txt}>گران ترین</Text>
+                    <Switch onValueChange={(value) => this.setState({
+                        mostExpensive: value,
+                        mostRated: !value,
+                        mostCheap: !value,
+                        newest: !value,
+                        closest:!value
+                    })}
+                            value={this.state.mostExpensive}
+                            thumbColor='#B08C3E'
+                            trackColor={{false: 'rgba(145,145,145,0.44)', true: '#F7DDA4'}}/>
+                </View>
+
+                <View style={styles.filterItem}>
+                    <Text style={styles.txt}>نزدیک ترین</Text>
+                    <Switch onValueChange={(value) => this.setState({
+                        closest:value,
+                        mostExpensive: !value,
+                        mostRated: !value,
+                        mostCheap: !value,
+                        newest: !value
+                    })}
+                            value={this.state.closest}
+                            thumbColor='#B08C3E'
+                            trackColor={{false: 'rgba(145,145,145,0.44)', true: '#F7DDA4'}}/>
+                </View>
+
+                <TouchableHighlight style={[styles.btn_save,]} onPress={() => this.props.navigation.goBack()}>
                     <Text style={styles.btn_save_txt}>ذخیره</Text>
                 </TouchableHighlight>
             </View>
@@ -151,7 +209,7 @@ export default class Filter extends React.Component {
     }
 }
 
-const serviceTypes = ['همه', 'خدمات عروس', 'خدمات پوست', 'جوان سازی و زیبایی', 'خدمات صورت', 'خدمات مو', 'خدمات ناخن', 'خدمات لیزر', 'خدمات بدن', 'ماساژ و اسپا',]
+const serviceTypes = ['خدمات عروس', 'خدمات پوست', 'جوان سازی و زیبایی', 'خدمات صورت', 'خدمات مو', 'خدمات ناخن', 'خدمات لیزر', 'خدمات بدن', 'ماساژ و اسپا',]
 
 const {width, height} = Dimensions.get("window");
 
@@ -202,17 +260,24 @@ const styles = StyleSheet.create({
         height: height / 18,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#e6b618',
+        backgroundColor: '#B08C3E',
         borderRadius: 50,
-        marginTop: 50
     },
 
-    serviceType: {
+    modalTile: {
         width: width / 1.1 - 5,
         alignItems: 'center',
         justifyContent: 'center',
         borderBottomWidth: 1,
         borderBottomColor: 'rgba(0,0,0,0.4)',
-        borderRadius: 25
+        borderRadius: 10
+    },
+    modalView:{
+        backgroundColor: 'white',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        alignSelf: 'center',
+        width: width / 1.1,
+        borderRadius: 10
     }
 });

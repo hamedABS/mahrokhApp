@@ -7,13 +7,14 @@ import {
     Text,
     TouchableOpacity,
     ImageBackground,
+    TouchableWithoutFeedback,
     View
 } from 'react-native';
 import Swiper from "react-native-web-swiper";
 import SalonService from "./sub_form/SalonService";
 import WorkSample from "./sub_form/WorkSample";
 import Comments from "./sub_form/Comments";
-
+import ImageView from "react-native-image-view";
 export default class Salon extends React.Component {
 
 
@@ -23,7 +24,9 @@ export default class Salon extends React.Component {
             name: "service",
             likedSalon: false,
             serviceReservedCount: 0,
-            focusedStatuses: [false, false, false, false, false, false]
+            focusedStatuses: [false, false, false, false, false, false],
+            isImageViewVisible: false,
+            currentImage: 0
         }
     }
 
@@ -32,29 +35,9 @@ export default class Salon extends React.Component {
     };
 
 
-    _optionsButtonPressed = (data) => {
-        this.setState({
-            name: data
-        })
-    }
-
-    _addressButtonPressed = () => {
-        this.props.navigation.navigate('SalonInfo');
-    }
-
-    _renderSubClasses = () => {
-        switch (this.state.name) {
-            case"comment":
-                return <Comments/>
-
-            case"sample":
-                return <WorkSample/>
-            default:
-                return <SalonService data={this.props}/>
-        }
-    }
-
     render() {
+        let emptyHeart = require('../../assets/png/emptyHeart.png');
+        let filledHeart = require('../../assets/png/heartRedGold.png')
         return (
             <View>
                 <View style={styles.header}>
@@ -64,7 +47,7 @@ export default class Salon extends React.Component {
                         zIndex: 1,
                         justifyContent: 'space-between',
                         width: width,
-                        marginTop: 35,
+                        marginTop: 40,
                     }}>
                         <TouchableOpacity style={styles.backBtn} onPress={() => this.props.navigation.goBack()}>
                             <Image
@@ -78,11 +61,12 @@ export default class Salon extends React.Component {
                                 }}
                             />
                         </TouchableOpacity>
+
                         <TouchableOpacity style={styles.topBtn}
                                           onPress={() => this.setState({likedSalon: !this.state.likedSalon})}>
                             <Image
-                                source={require('../../assets/png/emptyHeart.png')}
-                                style={this.state.likedSalon ? styles.heartIsRed : styles.heart}
+                                source={this.state.likedSalon ? filledHeart : emptyHeart}
+                                style={styles.heart}
                             />
                         </TouchableOpacity>
                     </View>
@@ -94,14 +78,23 @@ export default class Salon extends React.Component {
                             }}
                             loop={true}
                             timeout={5}>
-                        <ImageBackground style={styles.slider_image} source={require('../../assets/png/jhfjhg.png')}/>
-                        <Image style={styles.slider_image} source={require('../../assets/png/jhfjhg.png')}/>
-                        <Image style={styles.slider_image} source={require('../../assets/png/jhfjhg.png')}/>
+                        <TouchableWithoutFeedback onPress={() => this.setState({isImageViewVisible: true, currentImage:0})}>
+                            <Image style={styles.slider_image}
+                                   source={{uri: 'https://www.aroos.co/wp-content/uploads/2018/07/beauty-salon.jpg'}}/>
+                        </TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback onPress={() => this.setState({isImageViewVisible: true, currentImage:1})}>
+                            <Image style={styles.slider_image}
+                                   source={{uri: "https://www.curiouslyconscious.com/wp-content/uploads/2018/02/Le-Fix-Natural-Beauty-Bar.jpg"}}/>
+                        </TouchableWithoutFeedback>
+                        <TouchableWithoutFeedback onPress={() => this.setState({isImageViewVisible: true, currentImage:2})}>
+                            <Image style={styles.slider_image}
+                                   source={{uri: "https://i2.wp.com/c2.staticflickr.com/9/8860/28279022265_b668e80d24_o.jpg"}}/>
+                        </TouchableWithoutFeedback>
                     </Swiper>
                 </View>
                 <View style={{borderBottomWidth: 1, borderBottomColor: '#00000029'}}>
                     <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                        <View style={{flexDirection: 'row', marginLeft: 10, marginTop:5}}>
+                        <View style={{flexDirection: 'row', marginLeft: 10, marginTop: 5}}>
                             <StarRating
                                 disabled={false}
                                 starSize={14}
@@ -167,8 +160,65 @@ export default class Salon extends React.Component {
             </View>
         );
     }
+
+    _optionsButtonPressed = (data) => {
+        this.setState({
+            name: data
+        })
+    }
+
+    _addressButtonPressed = () => {
+        this.props.navigation.navigate('SalonInfo');
+    }
+
+    _renderSubClasses = () => {
+        switch (this.state.name) {
+            case"comment":
+                return <Comments/>
+
+            case"sample":
+                return <WorkSample/>
+            default:
+                return <SalonService data={this.props}/>
+        }
+    }
+/*
+    _renderImageView() {
+        return <ImageView
+            images={images}
+            imageIndex={0}
+            isVisible={this.state.isImageViewVisible}
+            onCancel={() => this.setState({isImageViewVisible: false})}
+            onClose={() => this.setState({isImageViewVisible: false})}
+            imageIndex={this.state.currentImage}
+        />
+    }*/
+
 }
 const {width, height} = Dimensions.get("window");
+
+const images = [
+    {
+        source: {
+            uri: "https://www.aroos.co/wp-content/uploads/2018/07/beauty-salon.jpg"
+        },
+        width: width,
+        height: height / 1.5
+
+    }, {
+        source: {
+            uri: "https://www.curiouslyconscious.com/wp-content/uploads/2018/02/Le-Fix-Natural-Beauty-Bar.jpg"
+        },
+        width: width,
+        height: height / 1.5
+    }, {
+        source: {
+            uri: "https://i2.wp.com/c2.staticflickr.com/9/8860/28279022265_b668e80d24_o.jpg"
+        },
+        width: width,
+        height: height / 1.5
+    },
+];
 
 const slides = [
     {
@@ -199,6 +249,8 @@ const styles = StyleSheet.create({
         borderRadius: 50,
     },
     topBtn: {
+        alignItems: 'center',
+        justifyContent: 'center',
         marginRight: 26,
         height: 25,
         width: 25,
@@ -209,7 +261,6 @@ const styles = StyleSheet.create({
     slider_image: {
         height: height / 3,
         width: width,
-        backgroundColor: 'red'
     },
     optionsContainer: {
         flexDirection: 'row-reverse',
@@ -244,20 +295,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: 'white'
     },
-    heartIsRed: {
-        backgroundColor: 'transparent',
-        width: 15,
-        height: 12.8,
-        margin: 4.5,
-        marginTop: 5.5,
-        tintColor: '#bf0808'
-    },
+
     heart: {
         backgroundColor: 'transparent',
         width: 15,
         height: 12.8,
         margin: 4.5,
         marginTop: 5.5,
-        tintColor: '#B08C3E'
     }
 });

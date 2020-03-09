@@ -85,10 +85,6 @@ class Search extends React.Component {
                 justifyContent: 'center',
                 height: height / 12
             }}>
-                {/*<Image*/}
-                {/*    source={require('../../assets/png/filter.png')}*/}
-                {/*    style={styles.headerIcon}/>*/}
-
                 <View style={styles.filterWrapper}>
                     <View style={styles.filter}>
                         <Image
@@ -151,7 +147,7 @@ const styles = StyleSheet.create({
     },
     blogSortTypeViewTxtOnFocused: {
         borderBottomWidth: 2,
-        borderBottomColor: '#e6b618',
+        borderBottomColor: '#B08C3E',
     },
     filterWrapper: {
         marginTop: 7,

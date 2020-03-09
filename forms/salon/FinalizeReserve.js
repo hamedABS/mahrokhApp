@@ -85,8 +85,8 @@ export default class FinalizeReserve extends React.Component {
                         <Text style={styles.itemText}> تخفیف: {discount} تومان </Text>
                         <Text style={[styles.itemText, {color: '#B08C3E'}]}>مبلغ نهایی: {wholePrice - discount} </Text>
                     </View>
-                    <View style={{alignItems: 'center', alignContent: 'center'}}>
-                        <Text style={[styles.itemText, {color: '#B08C3E'}]}>مبلغ
+                    <View style={{width:"100%",height:'30%',alignItems: 'center', justifyContent: 'center'}}>
+                    <Text style={[styles.itemText, {color: '#B08C3E'}]}>مبلغ
                             نهایی: {this.state.toBePayPrice} </Text>
                     </View>
                 </View>
@@ -108,7 +108,7 @@ export default class FinalizeReserve extends React.Component {
                                     isSelected={this.state.value === i}
                                     onPress={(value) => this._radioPress(value)}
                                     borderWidth={1}
-                                    buttonInnerColor={'#e6b618'}
+                                    buttonInnerColor={'#B08C3E'}
                                     buttonOuterColor={this.state.value === i ? '#a27d3d' : '#000'}
                                     buttonSize={12}
                                     buttonOuterSize={16}
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
         height: height / 18,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#e6b618',
+        backgroundColor: '#B08C3E',
         borderRadius: 50,
         marginTop: 20
     },

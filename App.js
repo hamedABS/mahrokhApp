@@ -4,6 +4,10 @@ import * as Font from 'expo-font';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import AppIntro from './AppIntro';
 import {AuthStack, TabNavigator} from "./Navigations";
+import { I18nManager} from 'react-native';
+I18nManager.allowRTL(false);
+I18nManager.forceRTL(false);
+
 
 const AppContainer = createAppContainer(createSwitchNavigator(
     {

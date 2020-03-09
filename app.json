@@ -19,11 +19,11 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
-      "**\\*"
+      "**/*"
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.eesssn.mahrokhUserApp",
+      "bundleIdentifier": "com.vista.mahrokhUserApp",
       "infoPlist": {
         "LSApplicationQueriesSchemes": [
           "comgooglemaps"
@@ -31,7 +31,7 @@
       }
     },
     "android": {
-      "package": "com.eesssn.mahrokhUserApp",
+      "package": "com.vista.mahrokhUserApp",
       "permissions": [
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION",
