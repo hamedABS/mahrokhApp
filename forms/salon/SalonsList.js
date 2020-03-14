@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import StarRating from "react-native-star-rating";
 import Modal from "react-native-modal";
+import {HeaderTitle} from "../../navigation/navigationConstants";
 
 I18nManager.allowRTL(false);
 
@@ -19,7 +20,8 @@ export default class SalonsList extends React.Component {
 
     static navigationOptions = ({navigation}) => {
         return {
-            headerTitle: () => <Search data={navigation}/>,
+            headerTitle: () => navigation.getParam('favorite') ? HeaderTitle('سالن های مورد علاقه من') :
+                <Search data={navigation}/>,
             headerStyle: {
                 height: height / 6.5
             }
@@ -66,28 +68,21 @@ export default class SalonsList extends React.Component {
                                         margin: 10,
                                         width: width / 4,
                                         height: height / 16,
-                                        marginLeft: 30,
+                                        marginLeft: 20,
                                         alignItems: 'center',
                                         justifyContent: "center",
+                                        alignContent: 'center'
                                     }}>
-                                        <View style={{flexDirection: 'row',}}>
-                                            <StarRating
-                                                disabled={true}
-                                                starSize={13}
-                                                emptyStarColor='#707070'
-                                                fullStarColor='#FAC917'
-                                                maxStars={5}
-                                                rating={salon.score}
-                                            />
-                                            <Text style={[styles.titlesBaseStyle, {
-                                                fontSize: 12,
-                                                marginLeft: 10,
-                                                marginBottom: 10
-                                            }]}>#تخفیف
-                                                دار</Text>
-                                        </View>
+                                        <StarRating
+                                            disabled={true}
+                                            starSize={13}
+                                            emptyStarColor='#707070'
+                                            fullStarColor='#FAC917'
+                                            maxStars={5}
+                                            rating={salon.score}
+                                        />
                                         <Text style={{
-                                            alignSelf: 'flex-start',
+                                            // alignSelf: 'flex-start',
                                             fontSize: 10,
                                             fontFamily: 'IRANSansFaNum',
                                             color: '#00000099'
@@ -130,7 +125,9 @@ class Search extends React.Component {
                 width: width,
                 alignItems: 'center',
                 alignContent: 'center',
-                justifyContent: 'flex-end',
+                justifyContent: 'space-around',
+                height: height / 7.5,
+                padding:15,
             }}>
                 <View style={styles.filterWrapper}>
                     <View style={styles.filter}>
@@ -183,7 +180,7 @@ class Search extends React.Component {
                     </View>
                 </Modal>
 
-                <View style={{flexDirection: 'row-reverse', alignSelf: 'flex-end', marginLeft: 20,}}>
+                <View style={{flexDirection: 'row-reverse', alignSelf: 'flex-end', marginLeft: 20, marginTop: 0}}>
                     <TouchableOpacity style={styles.filterTypeTile} onPress={() => navigation.navigate('Filter')}>
                         <Text style={{
                             fontFamily: 'IRANSansWeb',
@@ -191,7 +188,6 @@ class Search extends React.Component {
                             textAlign: 'center',
                             color: 'rgba(0,0,0,0.6)'
                         }}>فیلتر نتایج</Text>
-
                     </TouchableOpacity>
 
                     <TouchableOpacity style={styles.filterTypeTile} onPress={() => this.setState({
@@ -241,7 +237,7 @@ const styles = StyleSheet.create({
     },
     filterWrapper: {
         width: width / 1.1,
-        height: height / 11,
+        height: height / 13,
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -254,14 +250,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row-reverse'
     },
     filterTypeTile: {
-        width: 80,
-        height: 35,
+        width: width / 6,
+        height: width / 12,
         borderRadius: 5,
         borderWidth: 1,
         borderColor: '#70707033',
         alignItems: 'center',
         justifyContent: 'center',
-        alignContent: 'center',
+        marginTop: -10
     },
     txt: {
         fontSize: 18,

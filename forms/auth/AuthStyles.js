@@ -16,7 +16,6 @@ const authStyles = StyleSheet.create({
         justifyContent: 'space-between',
         borderBottomWidth: 1,
         borderColor: 'rgba(0,0,0,0.5)',
-        paddingRight: width
     },
 
     txt_input: {
@@ -63,6 +62,7 @@ const authStyles = StyleSheet.create({
         width: width / 2,
         height: height / 13,
         alignItems: 'center',
+        justifyContent:'center',
         backgroundColor: '#B08C3E',
         borderRadius: 50,
     },

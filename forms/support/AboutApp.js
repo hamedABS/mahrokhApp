@@ -5,7 +5,6 @@ export default class AboutApp extends React.Component {
 
     render() {
         return (
-
             <View style={{flex: 1, justifyContent: 'space-around'}}>
                 <View style={{height: height / 2, alignItems: 'center', marginTop: 40, padding: 20}}>
                     <ScrollView>

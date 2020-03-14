@@ -267,8 +267,9 @@ const styles = StyleSheet.create({
     },
     chooseOptionFocused: {
         width: width / 3.6,
-        height: 30,
-        backgroundColor: '#e6b618',
+        height: 35,
+        justifyContent:'center',
+        backgroundColor: '#B08C3E',
         borderRadius: 25,
     },
     chooseOptionNotFocused: {

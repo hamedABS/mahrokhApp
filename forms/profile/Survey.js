@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, TextInput, TouchableOpacity, View,KeyboardAvoidingView} from 'react-native';
 import StarRating from 'react-native-star-rating'
 
 export default class Survey extends React.Component {
@@ -83,7 +83,8 @@ export default class Survey extends React.Component {
 
     render() {
         return (
-            <View style={{flex: 1, alignItems: 'center'}}>
+            <KeyboardAvoidingView style={{flex: 1, alignItems: 'center'}}
+                                  behavior={'position'}>
                 <View style={[styles.itemContainer, {height: height / 4}]}>
                     <TouchableOpacity onPress={() => this.props.navigation.navigate('Salon')}>
                         <Image
@@ -149,7 +150,7 @@ export default class Survey extends React.Component {
                     </View>
                 </TouchableOpacity>
 
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }
@@ -196,7 +197,7 @@ const styles = StyleSheet.create({
     icon: {
         width: 20,
         height: 20,
-        tintColor: '#e6b618',
+        tintColor: '#B08C3E',
         margin: 10,
         alignSelf: 'flex-start'
     },
@@ -217,10 +218,11 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     btn: {
+        alignSelf:'center',
         width: width / 2,
         height: height / 13,
         alignItems: 'center',
-        backgroundColor: '#e6b618',
+        backgroundColor: '#B08C3E',
         borderRadius: 50,
     },
 })

@@ -7,14 +7,39 @@ import FinalizeReserve from "../forms/salon/FinalizeReserve";
 import ReserveNew from "../forms/salon/ReserveNew";
 import ReservedSalons from "../forms/profile/ReservedSalons";
 import {ReserveDetailsPage, SurveyPage} from "./ProfileStack";
+import {headerBackImag, HeaderTitle} from "./navigationConstants";
 
 const HomeStack = createStackNavigator({
     Home: Home,
     Salon: Salon,
-    SalonInfo: SalonInfo,
-    FinalizeReserve: FinalizeReserve,
-    ReserveNew: ReserveNew,
-    ReservedSalons: ReservedSalons,
+    SalonInfo: {
+        screen: SalonInfo,
+        navigationOptions: {
+            headerTitle: () => HeaderTitle(`کایزن`),
+            headerBackImage: () => headerBackImag,
+        },
+    },
+    FinalizeReserve: {
+        screen: FinalizeReserve,
+        navigationOptions: {
+            headerTitle: () => HeaderTitle(`ثبت رزرو`),
+            headerBackImage: () => headerBackImag,
+        },
+    },
+    ReserveNew: {
+        screen: ReserveNew,
+        navigationOptions: {
+            headerTitle: () => HeaderTitle(`رزرو جدید`),
+            headerBackImage: () => headerBackImag,
+        },
+    },
+    ReservedSalons: {
+        screen: ReservedSalons,
+        navigationOptions: {
+            headerTitle: () => HeaderTitle(`رزروهای من`),
+            headerBackImage: () => headerBackImag,
+        },
+    },
     ReserveDetails: ReserveDetailsPage,
     Survey: SurveyPage,
 }, {

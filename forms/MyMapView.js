@@ -54,8 +54,8 @@ export default class MyMapView extends React.Component {
             region: {
                 latitude: location.coords.latitude,
                 longitude: location.coords.longitude,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
+                latitudeDelta: 0.0009,
+                longitudeDelta: 0.0009,
             }
         });
     };
@@ -80,6 +80,12 @@ export default class MyMapView extends React.Component {
             return (
                 <View style={{width: width, height: height / 4}}>
                     <MapView style={{width: width, height: height / 4}}
+                             initialRegion={{
+                                 latitude: this.state.location.latitude,
+                                 longitude: this.state.location.longitude,
+                                 latitudeDelta: 0.0009,
+                                 longitudeDelta: 0.0009,
+                             }}
                              region={this.state.region}
                              onRegionChange={(region) => this.onRegionChange(region)}
                              showsMyLocationButton={true}

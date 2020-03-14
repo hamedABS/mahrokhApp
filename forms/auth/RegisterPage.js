@@ -1,7 +1,15 @@
 import React, {Component} from 'react';
 import {
-    StyleSheet, Text, TextInput, View, Image,
-    Dimensions, TouchableHighlight, CheckBox, KeyboardAvoidingView,
+    CheckBox,
+    Dimensions,
+    Image,
+    KeyboardAvoidingView,
+    Text,
+    TextInput,
+    TouchableHighlight,
+    View,
+    Picker,
+    StyleSheet
 } from 'react-native';
 import authStyles from './AuthStyles';
 
@@ -15,7 +23,10 @@ export default class RegisterClass extends Component {
             email: '',
             password: '',
             repeatPassword: '',
-            checked: false
+            checked: false,
+            dayOfBirth: '',
+            monthOfBirth: '',
+            yearOfBirth: ''
         }
     }
 
@@ -65,6 +76,7 @@ export default class RegisterClass extends Component {
                             onChangeText={(email) => this.setState({email})}
                             value={this.state.email}/>
                     </View>
+                    {this.renderBirthDayPicker()}
                     <View style={authStyles.txt_input_container}>
                         <Image
                             style={authStyles.txt_input_img}
@@ -96,7 +108,8 @@ export default class RegisterClass extends Component {
                     <TouchableHighlight style={authStyles.btn_register} onPress={this._onRegisterPressButton}>
                         <Text style={authStyles.btn_register_txt}>ساخت حساب کاربری</Text>
                     </TouchableHighlight>
-                    <Text style={[authStyles.rules_txt, {fontSize: 13}]}> * لطفا قبل از استفاده از ماهرخ حتما شرایط و قوانین
+                    <Text style={[authStyles.rules_txt, {fontSize: 13}]}> * لطفا قبل از استفاده از ماهرخ حتما شرایط و
+                        قوانین
                         مطالعه شود.</Text>
                     <View style={authStyles.rules_chk}>
                         <CheckBox
@@ -109,6 +122,74 @@ export default class RegisterClass extends Component {
             </KeyboardAvoidingView>
         );
     }
+
+    renderBirthDayPicker() {
+        let dayPickerItem = []
+        for (let i = 1; i <= 31; i++) {
+            dayPickerItem.push(<Picker.Item label={"" + i} value={i}/>)
+        }
+
+        let mothPickerItem = []
+        for (let i = 1; i <= 12; i++) {
+            mothPickerItem.push(<Picker.Item label={"" + i} value={i}/>)
+        }
+
+        let yearPickerItem = []
+        for (let i = 1340; i <= 1396; i++) {
+            yearPickerItem.push(<Picker.Item label={"" + i} value={i}/>)
+        }
+
+        return (
+            <View style={[authStyles.txt_input_container]}>
+                <Image
+                    style={[authStyles.txt_input_img,{marginBottom:4}]}
+                    source={require('../../assets/png/birthday.png')}
+                />
+                <View style={{
+                    flexDirection: 'row-reverse',
+                    width: width/1.25,
+                    justifyContent: 'space-between',
+                    alignSelf:'center',
+                    marginRight:10,
+                }}>
+                    <View style={styles.pickerView}>
+                        <Text style={styles.pickerText}>روز</Text>
+                        <Picker style={{height: 50, width: 100}}
+                                mode={'dropdown'}
+                                selectedValue={this.state.dayOfBirth}
+                                onValueChange={(itemValue) => this.setState({dayOfBirth: itemValue})}>
+                            {
+                                dayPickerItem
+                            }
+                        </Picker>
+                    </View>
+                    <View style={styles.pickerView}>
+                        <Text style={styles.pickerText}>ماه</Text>
+                        <Picker style={{height: 50, width: 100}}
+                                mode={'dropdown'}
+                                selectedValue={this.state.monthOfBirth}
+                                onValueChange={(itemValue) => this.setState({monthOfBirth: itemValue})}>
+                            {
+                                mothPickerItem
+                            }
+                        </Picker>
+                    </View>
+                    <View style={styles.pickerView}>
+                        <Text style={[styles.pickerText]}>سال</Text>
+                        <Picker style={{height: 50, width: 100}}
+                                mode={'dropdown'}
+                                selectedValue={this.state.yearOfBirth}
+                                onValueChange={(itemValue) => this.setState({yearOfBirth: itemValue})}>
+                            {
+                                yearPickerItem
+                            }
+                        </Picker>
+                    </View>
+                </View>
+
+            </View>
+        )
+    }
 }
 
 
@@ -117,3 +198,22 @@ const {width, height} = Dimensions.get("window");
 {
     console.log("width: " + width + " height: " + height)
 }
+
+const styles = StyleSheet.create({
+    pickerView: {
+        borderWidth: 1,
+        borderColor: 'rgba(0,0,0,0.3)',
+        width: 100,
+        height: 30,
+        borderRadius: 5,
+        alignSelf: 'center',
+        justifyContent: 'center'
+    },
+    pickerText: {
+        position: 'absolute',
+        fontSize: 15,
+        fontFamily: 'IRANSansFaNum',
+        alignSelf: 'center',
+        margin: 20
+    }
+})

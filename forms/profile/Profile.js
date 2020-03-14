@@ -18,40 +18,6 @@ export default class Profile extends React.Component {
         }
     }
 
-    static navigationOptions = ({navigation}) => {
-        let leftBtn =
-            <TouchableOpacity onPress={() => navigation.navigate('ReservedSalons')}>
-                <Image source={require('../../assets/png/list.png')}
-                       style={{width: 23, height: 24, marginLeft: 15, tintColor: '#B08C3E'}}/>
-            </TouchableOpacity>
-
-        let headerTitle =
-            <Text style={{
-                textAlign: 'center',
-                fontFamily: 'IRANSansWeb',
-                width: width / 1.4,
-                fontSize: 16
-            }}>پروفایل
-            </Text>
-        let rightBtn =
-            <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
-                <Image
-                    source={require('../../assets/png/settings3x.png')}
-                    style={{width: 23, height: 23, marginRight: 15, tintColor: '#C8992E'}}/>
-            </TouchableOpacity>
-        return {
-            headerLeft: () => {
-                return leftBtn
-            },
-            headerTitle: () => {
-                return headerTitle
-            },
-            headerRight: () => {
-                return rightBtn;
-            }
-        };
-    };
-
     render() {
         let numbers = ['50000', '100000', '150000', '200000']
         let {photoUri} = this.state;
@@ -170,7 +136,9 @@ export default class Profile extends React.Component {
                             }}/>
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.everyItem} onPress={() => this.props.navigation.navigate('SalonList')}>
+                <TouchableOpacity style={styles.everyItem} onPress={() => this.props.navigation.navigate('SalonList', {
+                    favorite: true
+                })}>
                     <Image
                         source={require('../../assets/png/heart-1.png')}
                         style={styles.icon}/>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Image, StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import ConfirmationDialog from "../ConfirmationDialog";
 
 
@@ -8,27 +8,6 @@ export default class Setting extends React.Component {
     state = {
         exitModalIsVisible: false
     }
-
-    static navigationOptions = ({navigation}) => {
-        let headerBackImage = <Image source={require('../../assets/png/left.png')}
-                                     style={{width: 20, height: 20}}
-        />;
-        let headerTitle =
-            <Text style={{
-                textAlign: 'center',
-                fontFamily: 'IRANSansWeb',
-                width: width / 1.4,
-                fontSize: 16
-            }}>تنظیمات</Text>
-        return {
-            headerBackImage: () => {
-                return headerBackImage
-            },
-            headerTitle: () => {
-                return headerTitle
-            },
-        };
-    };
 
     render() {
         return (
@@ -42,7 +21,8 @@ export default class Setting extends React.Component {
                             style={styles.icon}/>
                         <Text style={styles.txt}>تغییر گذر واژه</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.everyItem} onPress={() => this.setState({exitModalIsVisible: true})}>
+                    <TouchableOpacity style={styles.everyItem}
+                                      onPress={() => this.setState({exitModalIsVisible: true})}>
                         <Image
                             source={require('../../assets/png/exit.png')}
                             style={styles.icon}/>
@@ -68,6 +48,7 @@ export default class Setting extends React.Component {
 
         )
     }
+
     _closeModal = () => {
         this.setState({exitModalIsVisible: false})
     }

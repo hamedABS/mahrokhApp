@@ -19,7 +19,13 @@ const ReservesStack = createStackNavigator({
             headerBackImage: () => headerBackImag,
         },
     },
-    SalonInfo: SalonInfo,
+    SalonInfo: {
+        screen: SalonInfo,
+        navigationOptions: {
+            headerTitle: () => HeaderTitle(`کایزن`),
+            headerBackImage: () => headerBackImag,
+        },
+    },
     ReserveNew: {
         screen: ReserveNew,
         navigationOptions: {

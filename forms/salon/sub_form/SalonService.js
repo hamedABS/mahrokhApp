@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
         margin: 5
     },
     plus: {
-        width: 23,
-        height: 23,
+        width: 30,
+        height: 30,
     }
 })

@@ -1,7 +1,3 @@
-import Home from "../forms/home/HomePage";
-import Blog from "../forms/blog/Blog";
-import Support from "../forms/support/Support";
-import Profile from "../forms/profile/Profile";
 import {createBottomTabNavigator} from "react-navigation-tabs";
 import {Dimensions, Image, StyleSheet, Text} from "react-native";
 import React from "react";

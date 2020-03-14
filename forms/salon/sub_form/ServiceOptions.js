@@ -126,8 +126,7 @@ export default class ServiceOptions extends React.Component {
                         borderTopStartRadius: 25,
                         marginBottom: -20
                     }}>
-                        <View
-                            style={[styles.itemContainer, {padding: 10, height: height / 5}]}>
+                        <View style={[styles.itemContainer, {padding: 10, height: height / 5}]}>
                             <View style={{width: width, flexDirection: 'row-reverse', justifyContent: 'space-around'}}>
                                 <Text style={[styles.itemText, {marginRight: 75}]}>پرسنل مورد نظر را انتخاب کنید.</Text>
                                 <TouchableOpacity

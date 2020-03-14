@@ -115,7 +115,7 @@ export class DiscountTile extends React.Component {
     render() {
         return (
             <ImageBackground
-                source={require('../../assets/jpg/makupThings.jpg')}
+                source={require('../../assets/png/makupThings.jpg')}
                 style={{
                     width: width / 1.1,
                     height: '100%',

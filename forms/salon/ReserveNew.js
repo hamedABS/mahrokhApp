@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Dimensions, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View,KeyboardAvoidingView} from 'react-native';
 import moment from 'moment-jalali';
 import Moment from 'moment';
 import ServiceOptions from "./sub_form/ServiceOptions";
@@ -104,9 +104,10 @@ export default class ReserveNew extends React.Component {
     render() {
         let services = this.props.navigation.getParam('services');
         return (
-            <View style={{flex: 1, alignItems: 'center', justifyContent: 'space-between', padding: 10}}>
+            <KeyboardAvoidingView style={{flex: 1, alignItems: 'center', justifyContent: 'space-between', padding: 10}}
+                                  behavior={'position'}>
                 <View>
-                    <View style={{height: height / 2.5}}>
+                    <View style={{height: height / 1.8}}>
                         <ScrollView contentContainerStyle={{alignItems: 'center'}}
                                     showsHorizontalScrollIndicator={false}>
                             {this._renderModal()}
@@ -145,7 +146,7 @@ export default class ReserveNew extends React.Component {
                                   })}>
                     <Text style={styles.btn_pay_txt}>پرداخت و ثبت</Text>
                 </TouchableOpacity>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }
@@ -234,14 +235,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: 'white',
     },
-    routingBtn: {
-        justifyContent: 'center',
-        width: width / 4.8,
-        height: 27,
-        borderRadius: 25,
-        borderWidth: 1,
-        borderColor: '#B08C3E'
-    },
     timeItem: {
         width: width / 4.5,
         height: height / 15,
@@ -282,6 +275,7 @@ const styles = StyleSheet.create({
     pay_btn: {
         width: width / 2.5,
         height: height / 18,
+        alignSelf:'center',
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#B08C3E',

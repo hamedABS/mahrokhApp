@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View, Share} from 'react-native';
+import {Dimensions, Image, ScrollView, Share, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 export default class BlogList extends React.Component {
 
@@ -18,70 +18,72 @@ export default class BlogList extends React.Component {
         let blackBookmark = require('../../assets/png/bookmark_black.png')
         let goldBookmark = require('../../assets/png/bookmark.png')
         return (
-            <ScrollView contentContainerStyle={{alignItems: 'center'}}>
-                {
-                    mockData.map((data, index) => {
-                        return (
-                            <TouchableOpacity key={index} style={styles.blogItem} onPress={this._onPress}>
-                                <Image
-                                    source={data.imageSource}
-                                    style={styles.blogImage}
-                                />
+            <View style={{width: width, height: height}}>
+                <ScrollView contentContainerStyle={{alignItems: 'center',paddingBottom:100}}>
+                    {
+                        mockData.map((data, index) => {
+                            return (
+                                <TouchableOpacity key={index} style={styles.blogItem} onPress={this._onPress}>
+                                    <Image
+                                        source={data.imageSource}
+                                        style={styles.blogImage}
+                                    />
 
-                                <View style={{marginRight: 10}}>
-                                    <View style={{
-                                        flexDirection: 'row-reverse',
-                                        marginTop: 10
-                                    }}>
+                                    <View style={{marginRight: 10}}>
+                                        <View style={{
+                                            flexDirection: 'row-reverse',
+                                            marginTop: 10
+                                        }}>
 
-                                        <TouchableOpacity
-                                            onPress={() => {
-                                                let tmp = this.state.bookmarked;
-                                                tmp[index] = !tmp[index];
-                                                this.setState({bookmarked: tmp})
-                                            }}>
+                                            <TouchableOpacity
+                                                onPress={() => {
+                                                    let tmp = this.state.bookmarked;
+                                                    tmp[index] = !tmp[index];
+                                                    this.setState({bookmarked: tmp})
+                                                }}>
+                                                <Image
+                                                    source={this.state.bookmarked[index] ? goldBookmark : blackBookmark}
+                                                    style={{width: 15, height: 20, marginLeft: 10}}/>
+                                            </TouchableOpacity>
+
+                                            <TouchableOpacity onPress={() => this._onShare()}>
+                                                <Image source={require('../../assets/png/send.png')}
+                                                       style={{width: 20, height: 20}}/>
+                                            </TouchableOpacity>
+                                        </View>
+                                        <Text style={{
+                                            fontSize: 16,
+                                            fontFamily: 'IRANSansFaNum',
+                                            color: '#323232'
+                                        }}>{data.title}</Text>
+                                        <View style={{flexDirection: 'row-reverse'}}>
+                                            <Text style={{
+                                                fontSize: 12,
+                                                fontFamily: 'IRANSansFaNum',
+                                                color: 'rgba(0,0,0,0.4)',
+                                                marginLeft: 10
+                                            }}>{data.publishedDate}</Text>
+                                            <Text style={{
+                                                marginLeft: 5,
+                                                fontFamily: 'IRANSansFaNum',
+                                                fontSize: 12,
+                                                marginRight: 15,
+                                                color: 'rgba(0,0,0,0.4)'
+                                            }}>{data.likeCount}</Text>
                                             <Image
-                                                source={this.state.bookmarked[index] ? goldBookmark : blackBookmark}
-                                                style={{width: 15, height: 20, marginLeft: 10}}/>
-                                        </TouchableOpacity>
-
-                                        <TouchableOpacity onPress={() => this._onShare()}>
-                                            <Image source={require('../../assets/png/send.png')}
-                                                   style={{width: 20, height: 20}}/>
-                                        </TouchableOpacity>
+                                                source={require('../../assets/png/heartRedGold.png')}
+                                                style={{width: 16, height: 14, marginTop: 5, tintColor: '#B08C3E'}}/>
+                                        </View>
                                     </View>
-                                    <Text style={{
-                                        fontSize: 16,
-                                        fontFamily: 'IRANSansFaNum',
-                                        color: '#323232'
-                                    }}>{data.title}</Text>
-                                    <View style={{flexDirection: 'row-reverse'}}>
-                                        <Text style={{
-                                            fontSize: 12,
-                                            fontFamily: 'IRANSansFaNum',
-                                            color: 'rgba(0,0,0,0.4)',
-                                            marginLeft: 10
-                                        }}>{data.publishedDate}</Text>
-                                        <Text style={{
-                                            marginLeft: 5,
-                                            fontFamily: 'IRANSansFaNum',
-                                            fontSize: 12,
-                                            marginRight: 15,
-                                            color: 'rgba(0,0,0,0.4)'
-                                        }}>{data.likeCount}</Text>
-                                        <Image
-                                            source={require('../../assets/png/heartRedGold.png')}
-                                            style={{width: 16, height: 14, marginTop: 5, tintColor: '#B08C3E'}}/>
-                                    </View>
-                                </View>
+                                </TouchableOpacity>
+                            )
+                        })
+                    }
+                    <View style={{width: width, height: height / 8}}>
+                    </View>
+                </ScrollView>
+            </View>
 
-                            </TouchableOpacity>
-                        )
-                    })
-                }
-                <View style={{width: width, height: height / 10}}>
-                </View>
-            </ScrollView>
         )
     }
 
@@ -108,7 +110,6 @@ const styles = StyleSheet.create({
         flex: 1,
         width: width - 10,
         height: height / 2.5,
-        marginTop: 8,
         borderBottomColor: 'rgba(0,0,0,0.4)',
         borderBottomWidth: 1
     },

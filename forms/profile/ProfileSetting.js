@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-    Dimensions,
-    Image,
-    StyleSheet,
-    Text,
-    TextInput,
-    View,
-    TouchableOpacity,
-    TouchableHighlight
-} from 'react-native';
+import {Dimensions, Image, StyleSheet, Text, TextInput, TouchableHighlight, TouchableOpacity, View} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
@@ -36,27 +27,6 @@ export default class ProfileSetting extends React.Component {
         })
 
     }
-
-    static navigationOptions = ({navigation}) => {
-        let headerBackImage = <Image source={require('../../assets/png/left.png')}
-                                     style={{width: 20, height: 20}}
-        />;
-        let headerTitle = <Text style={{
-            textAlign: 'center',
-            fontFamily: 'IRANSansWeb',
-            width: width / 1.3,
-            fontSize: 16
-        }}>پروفایل شخصی</Text>
-        return {
-            headerBackImage: () => {
-                return headerBackImage
-            },
-            headerTitle: () => {
-                return headerTitle
-            },
-        };
-    };
-
 
     render() {
         let {photoUri} = this.state;

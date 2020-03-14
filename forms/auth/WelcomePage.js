@@ -22,7 +22,6 @@ export default class WelcomePage extends Component {
     }
 
     render() {
-        console.log("rendering... ")
         let image = require('../../assets/png/logo.png')
         return (
             <View style={styles.container}>
@@ -69,7 +68,7 @@ const styles = StyleSheet.create({
         padding: 5,
         marginTop: height / 7,
         height: height / 2.7,
-        width: width / 1.6
+        width: width / 1.3
     },
     btn_login: {
         width: width / 2,
